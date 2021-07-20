@@ -55,4 +55,6 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'ru.cloudpayments.android:sdk:1.0.8'
+    implementation 'com.google.android.gms:play-services-wallet:16.0.1'
 }
