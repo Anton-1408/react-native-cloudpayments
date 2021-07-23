@@ -11,3 +11,9 @@ export interface BankInfo {
   logoUrl: string;
   bankName: string;
 }
+export interface Product {
+  name: string;
+  price: string;
+}
+
+export type ListenerCryptogramCard = (cryptogram: string) => void;
