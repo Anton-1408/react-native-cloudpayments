@@ -1,9 +1,5 @@
-import { NativeModules } from 'react-native';
+import Card from './Card';
+import PAYMENT_NETWORK from './PaymentNetwork';
+import PaymentService from './GooglePay';
 
-type CloudpaymentsType = {
-  multiply(a: number, b: number): Promise<number>;
-};
-
-const { Cloudpayments } = NativeModules;
-
-export default Cloudpayments as CloudpaymentsType;
+export { Card, PAYMENT_NETWORK, PaymentService };
