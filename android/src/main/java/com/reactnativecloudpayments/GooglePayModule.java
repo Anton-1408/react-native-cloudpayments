@@ -17,6 +17,7 @@ import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.PaymentsClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.wallet.AutoResolveHelper;
+import com.google.android.gms.wallet.WalletConstants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +34,7 @@ import java.lang.String;
 public class GooglePayModule extends ReactContextBaseJavaModule  {
   public static final String NAME = "GooglePay";
   private RequestGooglePay requestGooglePay;
+  private int ENVIRONMENT_RUNNING;
   private int REQUEST_CODE = 13; // Arbitrarily-picked constant integer you define to track a request for payment data activity.
 
   private ActivityEventListener activityEventListener = new BaseActivityEventListener() {
@@ -83,7 +85,7 @@ public class GooglePayModule extends ReactContextBaseJavaModule  {
   @ReactMethod
   public void canMakePayments(Promise promise) {
     Activity activity = getCurrentActivity();
-    PaymentsClient paymentsClient = requestGooglePay.createPaymentsClient(activity);
+    PaymentsClient paymentsClient = requestGooglePay.createPaymentsClient(activity, ENVIRONMENT_RUNNING);
     final Optional<JSONObject> isReadyToPayJson = requestGooglePay.getIsReadyToPayRequest();
 
     if (!isReadyToPayJson.isPresent()) {
@@ -118,9 +120,14 @@ public class GooglePayModule extends ReactContextBaseJavaModule  {
   }
 
   @ReactMethod
-  public void showGooglePayWindow() {
+  public void setEnvironment(int environmentRunning) {
+    this.ENVIRONMENT_RUNNING = environmentRunning;
+  }
+
+  @ReactMethod
+  public void openGooglePay() {
     Activity activity = getCurrentActivity();
-    PaymentsClient paymentsClient = requestGooglePay.createPaymentsClient(activity);
+    PaymentsClient paymentsClient = requestGooglePay.createPaymentsClient(activity, ENVIRONMENT_RUNNING);
 
     String paymentDataRequest = requestGooglePay.getPaymentDataRequest().toString();
     PaymentDataRequest request = PaymentDataRequest.fromJson(paymentDataRequest);

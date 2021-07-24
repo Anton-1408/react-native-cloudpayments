@@ -19,6 +19,7 @@ class GooglePayModule {
   public initial = (methodData: MethodDataPayment): void => {
     const { gateway } = methodData;
 
+    this.setEnvironment(methodData.environmentRunning)
     this.setPaymentNetworks(methodData.supportedNetworks);
     this.setProducts(methodData.product);
     this.setGatewayTokenSpecification(gateway.service, gateway.merchantId);
@@ -32,6 +33,11 @@ class GooglePayModule {
 
   private setProducts = (product: Product): void => {
     GooglePay.setProducts(product);
+  };
+
+  private setEnvironment = (environmentRunning: EnvironmentRunningGooglePay): void => {
+    const numberConstantEnvironment = environmentRunning === 'Test' ? 3 : 1;
+    GooglePay.setEnvironment(numberConstantEnvironment);
   };
 
   private setPaymentNetworks = (
@@ -66,8 +72,8 @@ class GooglePayModule {
     return isCanMakePayments;
   };
 
-  public openPayWindow = (): void => {
-    GooglePay.showGooglePayWindow();
+  public openServicePay = (): void => {
+    GooglePay.openGooglePay();
   };
 
   public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {
@@ -92,6 +98,10 @@ interface MethodDataPayment {
   countryCode: string;
   currencyCode: string;
   product: Product;
+  environmentRunning: EnvironmentRunningGooglePay
 }
+
+type EnvironmentRunningGooglePay = 'Test' | 'Production';
+
 
 export default GooglePayModule.getInstance();

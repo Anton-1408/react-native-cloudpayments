@@ -69,9 +69,9 @@ public class RequestGooglePay {
     return cardPaymentMethod;
   }
 
-  public PaymentsClient createPaymentsClient(Activity activity) {
+  public PaymentsClient createPaymentsClient(Activity activity, int ENVIRONMENT_RUNNING) {
     Wallet.WalletOptions walletOptions =
-      new Wallet.WalletOptions.Builder().setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
+      new Wallet.WalletOptions.Builder().setEnvironment(ENVIRONMENT_RUNNING).build();
     return Wallet.getPaymentsClient(activity, walletOptions);
   }
 
