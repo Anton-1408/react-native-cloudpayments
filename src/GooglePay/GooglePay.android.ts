@@ -19,7 +19,7 @@ class GooglePayModule {
   public initial = (methodData: MethodDataPayment): void => {
     const { gateway } = methodData;
 
-    this.setEnvironment(methodData.environmentRunning)
+    this.setEnvironment(methodData.environmentRunning);
     this.setPaymentNetworks(methodData.supportedNetworks);
     this.setProducts(methodData.product);
     this.setGatewayTokenSpecification(gateway.service, gateway.merchantId);
@@ -35,8 +35,13 @@ class GooglePayModule {
     GooglePay.setProducts(product);
   };
 
-  private setEnvironment = (environmentRunning: EnvironmentRunningGooglePay): void => {
-    const numberConstantEnvironment = environmentRunning === 'Test' ? 3 : 1;
+  private setEnvironment = (
+    environmentRunning: EnvironmentRunningGooglePay
+  ): void => {
+    const numberConstantEnvironment =
+      environmentRunning === 'Test'
+        ? WalletConstants.ENVIRONMENT_TEST
+        : WalletConstants.ENVIRONMENT_PRODUCTION;
     GooglePay.setEnvironment(numberConstantEnvironment);
   };
 
@@ -98,10 +103,14 @@ interface MethodDataPayment {
   countryCode: string;
   currencyCode: string;
   product: Product;
-  environmentRunning: EnvironmentRunningGooglePay
+  environmentRunning: EnvironmentRunningGooglePay;
 }
 
 type EnvironmentRunningGooglePay = 'Test' | 'Production';
 
+enum WalletConstants {
+  ENVIRONMENT_TEST = 3,
+  ENVIRONMENT_PRODUCTION = 1,
+}
 
 export default GooglePayModule.getInstance();
