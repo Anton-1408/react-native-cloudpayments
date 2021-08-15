@@ -1,6 +1,5 @@
 import { NativeModules } from 'react-native';
-import { Parametres3DS, Result3DS, BankInfo } from '../types';
-
+import { BankInfo } from '../types';
 const { Cloudpayments } = NativeModules;
 
 class Card {
@@ -45,31 +44,14 @@ class Card {
     return cardCryptogramPacket;
   };
 
-  public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
-    const binInfo: string = await Cloudpayments.getBinInfo(cardNumb);
-    return JSON.parse(binInfo);
-  };
-
-  public cardType = async (
-    cardNumber: string,
-    expDate?: string,
-    cvv?: string
-  ): Promise<string> => {
-    const cardType: string = await Cloudpayments.cardType(
-      cardNumber,
-      expDate,
-      cvv
-    );
+  public cardType = async (cardNumber: string): Promise<string> => {
+    const cardType: string = await Cloudpayments.cardType(cardNumber);
     return cardType;
   };
 
-  public requestThreeDSecure = async (
-    parametres3DS: Parametres3DS
-  ): Promise<Result3DS> => {
-    const result: string = await Cloudpayments.requestThreeDSecure(
-      parametres3DS
-    );
-    return JSON.parse(result);
+  public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
+    const binInfo = await Cloudpayments.getBinInfo(cardNumb);
+    return binInfo;
   };
 }
 
