@@ -27,7 +27,7 @@ class Cloudpayments: NSObject {
     let cardCryptogramPacket: String = card.makeCryptogramPacket(cardNumber, andExpDate: expDate, andCVV: cvv, andMerchantPublicID: merchantId);
     resolve(cardCryptogramPacket)
   }
-    
+
   @objc
   func getBinInfo(_ cardNumber: String, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     self.resolve = resolve;

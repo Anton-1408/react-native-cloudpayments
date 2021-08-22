@@ -25,8 +25,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libCloudpayments.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudpayments.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A03381E26C8EF8D003EDE68 /* EventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
-		3A03381F26C8F010003EDE68 /* EventEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventEmitter.h; sourceTree = "<group>"; };
+		3AEA7D6826C901F300FED906 /* SDK-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "SDK-iOS"; sourceTree = "<group>"; };
+		3AF4190D26CAC1C400187204 /* ThreeDSecure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDSecure.m; sourceTree = "<group>"; };
+		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; };
 		6AF1896A9162F5FE538B7437 /* Pods_Cloudpayments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cloudpayments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5891CC2AC0600A0062D /* Cloudpayments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloudpayments.m; sourceTree = "<group>"; };
 		CB43D7BC1E6A152537AAC873 /* Pods-Cloudpayments.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudpayments.debug.xcconfig"; path = "Target Support Files/Pods-Cloudpayments/Pods-Cloudpayments.debug.xcconfig"; sourceTree = "<group>"; };
@@ -67,8 +68,9 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				3A03381F26C8F010003EDE68 /* EventEmitter.h */,
-				3A03381E26C8EF8D003EDE68 /* EventEmitter.swift */,
+				3AF4190E26CAC30700187204 /* ThreeDSecure.swift */,
+				3AF4190D26CAC1C400187204 /* ThreeDSecure.m */,
+				3AEA7D6826C901F300FED906 /* SDK-iOS */,
 				F4FF95D6245B92E800C19C63 /* Cloudpayments.swift */,
 				B3E7B5891CC2AC0600A0062D /* Cloudpayments.m */,
 				F4FF95D5245B92E700C19C63 /* Cloudpayments-Bridging-Header.h */,

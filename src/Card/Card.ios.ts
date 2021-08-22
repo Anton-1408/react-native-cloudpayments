@@ -1,6 +1,7 @@
 import { NativeModules } from 'react-native';
-import { BankInfo } from '../types';
-const { Cloudpayments } = NativeModules;
+import { Parametres3DS, BankInfo, Result3DS } from '../types';
+
+const { Cloudpayments, ThreeDSecure } = NativeModules;
 
 class Card {
   private static instance: Card;
@@ -52,6 +53,13 @@ class Card {
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
     const binInfo = await Cloudpayments.getBinInfo(cardNumb);
     return binInfo;
+  };
+
+  public requestThreeDSecure = async (
+    parametres3DS: Parametres3DS
+  ): Promise<Result3DS> => {
+    const result = await ThreeDSecure.requestThreeDSecure(parametres3DS);
+    return result;
   };
 }
 
