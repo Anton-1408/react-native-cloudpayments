@@ -73,7 +73,7 @@ class GooglePayModule {
   };
 
   public canMakePayments = async (): Promise<boolean> => {
-    const isCanMakePayments: any = await GooglePay.canMakePayments();
+    const isCanMakePayments: boolean = await GooglePay.canMakePayments();
     return isCanMakePayments;
   };
 
