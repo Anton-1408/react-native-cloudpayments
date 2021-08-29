@@ -6,7 +6,7 @@ class ThreeDSecure: UIViewController {
   private let d3ds: D3DS = D3DS.init();
   private var resolve: RCTPromiseResolveBlock?;
   private var reject: RCTPromiseRejectBlock?;
-  private var window = UIWindow(frame: UIScreen.main.bounds);
+  private var window = UIApplication.shared.windows[0];
 
   @objc
   public func requestThreeDSecure(_ parametres3DS: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -18,12 +18,7 @@ class ThreeDSecure: UIViewController {
     self.reject = reject;
 
     DispatchQueue.main.async {
-        self.window.rootViewController = UIViewController();
-        self.window.clipsToBounds = true;
-        self.window.makeKeyAndVisible();
-        self.window.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width + 20, height: UIScreen.main.bounds.height + 20);
         self.window.rootViewController?.present(self, animated: true, completion: nil);
-
         self.d3ds.make3DSPayment(with: self, andAcsURLString: acsUrl, andPaReqString: paReq, andTransactionIdString: transactionId)
 
     }
@@ -41,12 +36,12 @@ extension ThreeDSecure: D3DSDelegate, WKUIDelegate {
     result["TransactionId"] = md;
     result["PaRes"] = paRes;
 
+    self.window.rootViewController?.dismiss(animated: true, completion: nil);
     self.resolve?(result);
-    self.window.isHidden = true;
   }
 
   func authorizationFailed(withHtml html: String!) {
+    self.window.rootViewController?.dismiss(animated: true, completion: nil);
     self.reject?("error", html, nil);
-    self.window.isHidden = true;
   }
 }
