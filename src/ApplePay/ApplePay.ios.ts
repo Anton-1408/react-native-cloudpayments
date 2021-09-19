@@ -1,7 +1,8 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
-import { ListenerCryptogramCard } from '../types';
+import { ListenerCryptogramCard, Product } from '../types';
+import PAYMENT_NETWORK from '../PaymentNetwork';
 
-const { EventEmitter } = NativeModules;
+const { EventEmitter, ApplePayController } = NativeModules;
 
 const eventCryptogramCard = new NativeEventEmitter(EventEmitter);
 
@@ -17,13 +18,56 @@ class ApplePay {
     return ApplePay.instance;
   }
 
-  public listenerCryptogramCard = (callback: ListenerCryptogramCard) => {
+  public initial = (methodData: MethodDataPayment): void => {
+    this.setPaymentNetworks(methodData.supportedNetworks);
+    this.setProducts(methodData.product);
+    this.setRequestPay(
+      methodData.countryCode,
+      methodData.currencyCode,
+      methodData.merchantId,
+    );
+  };
+
+  private setProducts = (product: Product[]): void => {
+    ApplePayController.setProducts(product);
+  };
+
+  private setPaymentNetworks = (paymentNetworks: Array<PAYMENT_NETWORK>): void => {
+    ApplePayController.setPaymentNetworks(paymentNetworks);
+  };
+
+  private setRequestPay = async (
+    countryCode: string,
+    currencyCode: string,
+    merchantId: string,
+  ) => {
+    ApplePayController.setRequestPay(countryCode, currencyCode, merchantId);
+  };
+
+  public canMakePayments = async (): Promise<boolean> => {
+    const isCanMakePayments: boolean = await ApplePayController.canMakePayments();
+    return isCanMakePayments;
+  };
+
+  public openServicePay = (): void => {
+    ApplePayController.openApplePay();
+  };
+
+  public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {
     eventCryptogramCard.addListener('listenerCryptogramCard', callback);
   };
 
-  public removeListenerCryptogramCard = (callback: ListenerCryptogramCard) => {
-    eventCryptogramCard.removeListener('listenerCryptogramCard', callback);
+  public removeListenerCryptogramCard = (): void => {
+    eventCryptogramCard.removeAllListeners('listenerCryptogramCard');
   };
+}
+
+interface MethodDataPayment {
+  merchantId: string;
+  supportedNetworks: Array<PAYMENT_NETWORK>;
+  countryCode: string;
+  currencyCode: string;
+  product: Product[];
 }
 
 export default ApplePay.getInstance();

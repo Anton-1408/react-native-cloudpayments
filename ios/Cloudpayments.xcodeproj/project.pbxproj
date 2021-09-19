@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A39B83426DBBE040073FB00 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A39B83326DBBE040073FB00 /* EventEmitter.swift */; };
+		3ABEBF3A26F75D5A0081EADB /* ApplePayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */; };
 		684655E52F59904583675E12 /* Pods_Cloudpayments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF1896A9162F5FE538B7437 /* Pods_Cloudpayments.framework */; };
 		F4FF95D7245B92E800C19C63 /* Cloudpayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* Cloudpayments.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,8 @@
 		134814201AA4EA6300B7C361 /* libCloudpayments.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudpayments.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A39B83226DBBDF50073FB00 /* EventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventEmitter.m; sourceTree = "<group>"; };
 		3A39B83326DBBE040073FB00 /* EventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
+		3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayController.swift; sourceTree = "<group>"; };
+		3ABEBF3B26F75D700081EADB /* ApplePayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePayController.m; sourceTree = "<group>"; };
 		3AEA7D6826C901F300FED906 /* SDK-iOS */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "SDK-iOS"; sourceTree = "<group>"; };
 		3AF4190D26CAC1C400187204 /* ThreeDSecure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDSecure.m; sourceTree = "<group>"; };
 		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				3ABEBF3B26F75D700081EADB /* ApplePayController.m */,
+				3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */,
 				3A39B83326DBBE040073FB00 /* EventEmitter.swift */,
 				3A39B83226DBBDF50073FB00 /* EventEmitter.m */,
 				3AF4190E26CAC30700187204 /* ThreeDSecure.swift */,
@@ -176,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ABEBF3A26F75D5A0081EADB /* ApplePayController.swift in Sources */,
 				F4FF95D7245B92E800C19C63 /* Cloudpayments.swift in Sources */,
 				3A39B83426DBBE040073FB00 /* EventEmitter.swift in Sources */,
 			);

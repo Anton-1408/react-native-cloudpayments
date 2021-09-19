@@ -85,10 +85,8 @@ class GooglePayModule {
     DeviceEventEmitter.addListener('listenerCryptogramCard', callback);
   };
 
-  public removeListenerCryptogramCard = (
-    callback: ListenerCryptogramCard
-  ): void => {
-    DeviceEventEmitter.removeListener('listenerCryptogramCard', callback);
+  public removeListenerCryptogramCard = (): void => {
+    DeviceEventEmitter.removeAllListeners('listenerCryptogramCard');
   };
 }
 
