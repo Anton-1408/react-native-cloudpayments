@@ -1,5 +1,5 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
-import { ListenerCryptogramCard, Product } from '../types';
+import { ListenerCryptogramCard, Product, MethodDataPayment } from '../types';
 import PAYMENT_NETWORK from '../PaymentNetwork';
 
 const { EventEmitter, ApplePayController } = NativeModules;
@@ -62,13 +62,6 @@ class ApplePay {
   public removeListenerCryptogramCard = (): void => {
     eventCryptogramCard.removeAllListeners('listenerCryptogramCard');
   };
-}
-
-interface MethodDataPayment {
-  merchantId: string;
-  supportedNetworks: Array<PAYMENT_NETWORK>;
-  countryCode: string;
-  currencyCode: string;
 }
 
 export default ApplePay.getInstance();
