@@ -21,7 +21,6 @@ class GooglePayModule {
 
     this.setEnvironment(methodData.environmentRunning);
     this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setProducts(methodData.product);
     this.setGatewayTokenSpecification(gateway.service, gateway.merchantId);
     this.setRequestPay(
       methodData.countryCode,
@@ -31,7 +30,7 @@ class GooglePayModule {
     );
   };
 
-  private setProducts = (product: Product): void => {
+  public setProducts = (product: Product): void => {
     GooglePay.setProducts(product);
   };
 
@@ -100,7 +99,6 @@ interface MethodDataPayment {
   supportedNetworks: Array<PAYMENT_NETWORK>;
   countryCode: string;
   currencyCode: string;
-  product: Product;
   environmentRunning: EnvironmentRunningGooglePay;
 }
 

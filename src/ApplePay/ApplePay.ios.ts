@@ -20,32 +20,34 @@ class ApplePay {
 
   public initial = (methodData: MethodDataPayment): void => {
     this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setProducts(methodData.product);
     this.setRequestPay(
       methodData.countryCode,
       methodData.currencyCode,
-      methodData.merchantId,
+      methodData.merchantId
     );
   };
 
-  private setProducts = (product: Product[]): void => {
+  public setProducts = (product: Product[]): void => {
     ApplePayController.setProducts(product);
   };
 
-  private setPaymentNetworks = (paymentNetworks: Array<PAYMENT_NETWORK>): void => {
+  private setPaymentNetworks = (
+    paymentNetworks: Array<PAYMENT_NETWORK>
+  ): void => {
     ApplePayController.setPaymentNetworks(paymentNetworks);
   };
 
   private setRequestPay = async (
     countryCode: string,
     currencyCode: string,
-    merchantId: string,
+    merchantId: string
   ) => {
     ApplePayController.setRequestPay(countryCode, currencyCode, merchantId);
   };
 
   public canMakePayments = async (): Promise<boolean> => {
-    const isCanMakePayments: boolean = await ApplePayController.canMakePayments();
+    const isCanMakePayments: boolean =
+      await ApplePayController.canMakePayments();
     return isCanMakePayments;
   };
 
@@ -67,7 +69,6 @@ interface MethodDataPayment {
   supportedNetworks: Array<PAYMENT_NETWORK>;
   countryCode: string;
   currencyCode: string;
-  product: Product[];
 }
 
 export default ApplePay.getInstance();

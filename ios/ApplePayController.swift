@@ -3,7 +3,6 @@ import Foundation
 @objc(ApplePayController)
 class ApplePayController: UIViewController {
   private var window = UIApplication.shared.windows[0];
-  private var paymentItems: [PKPaymentSummaryItem] = [];
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
@@ -32,7 +31,7 @@ class ApplePayController: UIViewController {
       let paymentItem = PKPaymentSummaryItem.init(label: nameProduct, amount: NSDecimalNumber(value: priceProduct!));
       listProducts.append(paymentItem);
     }
-    self.paymentItems = listProducts;
+    self.requestPay.paymentSummaryItems = listProducts;
   }
 
   @objc
@@ -42,7 +41,6 @@ class ApplePayController: UIViewController {
     self.requestPay.merchantCapabilities = PKMerchantCapability.capability3DS;
     self.requestPay.countryCode = countryCode;
     self.requestPay.currencyCode = currencyCode;
-    self.requestPay.paymentSummaryItems = self.paymentItems;
   }
 
   @objc
