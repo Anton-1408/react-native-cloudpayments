@@ -28,7 +28,7 @@ export interface MethodDataPayment {
   countryCode: string;
   currencyCode: string;
   environmentRunning?: EnvironmentRunningGooglePay;
-};
+}
 
 export type EnvironmentRunningGooglePay = 'Test' | 'Production';
 

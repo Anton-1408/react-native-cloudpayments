@@ -1,6 +1,11 @@
 import { NativeModules, DeviceEventEmitter } from 'react-native';
 import PAYMENT_NETWORK from '../PaymentNetwork';
-import { ListenerCryptogramCard, Product, MethodDataPayment, EnvironmentRunningGooglePay } from '../types';
+import {
+  ListenerCryptogramCard,
+  Product,
+  MethodDataPayment,
+  EnvironmentRunningGooglePay,
+} from '../types';
 
 const { GooglePay } = NativeModules;
 
@@ -19,7 +24,10 @@ class GooglePayModule {
   public initial = (methodData: MethodDataPayment): void => {
     this.setEnvironment(methodData.environmentRunning!);
     this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setGatewayTokenSpecification(methodData.gateway!.service, methodData.gateway!.merchantId);
+    this.setGatewayTokenSpecification(
+      methodData.gateway!.service,
+      methodData.gateway!.merchantId
+    );
     this.setRequestPay(
       methodData.countryCode,
       methodData.currencyCode,
@@ -28,7 +36,7 @@ class GooglePayModule {
     );
   };
 
-  public setProducts = (product: Product): void => {
+  public setProducts = (product: Product | Product[]): void => {
     GooglePay.setProducts(product);
   };
 
