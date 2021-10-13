@@ -1,7 +1,7 @@
 import Foundation
 
 @objc(ApplePayController)
-class ApplePayController: UIViewController {
+class ApplePayController: RCTViewManager {
   private var window = UIApplication.shared.windows[0];
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
@@ -79,11 +79,6 @@ class ApplePayController: UIViewController {
       default:
         return PKPaymentNetwork.visa;
     }
-  }
-
-  @objc
-  static func requiresMainQueueSetup() -> Bool {
-    return true
   }
 }
 
