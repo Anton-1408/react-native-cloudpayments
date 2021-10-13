@@ -27,7 +27,7 @@ class ApplePay {
     );
   };
 
-  public setProducts = (product: Product[] | Product): void => {
+  public setProducts = (product: Product[]): void => {
     ApplePayController.setProducts(product);
   };
 

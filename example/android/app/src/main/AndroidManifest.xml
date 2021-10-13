@@ -25,6 +25,10 @@
       <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
+      <activity
+        android:name="com.reactnativecloudpayments.ThreeDSecureActivity"
+        android:launchMode="singleInstance"
+      />
     </application>
 
 </manifest>

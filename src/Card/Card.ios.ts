@@ -47,8 +47,8 @@ class Card {
 
   public cardType = async (
     cardNumber: string,
-    _expDate?: string,
-    _cvv?: string
+    _expDate: string,
+    _cvv: string
   ): Promise<string> => {
     const cardType: string = await Cloudpayments.cardType(cardNumber);
     return cardType;
