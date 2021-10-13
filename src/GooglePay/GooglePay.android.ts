@@ -1,6 +1,11 @@
 import { NativeModules, DeviceEventEmitter } from 'react-native';
 import PAYMENT_NETWORK from '../PaymentNetwork';
-import { ListenerCryptogramCard, Product } from '../types';
+import {
+  ListenerCryptogramCard,
+  Product,
+  MethodDataPayment,
+  EnvironmentRunningGooglePay,
+} from '../types';
 
 const { GooglePay } = NativeModules;
 
@@ -17,21 +22,21 @@ class GooglePayModule {
   }
 
   public initial = (methodData: MethodDataPayment): void => {
-    const { gateway } = methodData;
-
-    this.setEnvironment(methodData.environmentRunning);
+    this.setEnvironment(methodData.environmentRunning!);
     this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setProducts(methodData.product);
-    this.setGatewayTokenSpecification(gateway.service, gateway.merchantId);
+    this.setGatewayTokenSpecification(
+      methodData.gateway!.service,
+      methodData.gateway!.merchantId
+    );
     this.setRequestPay(
       methodData.countryCode,
       methodData.currencyCode,
-      methodData.merchantName,
+      methodData.merchantName!,
       methodData.merchantId
     );
   };
 
-  private setProducts = (product: Product): void => {
+  public setProducts = (product: Product | Product[]): void => {
     GooglePay.setProducts(product);
   };
 
@@ -73,7 +78,7 @@ class GooglePayModule {
   };
 
   public canMakePayments = async (): Promise<boolean> => {
-    const isCanMakePayments: any = await GooglePay.canMakePayments();
+    const isCanMakePayments: boolean = await GooglePay.canMakePayments();
     return isCanMakePayments;
   };
 
@@ -85,28 +90,10 @@ class GooglePayModule {
     DeviceEventEmitter.addListener('listenerCryptogramCard', callback);
   };
 
-  public removeListenerCryptogramCard = (
-    callback: ListenerCryptogramCard
-  ): void => {
-    DeviceEventEmitter.removeListener('listenerCryptogramCard', callback);
+  public removeListenerCryptogramCard = (): void => {
+    DeviceEventEmitter.removeAllListeners('listenerCryptogramCard');
   };
 }
-
-interface MethodDataPayment {
-  merchantId: string;
-  merchantName: string;
-  gateway: {
-    service: string;
-    merchantId: string;
-  };
-  supportedNetworks: Array<PAYMENT_NETWORK>;
-  countryCode: string;
-  currencyCode: string;
-  product: Product;
-  environmentRunning: EnvironmentRunningGooglePay;
-}
-
-type EnvironmentRunningGooglePay = 'Test' | 'Production';
 
 enum WalletConstants {
   ENVIRONMENT_TEST = 3,
