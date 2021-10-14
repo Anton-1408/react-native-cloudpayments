@@ -1,6 +1,8 @@
 package com.example.reactnativecloudpayments;
 
 import com.facebook.react.ReactActivity;
+import android.os.Bundle;
+import android.content.Intent;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +13,18 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "CloudpaymentsExample";
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+
+      if (!isTaskRoot()) {
+        final Intent intent = getIntent();
+        if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(intent.getAction())) {
+            finish();
+            return;
+        }
+    }
   }
 }
