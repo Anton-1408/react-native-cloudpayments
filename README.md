@@ -10,7 +10,7 @@ npm install react-native-cloudpayments
 yarn add react-native-cloudpayments
 ```
 
-#### Android
+### Android
 
 * Чтобы включить Google Pay в приложении, добавьте следующие метаданные в тег <application> файла AndroidManifest.xml.
 
@@ -53,7 +53,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 * Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay.
 
-### Документации по интеграции Google Pay
+#### Документации по интеграции Google Pay
 
 [О Google Pay](https://developers.cloudpayments.ru/#google-pay)
 
