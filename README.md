@@ -2,14 +2,55 @@
 
 CloudPayments SDK fro React Native
 
-## Installation
+## Установка
 
 ```sh
 npm install react-native-cloudpayments
 yarn add react-native-cloudpayments
 ```
 
-## Usage
+### Android
+
+* Чтобы включить Google Pay в приложении, добавьте следующие метаданные в тег <application> файла AndroidManifest.xml.
+
+```xml
+<meta-data
+  android:name="com.google.android.gms.wallet.api.enabled"
+  android:value="true" />
+```
+
+* Чтобы использовать экран для подтверждения оплыты, добавьте activity в тег <application> файла AndroidManifest.xml.
+
+```xml
+<activity
+  android:name="com.reactnativecloudpayments.ThreeDSecureActivity"
+/>
+```
+
+##### Примичание
+* Чтобы экран с подтверждением оплаты не закрывался после перехода приложения из фоного режима на передний план ([issues](https://issuetracker.google.com/issues/64108432)) добавьте в MainActivity.java следующие строки:
+
+```java
+import android.os.Bundle;
+import android.content.Intent;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+
+  if (!isTaskRoot()) {
+    final Intent intent = getIntent();
+    if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(intent.getAction())) {
+      finish();
+      return;
+    }
+  }
+}
+```
+
+и измените значение у `android:launchMode` на `singleTop` у MainActivity в AndroidManifest.xml.
+
+## Использвание
 
 ```js
 import { Card } from "react-native-cloudpayments";

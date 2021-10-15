@@ -70,7 +70,7 @@ class ApplePayController: RCTViewManager {
         } else {
             return PKPaymentNetwork.visa;
         };
-     case "JCB":
+      case "JCB":
         if #available(iOS 10.1, *) {
             return PKPaymentNetwork.JCB
         } else {
