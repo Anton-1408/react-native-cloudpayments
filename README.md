@@ -12,7 +12,7 @@ yarn add react-native-cloudpayments
 ## Usage
 
 ```js
-import { PAYMENT_NETWORK, PaymentService, Card }from "react-native-cloudpayments";
+import { Card } from "react-native-cloudpayments";
 ```
 #### Возможности CloudPayments SDK:
 
@@ -59,6 +59,94 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
   paReq,
   acsUrl,
 })
+```
+##### Использования Google/Apple Pay
+
+```js
+import { PAYMENT_NETWORK, PaymentService } from "react-native-cloudpayments";
+```
+* Инициализация
+
+```js
+const PAYMENT_DATA = Platform.select({
+  ios: () => {
+    return {
+      merchantId: 'applePayMerchantID',
+      supportedNetworks: [
+        PAYMENT_NETWORK.masterCard,
+        PAYMENT_NETWORK.visa,
+        PAYMENT_NETWORK.amex,
+        PAYMENT_NETWORK.interac,
+        PAYMENT_NETWORK.discover,
+        PAYMENT_NETWORK.mir,
+        PAYMENT_NETWORK.jcb,
+      ],
+      countryCode: 'RU',
+      currencyCode: 'RUB',
+    };
+  },
+  android: () => {
+    return {
+      merchantId: 'googlePayMerchantID',
+      merchantName: 'Example',
+      gateway: {
+        service: 'cloudpayments',
+        merchantId: 'cloudpaymentsPublicID',
+      },
+      supportedNetworks: [
+        PAYMENT_NETWORK.masterCard,
+        PAYMENT_NETWORK.visa,
+        PAYMENT_NETWORK.amex,
+        PAYMENT_NETWORK.interac,
+        PAYMENT_NETWORK.discover,
+        PAYMENT_NETWORK.jcb,
+      ],
+      countryCode: 'RU',
+      currencyCode: 'RUB',
+      environmentRunning: 'Test',
+    };
+  },
+})!();
+
+PaymentService.initial(PAYMENT_DATA);
+```
+
+* Проверка, доступны ли пользователю эти платежные системы
+
+```js
+const isSupportPayments = await PaymentService.canMakePayments();
+```
+
+* Создайте массив покупок и передайте его в метод setProducts
+
+```js
+const PRODUCTS = [
+  { name: 'example_1', price: '1' },
+  { name: 'example_2', price: '10' },
+  { name: 'example_3', price: '15' },
+];
+
+PaymentService.setProducts(PRODUCTS);
+```
+
+* Чтобы получить результат оплаты, нужно подписаться на listener
+
+```js
+useEffect(() => {
+  PaymentService.listenerCryptogramCard((cryptogram) => {
+    console.warn(cryptogram);
+  });
+
+  return () => {
+    PaymentService.removeListenerCryptogramCard();
+  };
+}, []);
+```
+
+* Выполните оплату
+
+```js
+PaymentService.openServicePay();
 ```
 
 ## Contributing

@@ -50,8 +50,8 @@ const PAYMENT_DATA = Platform.select({
 
 const PRODUCTS = [
   { name: 'example_1', price: '1' },
-  { name: 'example_1', price: '10' },
-  { name: 'example_1', price: '15' },
+  { name: 'example_2', price: '10' },
+  { name: 'example_3', price: '15' },
 ];
 
 const App = () => {
