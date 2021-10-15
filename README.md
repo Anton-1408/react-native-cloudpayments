@@ -59,7 +59,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 [Документация](https://developers.google.com/pay/api/android/guides/setup)
 
-[Репозиторий официальной SDK](https://github.com/cloudpayments/SDK-Android)
+[Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-Android)
 
 ## Использвание
 
@@ -115,7 +115,7 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
 
 Смотрите документацию по API: Платёж - [обработка 3-D Secure](https://developers.cloudpayments.ru/#obrabotka-3-d-secure)
 
-##### Использования Google Pay / Apple Pay
+#### Использования Google Pay / Apple Pay
 
 ###### Поддержка типов платежных систем:
 * Visa
