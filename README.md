@@ -60,7 +60,15 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
   acsUrl,
 })
 ```
-##### Использования Google/Apple Pay
+##### Использования Google Pay / Apple Pay
+
+###### Поддержка типов платежных систем:
+* Visa
+* Master Card
+* Discover
+* Interac
+* JCB (IOS +10.1)
+* MIR (только IOS +14.5)
 
 ```js
 import { PAYMENT_NETWORK, PaymentService } from "react-native-cloudpayments";
