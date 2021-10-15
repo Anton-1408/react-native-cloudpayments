@@ -49,7 +49,7 @@ class Card {
 
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
     const binInfo: string = await Cloudpayments.getBinInfo(cardNumb);
-    return JSON.parse(binInfo);
+    return JSON.parse(binInfo) as BankInfo;
   };
 
   public cardType = async (

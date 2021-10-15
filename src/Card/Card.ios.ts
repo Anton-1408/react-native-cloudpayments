@@ -55,7 +55,7 @@ class Card {
   };
 
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
-    const binInfo = await Cloudpayments.getBinInfo(cardNumb);
+    const binInfo: BankInfo = await Cloudpayments.getBinInfo(cardNumb);
     return binInfo;
   };
 
