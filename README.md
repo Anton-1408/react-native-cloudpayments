@@ -6,10 +6,11 @@ CloudPayments SDK fro React Native
 
 ```sh
 npm install react-native-cloudpayments
+
 yarn add react-native-cloudpayments
 ```
 
-### Android
+#### Android
 
 * Чтобы включить Google Pay в приложении, добавьте следующие метаданные в тег <application> файла AndroidManifest.xml.
 
@@ -49,6 +50,16 @@ protected void onCreate(Bundle savedInstanceState) {
 ```
 
 и измените значение у `android:launchMode` на `singleTop` у MainActivity в AndroidManifest.xml.
+
+* Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay.
+
+### Документации по интеграции Google Pay
+
+[О Google Pay](https://developers.cloudpayments.ru/#google-pay)
+
+[Документация](https://developers.google.com/pay/api/android/guides/setup)
+
+[Репозиторий официальной SDK](https://github.com/cloudpayments/SDK-Android)
 
 ## Использвание
 
@@ -101,6 +112,9 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
   acsUrl,
 })
 ```
+
+Смотрите документацию по API: Платёж - [обработка 3-D Secure](https://developers.cloudpayments.ru/#obrabotka-3-d-secure)
+
 ##### Использования Google Pay / Apple Pay
 
 ###### Поддержка типов платежных систем:
@@ -159,6 +173,9 @@ const PAYMENT_DATA = Platform.select({
 
 PaymentService.initial(PAYMENT_DATA);
 ```
+##### Примичание
+
+`cloudpaymentsPublicID`: Ваш Public ID, его можно посмотреть в [личном кабинете](https://merchant.cloudpayments.ru/).
 
 * Проверка, доступны ли пользователю эти платежные системы
 
