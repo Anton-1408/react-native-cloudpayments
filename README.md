@@ -1,6 +1,8 @@
-# react-native-cloudpayments
+# CloudPayments SDK for React Native
 
-CloudPayments SDK fro React Native
+Всем привет! Мы [Purrweb](https://www.purrweb.com/ru/), однажды, заказчик крупного проекта [EnerGO](https://energo.app/) захотел перейти на платежную систему Cloud Payments, но, к сожалению, официальной библиотеки под React Native не оказалось, и нашему разработчику пришлось самому ее пилить. Сегодня мы хотим поделится с вами данной разработкой, поэтому ставьте звезды и пишите issues, мы постараемся поддерживать данный пакет.
+
+CloudPayments SDK позволяет интегрировать прием платежей в мобильные приложение.
 
 ## Установка
 
@@ -226,9 +228,9 @@ useEffect(() => {
 PaymentService.openServicePay();
 ```
 
-## Contributing
+## Поддержка
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+По возникающим вопросам техничечкого характера и предложениями обращайтесь на  (antonvotinov@gmail.com)
 
 ## License
 
