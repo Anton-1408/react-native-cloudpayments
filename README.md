@@ -61,6 +61,17 @@ protected void onCreate(Bundle savedInstanceState) {
 
 [Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-Android)
 
+### IOS
+
+Для использования технологии Apple Pay вам необходимо зарегистрировать Merchant ID, сформировать платежный сертификат, сертификат для веб-платежей и подтвердить владение доменами сайтов, на которых будет производиться оплата.
+
+#### Документации по интеграции Apple Pay
+
+[О Apple Pay](https://developers.cloudpayments.ru/#apple-pay)
+
+[Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-iOS)
+
+
 ## Использвание
 
 ```js
