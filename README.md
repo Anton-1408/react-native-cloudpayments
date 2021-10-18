@@ -135,8 +135,8 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
 * Master Card
 * Discover
 * Interac
-* JCB (IOS +10.1)
-* MIR (только IOS +14.5)
+* JCB (IOS 10.1+)
+* MIR (только IOS 14.5+)
 
 ```js
 import { PAYMENT_NETWORK, PaymentService } from "react-native-cloudpayments";
