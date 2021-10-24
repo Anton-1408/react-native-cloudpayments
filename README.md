@@ -39,6 +39,8 @@ yarn add react-native-cloudpayments-sdk
 />
 ```
 
+* В файле `/android/build.gradle` в разделе `allprojects -> repositories` добавьте `jcenter()`
+
 ##### Примичание
 * Чтобы экран с подтверждением оплаты не закрывался после перехода приложения из фоного режима на передний план ([issues](https://issuetracker.google.com/issues/64108432)) добавьте в MainActivity.java следующие строки:
 
