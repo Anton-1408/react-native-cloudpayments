@@ -36,8 +36,11 @@ class GooglePayModule {
     );
   };
 
-  public setProducts = (product: Product | Product[]): void => {
-    GooglePay.setProducts(product);
+  public setProducts = (product: Product[]): void => {
+    const sumPrice = product.reduce((previousValue, currentValue) => {
+      return previousValue + Number(currentValue.price);
+    }, 0);
+    GooglePay.setProducts(String(sumPrice));
   };
 
   private setEnvironment = (

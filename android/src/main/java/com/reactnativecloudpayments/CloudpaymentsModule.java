@@ -22,11 +22,9 @@ import ru.cloudpayments.sdk.cp_card.api.CPCardApi;
 public class CloudpaymentsModule extends ReactContextBaseJavaModule {
   public static final String NAME = "Cloudpayments";
   public static Promise promise;
-  private Context context;
 
   public CloudpaymentsModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.context = reactContext;
   }
 
   @Override
@@ -80,7 +78,7 @@ public class CloudpaymentsModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getBinInfo(String cardNumber, Promise promise) {
     try {
-      CPCardApi api = new CPCardApi(this.context);
+      CPCardApi api = new CPCardApi(getCurrentActivity());
       JSONObject bankInfo = new JSONObject();
 
       api.getBinInfo(cardNumber, binInfo -> {
@@ -113,7 +111,7 @@ public class CloudpaymentsModule extends ReactContextBaseJavaModule {
     String paReq = parametres3DS.getString("paReq");
     String acsUrl = parametres3DS.getString("acsUrl");
 
-    Intent intent = new Intent(this.context, ThreeDSecureActivity.class); // действие для запуска нового экрана (из текущего в ThreeDSecureActivity)
+    Intent intent = new Intent(getCurrentActivity(), ThreeDSecureActivity.class); // действие для запуска нового экрана (из текущего в ThreeDSecureActivity)
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // добавление флага для создания
 
     //передаем параметры
@@ -121,6 +119,6 @@ public class CloudpaymentsModule extends ReactContextBaseJavaModule {
     intent.putExtra("paReq", paReq);
     intent.putExtra("acsUrl", acsUrl);
 
-    this.context.startActivity(intent); // переключаемся на новый экран
+    getCurrentActivity().startActivity(intent); // переключаемся на новый экран
   }
 }

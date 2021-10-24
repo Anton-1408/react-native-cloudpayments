@@ -47,15 +47,15 @@ class Card {
 
   public cardType = async (
     cardNumber: string,
-    _expDate?: string,
-    _cvv?: string
+    _expDate: string,
+    _cvv: string
   ): Promise<string> => {
     const cardType: string = await Cloudpayments.cardType(cardNumber);
     return cardType;
   };
 
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
-    const binInfo = await Cloudpayments.getBinInfo(cardNumb);
+    const binInfo: BankInfo = await Cloudpayments.getBinInfo(cardNumb);
     return binInfo;
   };
 

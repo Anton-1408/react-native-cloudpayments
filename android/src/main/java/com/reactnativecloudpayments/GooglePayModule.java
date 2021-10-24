@@ -114,8 +114,7 @@ public class GooglePayModule extends ReactContextBaseJavaModule  {
   }
 
   @ReactMethod
-  public void setProducts(ReadableMap product) {
-    String price = product.getString("price");
+  public void setProducts(String price) {
     requestGooglePay.setProducts(price);
   }
 

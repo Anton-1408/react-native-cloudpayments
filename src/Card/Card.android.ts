@@ -23,8 +23,9 @@ class Card {
   };
 
   public isExpDateValid = async (cardExpDate: string): Promise<boolean> => {
+    const cardExpDateFormat = cardExpDate.replace('/', '');
     const isExpDateValid: boolean = await Cloudpayments.isExpDateValid(
-      cardExpDate
+      cardExpDateFormat
     );
     return isExpDateValid;
   };
@@ -35,10 +36,11 @@ class Card {
     cvv: string,
     merchantId: string
   ): Promise<string> => {
+    const expDateFormat = expDate.replace('/', '');
     const cardCryptogramPacket: string =
       await Cloudpayments.cardCryptogramPacket(
         cardNumber,
-        expDate,
+        expDateFormat,
         cvv,
         merchantId
       );
@@ -47,17 +49,18 @@ class Card {
 
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
     const binInfo: string = await Cloudpayments.getBinInfo(cardNumb);
-    return JSON.parse(binInfo);
+    return JSON.parse(binInfo) as BankInfo;
   };
 
   public cardType = async (
     cardNumber: string,
-    expDate?: string,
-    cvv?: string
+    expDate: string,
+    cvv: string
   ): Promise<string> => {
+    const expDateFormat = expDate.replace('/', '');
     const cardType: string = await Cloudpayments.cardType(
       cardNumber,
-      expDate,
+      expDateFormat,
       cvv
     );
     return cardType;
