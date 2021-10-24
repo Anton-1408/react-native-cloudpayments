@@ -6,7 +6,10 @@ import {
   Text,
   Platform,
 } from 'react-native';
-import { PAYMENT_NETWORK, PaymentService } from 'react-native-cloudpayments';
+import {
+  PAYMENT_NETWORK,
+  PaymentService,
+} from 'react-native-cloudpayments-sdk';
 
 const PAYMENT_DATA = Platform.select({
   ios: () => {

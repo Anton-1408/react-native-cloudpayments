@@ -1,6 +1,6 @@
 {
-  "name": "react-native-cloudpayments-example",
-  "description": "Example app for react-native-cloudpayments",
+  "name": "react-native-cloudpayment-sdk-example",
+  "description": "Example app for react-native-cloudpayments-sdk",
   "version": "0.0.1",
   "private": true,
   "scripts": {

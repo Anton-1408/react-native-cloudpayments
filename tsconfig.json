@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-cloudpayments": ["./src/index"]
+      "react-native-cloudpayments-sdk": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

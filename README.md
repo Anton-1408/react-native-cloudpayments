@@ -86,7 +86,7 @@ protected void onCreate(Bundle savedInstanceState) {
 ## Использвание
 
 ```js
-import { Card } from "react-native-cloudpayments";
+import { Card } from "react-native-cloudpayments-sdk";
 ```
 #### Возможности CloudPayments SDK:
 
@@ -148,7 +148,7 @@ const { TransactionId, PaRes } = await Card.requestThreeDSecure({
 * MIR (только IOS 14.5+)
 
 ```js
-import { PAYMENT_NETWORK, PaymentService } from "react-native-cloudpayments";
+import { PAYMENT_NETWORK, PaymentService } from "react-native-cloudpayments-sdk";
 ```
 * Инициализация
 
