@@ -16,9 +16,9 @@ CloudPayments SDK позволяет интегрировать прием пл�
 ## Установка
 
 ```sh
-npm install react-native-cloudpayments
+npm install react-native-cloudpayments-sdk
 
-yarn add react-native-cloudpayments
+yarn add react-native-cloudpayments-sdk
 ```
 
 ### Android
