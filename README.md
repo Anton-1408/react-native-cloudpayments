@@ -1,6 +1,6 @@
 # CloudPayments SDK for React Native
 
-Всем привет! Мы [Purrweb](https://www.purrweb.com/ru/), однажды, заказчик крупного проекта [EnerGO](https://energo.app/) захотел перейти на платежную систему Cloud Payments, но, к сожалению, официальной библиотеки под React Native не оказалось, и нашему разработчику пришлось самому ее пилить. Сегодня мы хотим поделится с вами данной разработкой, поэтому ставьте звезды и пишите issues, мы постараемся поддерживать данный пакет.
+Всем привет! Мы - [Purrweb](https://www.purrweb.com/ru/), однажды, заказчик крупного проекта [EnerGO](https://energo.app/) захотел перейти на платежную систему Cloud Payments, но, к сожалению, официальной библиотеки под React Native не оказалось, и нашему разработчику пришлось самому ее пилить. Сегодня мы хотим поделится с вами данной разработкой, поэтому ставьте звезды и пишите issues, мы постараемся поддерживать данный пакет.
 
 CloudPayments SDK позволяет интегрировать прием платежей в мобильные приложение.
 
@@ -29,6 +29,20 @@ yarn add react-native-cloudpayments-sdk
 <meta-data
   android:name="com.google.android.gms.wallet.api.enabled"
   android:value="true" />
+```
+
+В файл `MainApplication.java` добавьте `packages.add(new GooglePayPackage());`
+
+```java
+  import com.reactnativecloudpayments.GooglePayPackage;
+
+  @Override
+  protected List<ReactPackage> getPackages() {
+    @SuppressWarnings("UnnecessaryLocalVariable")
+    List<ReactPackage> packages = new PackageList(this).getPackages();
+    packages.add(new GooglePayPackage());
+    return packages;
+  }
 ```
 
 * Чтобы использовать экран для подтверждения оплыты, добавьте activity в тег <application> файла AndroidManifest.xml.
@@ -75,6 +89,8 @@ protected void onCreate(Bundle savedInstanceState) {
 [Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-Android)
 
 ### IOS
+
+* Выволните `pod install` в папке ios
 
 Для использования технологии Apple Pay вам необходимо зарегистрировать Merchant ID, сформировать платежный сертификат, сертификат для веб-платежей и подтвердить владение доменами сайтов, на которых будет производиться оплата.
 
