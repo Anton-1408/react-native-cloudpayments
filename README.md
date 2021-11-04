@@ -45,7 +45,7 @@ yarn add react-native-cloudpayments-sdk
   }
 ```
 
-* Чтобы использовать экран для подтверждения оплыты, добавьте activity в тег <application> файла AndroidManifest.xml.
+* Чтобы использовать экран для подтверждения оплаты, добавьте activity в тег <application> файла AndroidManifest.xml.
 
 ```xml
 <activity
