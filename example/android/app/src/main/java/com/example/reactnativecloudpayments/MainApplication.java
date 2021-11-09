@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import com.reactnativecloudpayments.CloudpaymentsPackage;
-import com.reactnativecloudpayments.GooglePayPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -30,7 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for CloudpaymentsExample:
           // packages.add(new MyReactNativePackage());
           packages.add(new CloudpaymentsPackage());
-          packages.add(new GooglePayPackage());
           return packages;
         }
 

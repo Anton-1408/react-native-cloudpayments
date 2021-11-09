@@ -31,20 +31,6 @@ yarn add react-native-cloudpayments-sdk
   android:value="true" />
 ```
 
-В файл `MainApplication.java` добавьте `packages.add(new GooglePayPackage());`
-
-```java
-  import com.reactnativecloudpayments.GooglePayPackage;
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-    @SuppressWarnings("UnnecessaryLocalVariable")
-    List<ReactPackage> packages = new PackageList(this).getPackages();
-    packages.add(new GooglePayPackage());
-    return packages;
-  }
-```
-
 * Чтобы использовать экран для подтверждения оплаты, добавьте activity в тег <application> файла AndroidManifest.xml.
 
 ```xml
@@ -54,29 +40,6 @@ yarn add react-native-cloudpayments-sdk
 ```
 
 * В файле `/android/build.gradle` в разделе `allprojects -> repositories` добавьте `jcenter()`
-
-##### Примичание
-* Чтобы экран с подтверждением оплаты не закрывался после перехода приложения из фоного режима на передний план ([issues](https://issuetracker.google.com/issues/64108432)) добавьте в MainActivity.java следующие строки:
-
-```java
-import android.os.Bundle;
-import android.content.Intent;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-
-  if (!isTaskRoot()) {
-    final Intent intent = getIntent();
-    if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(intent.getAction())) {
-      finish();
-      return;
-    }
-  }
-}
-```
-
-и измените значение у `android:launchMode` на `singleTop` у MainActivity в AndroidManifest.xml.
 
 * Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay.
 

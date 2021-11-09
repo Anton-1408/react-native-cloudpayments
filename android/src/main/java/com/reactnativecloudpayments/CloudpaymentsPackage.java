@@ -17,6 +17,7 @@ public class CloudpaymentsPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         modules.add(new CloudpaymentsModule(reactContext));
+        modules.add(new GooglePayModule(reactContext));
         return modules;
     }
 
