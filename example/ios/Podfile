@@ -9,6 +9,7 @@ target 'CloudpaymentsExample' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'react-native-cloudpayments-sdk', :path => '../..'
+  pod 'SDK-iOS', :git =>  "https://github.com/cloudpayments/SDK-iOS", :branch => "master", :modular_headers => true
 
   # Enables Flipper.
   #
