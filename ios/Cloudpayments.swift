@@ -36,6 +36,11 @@ class Cloudpayments: NSObject {
     api.delegate = self;
     api.getBinInfo(cardNumber)
   }
+
+  @objc
+  static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
 }
 
 extension Cloudpayments: CPCardApiDelegate {

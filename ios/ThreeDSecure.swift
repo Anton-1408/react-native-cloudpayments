@@ -17,4 +17,9 @@ class ThreeDSecure: RCTViewManager {
 
     threeDSecure.open(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
   }
+
+  @objc
+  override static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
 }

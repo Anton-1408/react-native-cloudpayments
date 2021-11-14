@@ -80,6 +80,11 @@ class ApplePayController: RCTViewManager {
         return PKPaymentNetwork.visa;
     }
   }
+
+  @objc
+  override static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
 }
 
 extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {

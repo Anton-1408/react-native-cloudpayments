@@ -10,4 +10,9 @@ open class EventEmitter: RCTEventEmitter {
   open override func supportedEvents() -> [String] {
     ["listenerCryptogramCard"]
   }
+
+  @objc
+  public override static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
 }
