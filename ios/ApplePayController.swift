@@ -41,6 +41,7 @@ class ApplePayController: RCTViewManager {
     self.requestPay.merchantCapabilities = PKMerchantCapability.capability3DS;
     self.requestPay.countryCode = countryCode;
     self.requestPay.currencyCode = currencyCode;
+    self.requestPay.merchantCapabilities = [.capability3DS, .capabilityEMV];
   }
 
   @objc
@@ -93,9 +94,19 @@ extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
   }
 
   func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
-    guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
-          return
+    do {
+        guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
+            throw CryptogramError.FoundNil("Don't create cryptogram card");
+        }
+         EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
+        completion(PKPaymentAuthorizationStatus.success)
+    } catch let error {
+        print(error);
+        completion(PKPaymentAuthorizationStatus.failure)
     }
-    EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
   }
+}
+
+enum CryptogramError: Error {
+    case FoundNil(String)
 }
