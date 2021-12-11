@@ -45,21 +45,25 @@ class Cloudpayments: NSObject {
 
 extension Cloudpayments: CPCardApiDelegate {
   func didFinish(_ info: BinInfo!) {
+    guard let reject = reject, let resolve = resolve else {
+        return
+    };
+
     let bankInfo: NSMutableDictionary = [:];
 
     if let bankName = info.bankName {
       bankInfo["bankName"] = bankName;
     } else {
-      self.reject?("Error", "BankName is empty", nil);
+      reject("Error", "BankName is empty", nil);
     }
 
     if let logoUrl = info.logoUrl {
       bankInfo["logoUrl"] = logoUrl;
     } else {
-      self.reject?("Error", "LogoUrl is empty", nil);
+      reject("Error", "LogoUrl is empty", nil);
     }
 
-    self.resolve?(bankInfo);
+    resolve(bankInfo);
   }
 
   func didFailWithError(_ message: String!) {

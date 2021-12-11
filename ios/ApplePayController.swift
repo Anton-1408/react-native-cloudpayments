@@ -2,7 +2,6 @@ import Foundation
 
 @objc(ApplePayController)
 class ApplePayController: RCTViewManager {
-  private var window = UIApplication.shared.windows[0];
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
@@ -47,9 +46,13 @@ class ApplePayController: RCTViewManager {
   @objc
   func openApplePay() -> Void {
     DispatchQueue.main.async {
-        let applePayController = PKPaymentAuthorizationViewController(paymentRequest: self.requestPay)
-        applePayController?.delegate = self;
-      self.window.rootViewController?.present(applePayController!, animated: true, completion: nil);
+      guard let rootViewController = RCTPresentedViewController() else {
+        return
+      }
+
+      let applePayController = PKPaymentAuthorizationViewController(paymentRequest: self.requestPay)
+      applePayController?.delegate = self;
+      rootViewController.present(applePayController!, animated: true, completion: nil);
     }
   }
 
@@ -94,19 +97,13 @@ extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
   }
 
   func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
-    do {
-        guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
-            throw CryptogramError.FoundNil("Don't create cryptogram card");
-        }
-         EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
-        completion(PKPaymentAuthorizationStatus.success)
-    } catch let error {
-        print(error);
-        completion(PKPaymentAuthorizationStatus.failure)
-    }
-  }
-}
 
-enum CryptogramError: Error {
-    case FoundNil(String)
+      guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
+        completion(PKPaymentAuthorizationStatus.failure)
+        return
+      }
+    
+     EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
+     completion(PKPaymentAuthorizationStatus.success)
+  }
 }

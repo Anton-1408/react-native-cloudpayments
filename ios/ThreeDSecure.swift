@@ -4,7 +4,7 @@ import Foundation;
 class ThreeDSecure: RCTViewManager {
   public static var resolve: RCTPromiseResolveBlock?;
   public static var reject: RCTPromiseRejectBlock?;
-  private var threeDSecure = ThreeDSecureController();
+  private let threeDSecure = ThreeDSecureController();
 
   @objc
   public func requestThreeDSecure(_ parametres3DS: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
