@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 import { Parametres3DS, BankInfo, Result3DS } from '../types';
 
-const { Cloudpayments, ThreeDSecure } = NativeModules;
+const { CardService, ThreeDSecure } = NativeModules;
 
 class Card {
   private static instance: Card;
@@ -16,33 +16,34 @@ class Card {
   }
 
   public isCardNumberValid = async (cardNumb: string): Promise<boolean> => {
-    const isCardNumberValid: boolean = await Cloudpayments.isCardNumberValid(
+    const isCardNumberValid: boolean = await CardService.isCardNumberValid(
       cardNumb
     );
     return isCardNumberValid;
   };
 
   public isExpDateValid = async (cardExpDate: string): Promise<boolean> => {
-    const isExpDateValid: boolean = await Cloudpayments.isExpDateValid(
+    const isExpDateValid: boolean = await CardService.isExpDateValid(
       cardExpDate
     );
     return isExpDateValid;
   };
 
-  public cardCryptogramPacket = async (
-    cardNumber: string,
-    expDate: string,
+  public makeCardCryptogramPacket = async (
     cvv: string,
-    merchantId: string
+    cardNumber?: string,
+    expDate?: string,
+    merchantId?: string
   ): Promise<string> => {
-    const cardCryptogramPacket: string =
-      await Cloudpayments.cardCryptogramPacket(
+    if (cardNumber && expDate && merchantId) {
+      return await CardService.makeCardCryptogramPacket(
         cardNumber,
         expDate,
         cvv,
         merchantId
       );
-    return cardCryptogramPacket;
+    }
+    return await CardService.makeCardCryptogramPacket(cvv);
   };
 
   public cardType = async (
@@ -50,12 +51,12 @@ class Card {
     _expDate: string,
     _cvv: string
   ): Promise<string> => {
-    const cardType: string = await Cloudpayments.cardType(cardNumber);
+    const cardType: string = await CardService.cardType(cardNumber);
     return cardType;
   };
 
   public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
-    const binInfo: BankInfo = await Cloudpayments.getBinInfo(cardNumb);
+    const binInfo: BankInfo = await CardService.getBinInfo(cardNumb);
     return binInfo;
   };
 

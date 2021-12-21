@@ -1,10 +1,9 @@
 import Foundation;
 
 @objc(ThreeDSecure)
-class ThreeDSecure: RCTViewManager {
+class ThreeDSecure: NSObject {
   public static var resolve: RCTPromiseResolveBlock?;
   public static var reject: RCTPromiseRejectBlock?;
-  private let threeDSecure = ThreeDSecureController();
 
   @objc
   public func requestThreeDSecure(_ parametres3DS: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -15,11 +14,16 @@ class ThreeDSecure: RCTViewManager {
     ThreeDSecure.resolve = resolve;
     ThreeDSecure.reject = reject;
 
-    threeDSecure.open(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
+    DispatchQueue.main.async {
+      let threeDSecure = ThreeDSecureController();
+
+      threeDSecure.onShowController();
+      threeDSecure.onRequest(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
+    }
   }
 
   @objc
-  override static func requiresMainQueueSetup() -> Bool {
+  static func requiresMainQueueSetup() -> Bool {
     return true
   }
 }

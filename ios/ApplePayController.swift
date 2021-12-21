@@ -1,7 +1,8 @@
 import Foundation
+import PassKit
 
 @objc(ApplePayController)
-class ApplePayController: RCTViewManager {
+class ApplePayController: NSObject {
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
@@ -9,7 +10,10 @@ class ApplePayController: RCTViewManager {
   func setPaymentNetworks(_ paymentNetworks: Array<String>) -> Void {
     var listPaymentNetwork: Array<PKPaymentNetwork> = [];
     for paymentNetwork in paymentNetworks {
-      let networkPay = checkPaymentNetwork(paymentNetwork);
+      guard let networkPay = checkPaymentNetwork(paymentNetwork) else {
+        continue
+      };
+
       listPaymentNetwork.append(networkPay);
     }
     self.paymentNetworks = listPaymentNetwork;
@@ -56,7 +60,7 @@ class ApplePayController: RCTViewManager {
     }
   }
 
-  private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork {
+  private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork? {
     switch paymentNetwork {
       case "VISA":
         return PKPaymentNetwork.visa;
@@ -72,13 +76,13 @@ class ApplePayController: RCTViewManager {
         if #available(iOS 14.5, *) {
             return PKPaymentNetwork.mir
         } else {
-            return PKPaymentNetwork.visa;
+            return nil;
         };
       case "JCB":
         if #available(iOS 10.1, *) {
             return PKPaymentNetwork.JCB
         } else {
-            return PKPaymentNetwork.visa;
+            return nil;
         };
       default:
         return PKPaymentNetwork.visa;
@@ -86,7 +90,7 @@ class ApplePayController: RCTViewManager {
   }
 
   @objc
-  override static func requiresMainQueueSetup() -> Bool {
+  static func requiresMainQueueSetup() -> Bool {
     return true
   }
 }
@@ -98,12 +102,12 @@ extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
 
   func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
 
-      guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
-        completion(PKPaymentAuthorizationStatus.failure)
-        return
-      }
-    
-     EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
-     completion(PKPaymentAuthorizationStatus.success)
+    guard let cryptogram = payment.convertToString() else {
+      completion(PKPaymentAuthorizationStatus.failure)
+      return
+    }
+
+    EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
+    completion(PKPaymentAuthorizationStatus.success)
   }
 }

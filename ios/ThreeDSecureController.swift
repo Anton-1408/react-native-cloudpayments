@@ -1,52 +1,76 @@
-import Foundation
-import UIKit;
+import PassKit
+import Cloudpayments
+import UIKit
+import WebKit
 
-@objc(ThreeDSecureController)
 class ThreeDSecureController: UIViewController {
-  private let d3ds: D3DS = D3DS.init();
+  let threeDsProcessor = ThreeDsProcessor();
 
-  public func open(transactionId: String, paReq: String, acsUrl: String) {
-    guard let rootViewController = RCTPresentedViewController() else {
-      return
-    }
+  public func onRequest(transactionId: String, paReq: String, acsUrl: String) {
+    let data = ThreeDsData.init(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
 
+    threeDsProcessor.make3DSPayment(with: data, delegate: self);
+  }
+
+  public func onShowController() {
     DispatchQueue.main.async {
+      guard let rootViewController = RCTPresentedViewController() else {
+        return
+      }
+
       rootViewController.present(self, animated: true, completion: nil);
+      self.view.backgroundColor = .white;
+    }
+  }
 
-      self.d3ds.make3DSPayment(with: self, andAcsURLString: acsUrl, andPaReqString: paReq, andTransactionIdString: transactionId)
+  private func hideController() {
+    DispatchQueue.main.async {
+      guard let rootViewController = RCTPresentedViewController() else {
+        return
+      }
 
+      rootViewController.dismiss(animated: true, completion: nil)
     }
   }
 }
 
-extension ThreeDSecureController: D3DSDelegate, WKUIDelegate {
-  func authorizationCompleted(withMD md: String!, andPares paRes: String!) {
-    guard let rootViewController = RCTPresentedViewController() else {
-      return
-    }
+extension ThreeDSecureController: ThreeDsDelegate {
+  func willPresentWebView(_ webView: WKWebView) {
+    webView.frame = self.view.bounds
+    webView.translatesAutoresizingMaskIntoConstraints = false
+
+    self.view.addSubview(webView)
+
+    NSLayoutConstraint.activate([
+      webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+      webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+      webView.topAnchor.constraint(equalTo: self.view.topAnchor),
+      webView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+    ])
+  }
+
+  func onAuthorizationCompleted(with md: String, paRes: String) {
+    self.hideController()
 
     guard let resolve = ThreeDSecure.resolve else {
         return
     };
 
     let result: NSMutableDictionary = [:];
+
     result["TransactionId"] = md;
     result["PaRes"] = paRes;
 
-    rootViewController.dismiss(animated: true, completion: nil);
     resolve(result);
   }
 
-  func authorizationFailed(withHtml html: String!) {
-    guard let rootViewController = RCTPresentedViewController() else {
-      return
-    }
+  func onAuthorizationFailed(with html: String) {
+    self.hideController()
 
     guard let reject = ThreeDSecure.reject else {
       return
     };
 
-    rootViewController.dismiss(animated: true, completion: nil);
     reject("error", html, nil);
   }
 }

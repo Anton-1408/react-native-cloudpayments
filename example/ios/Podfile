@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'CloudpaymentsExample' do
   config = use_native_modules!
@@ -9,7 +9,9 @@ target 'CloudpaymentsExample' do
   use_react_native!(:path => config["reactNativePath"])
 
   pod 'react-native-cloudpayments-sdk', :path => '../..'
-  pod 'SDK-iOS', :git =>  "https://github.com/cloudpayments/SDK-iOS", :branch => "master", :modular_headers => true
+
+  pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+  pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
 
   # Enables Flipper.
   #

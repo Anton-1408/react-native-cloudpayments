@@ -35,12 +35,12 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "CloudpaymentsExample-tvOS";
 		};
-		3ABEBF4026F760870081EADB /* PBXContainerItemProxy */ = {
+		3ABA28482765CCFA00616F46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3ABEBF3C26F760870081EADB /* Cloudpayments.xcodeproj */;
+			containerPortal = 3ABA28442765CCFA00616F46 /* CloudpaymentsSdk.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = Cloudpayments;
+			remoteInfo = CloudpaymentsSdk;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -59,7 +59,7 @@
 		2D02E4901E0B4A5D006451C7 /* CloudpaymentsExample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CloudpaymentsExample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9CD4F526C8E09000A7FEE3 /* CloudpaymentsExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudpaymentsExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		3A9CD4F626C8E09100A7FEE3 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		3ABEBF3C26F760870081EADB /* Cloudpayments.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cloudpayments.xcodeproj; path = ../../ios/Cloudpayments.xcodeproj; sourceTree = "<group>"; };
+		3ABA28442765CCFA00616F46 /* CloudpaymentsSdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CloudpaymentsSdk.xcodeproj; path = ../../ios/CloudpaymentsSdk.xcodeproj; sourceTree = "<group>"; };
 		47F7ED3B7971BE374F7B8635 /* Pods-CloudpaymentsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudpaymentsExample.debug.xcconfig"; path = "Target Support Files/Pods-CloudpaymentsExample/Pods-CloudpaymentsExample.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CloudpaymentsExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA3E69C5B9553B26FBA2DF04 /* libPods-CloudpaymentsExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CloudpaymentsExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,10 +144,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3ABEBF3D26F760870081EADB /* Products */ = {
+		3ABA28452765CCFA00616F46 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3ABEBF4126F760870081EADB /* libCloudpayments.a */,
+				3ABA28492765CCFA00616F46 /* libCloudpaymentsSdk.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,7 +164,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				3ABEBF3C26F760870081EADB /* Cloudpayments.xcodeproj */,
+				3ABA28442765CCFA00616F46 /* CloudpaymentsSdk.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -314,8 +314,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3ABEBF3D26F760870081EADB /* Products */;
-					ProjectRef = 3ABEBF3C26F760870081EADB /* Cloudpayments.xcodeproj */;
+					ProductGroup = 3ABA28452765CCFA00616F46 /* Products */;
+					ProjectRef = 3ABA28442765CCFA00616F46 /* CloudpaymentsSdk.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -329,11 +329,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3ABEBF4126F760870081EADB /* libCloudpayments.a */ = {
+		3ABA28492765CCFA00616F46 /* libCloudpaymentsSdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libCloudpayments.a;
-			remoteRef = 3ABEBF4026F760870081EADB /* PBXContainerItemProxy */;
+			path = libCloudpaymentsSdk.a;
+			remoteRef = 3ABA28482765CCFA00616F46 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -448,10 +448,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CloudpaymentsExample/Pods-CloudpaymentsExample-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Cloudpayments/Cloudpayments.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Cloudpayments.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -793,7 +795,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -846,7 +848,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",

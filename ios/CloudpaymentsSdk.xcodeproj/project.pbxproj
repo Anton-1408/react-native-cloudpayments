@@ -10,8 +10,8 @@
 		3A39B83426DBBE040073FB00 /* EventEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A39B83326DBBE040073FB00 /* EventEmitter.swift */; };
 		3AB93B022717303400DB5CFC /* ThreeDSecureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */; };
 		3ABEBF3A26F75D5A0081EADB /* ApplePayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */; };
-		684655E52F59904583675E12 /* Pods_Cloudpayments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF1896A9162F5FE538B7437 /* Pods_Cloudpayments.framework */; };
-		F4FF95D7245B92E800C19C63 /* Cloudpayments.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* Cloudpayments.swift */; };
+		684655E52F59904583675E12 /* Pods_CloudpaymentsSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */; };
+		F4FF95D7245B92E800C19C63 /* CardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* CardService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,20 +27,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libCloudpayments.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudpayments.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		134814201AA4EA6300B7C361 /* libCloudpaymentsSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCloudpaymentsSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A39B83226DBBDF50073FB00 /* EventEmitter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventEmitter.m; sourceTree = "<group>"; };
 		3A39B83326DBBE040073FB00 /* EventEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEmitter.swift; sourceTree = "<group>"; };
-		3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureController.swift; sourceTree = "<group>"; };
+		3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ThreeDSecureController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		3ABA284A2765CD1C00616F46 /* CloudpaymentsSdk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudpaymentsSdk-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayController.swift; sourceTree = "<group>"; };
 		3ABEBF3B26F75D700081EADB /* ApplePayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePayController.m; sourceTree = "<group>"; };
 		3AF4190D26CAC1C400187204 /* ThreeDSecure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDSecure.m; sourceTree = "<group>"; };
 		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; };
-		6AF1896A9162F5FE538B7437 /* Pods_Cloudpayments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cloudpayments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5891CC2AC0600A0062D /* Cloudpayments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloudpayments.m; sourceTree = "<group>"; };
-		CB43D7BC1E6A152537AAC873 /* Pods-Cloudpayments.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudpayments.debug.xcconfig"; path = "Target Support Files/Pods-Cloudpayments/Pods-Cloudpayments.debug.xcconfig"; sourceTree = "<group>"; };
-		E8FF5A3021AECA203D7DAD99 /* Pods-Cloudpayments.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudpayments.release.xcconfig"; path = "Target Support Files/Pods-Cloudpayments/Pods-Cloudpayments.release.xcconfig"; sourceTree = "<group>"; };
-		F4FF95D5245B92E700C19C63 /* Cloudpayments-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cloudpayments-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4FF95D6245B92E800C19C63 /* Cloudpayments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloudpayments.swift; sourceTree = "<group>"; };
+		6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudpaymentsSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E7B5891CC2AC0600A0062D /* CardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardService.m; sourceTree = "<group>"; };
+		CB43D7BC1E6A152537AAC873 /* Pods-CloudpaymentsSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudpaymentsSdk.debug.xcconfig"; path = "Target Support Files/Pods-CloudpaymentsSdk/Pods-CloudpaymentsSdk.debug.xcconfig"; sourceTree = "<group>"; };
+		E8FF5A3021AECA203D7DAD99 /* Pods-CloudpaymentsSdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudpaymentsSdk.release.xcconfig"; path = "Target Support Files/Pods-CloudpaymentsSdk/Pods-CloudpaymentsSdk.release.xcconfig"; sourceTree = "<group>"; };
+		F4FF95D6245B92E800C19C63 /* CardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				684655E52F59904583675E12 /* Pods_Cloudpayments.framework in Frameworks */,
+				684655E52F59904583675E12 /* Pods_CloudpaymentsSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +58,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libCloudpayments.a */,
+				134814201AA4EA6300B7C361 /* libCloudpaymentsSdk.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,8 +66,8 @@
 		25961F90333D254BA66E0166 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CB43D7BC1E6A152537AAC873 /* Pods-Cloudpayments.debug.xcconfig */,
-				E8FF5A3021AECA203D7DAD99 /* Pods-Cloudpayments.release.xcconfig */,
+				CB43D7BC1E6A152537AAC873 /* Pods-CloudpaymentsSdk.debug.xcconfig */,
+				E8FF5A3021AECA203D7DAD99 /* Pods-CloudpaymentsSdk.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -75,6 +75,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				3ABA284A2765CD1C00616F46 /* CloudpaymentsSdk-Bridging-Header.h */,
 				3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */,
 				3ABEBF3B26F75D700081EADB /* ApplePayController.m */,
 				3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */,
@@ -82,9 +83,8 @@
 				3A39B83226DBBDF50073FB00 /* EventEmitter.m */,
 				3AF4190E26CAC30700187204 /* ThreeDSecure.swift */,
 				3AF4190D26CAC1C400187204 /* ThreeDSecure.m */,
-				F4FF95D6245B92E800C19C63 /* Cloudpayments.swift */,
-				B3E7B5891CC2AC0600A0062D /* Cloudpayments.m */,
-				F4FF95D5245B92E700C19C63 /* Cloudpayments-Bridging-Header.h */,
+				F4FF95D6245B92E800C19C63 /* CardService.swift */,
+				B3E7B5891CC2AC0600A0062D /* CardService.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				25961F90333D254BA66E0166 /* Pods */,
 				8124141055FD049EC300F5DE /* Frameworks */,
@@ -94,7 +94,7 @@
 		8124141055FD049EC300F5DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6AF1896A9162F5FE538B7437 /* Pods_Cloudpayments.framework */,
+				6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,9 +102,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* Cloudpayments */ = {
+		58B511DA1A9E6C8500147676 /* CloudpaymentsSdk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Cloudpayments" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "CloudpaymentsSdk" */;
 			buildPhases = (
 				35FE6827AE3064AB3FA533E2 /* [CP] Check Pods Manifest.lock */,
 				58B511D71A9E6C8500147676 /* Sources */,
@@ -115,9 +115,9 @@
 			);
 			dependencies = (
 			);
-			name = Cloudpayments;
+			name = CloudpaymentsSdk;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libCloudpayments.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libCloudpaymentsSdk.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -134,7 +134,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Cloudpayments" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "CloudpaymentsSdk" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -147,7 +147,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* Cloudpayments */,
+				58B511DA1A9E6C8500147676 /* CloudpaymentsSdk */,
 			);
 		};
 /* End PBXProject section */
@@ -168,7 +168,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cloudpayments-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CloudpaymentsSdk-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -183,7 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ABEBF3A26F75D5A0081EADB /* ApplePayController.swift in Sources */,
-				F4FF95D7245B92E800C19C63 /* Cloudpayments.swift in Sources */,
+				F4FF95D7245B92E800C19C63 /* CardService.swift in Sources */,
 				3AB93B022717303400DB5CFC /* ThreeDSecureController.swift in Sources */,
 				3A39B83426DBBE040073FB00 /* EventEmitter.swift in Sources */,
 			);
@@ -235,7 +235,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -278,7 +278,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -287,7 +287,7 @@
 		};
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB43D7BC1E6A152537AAC873 /* Pods-Cloudpayments.debug.xcconfig */;
+			baseConfigurationReference = CB43D7BC1E6A152537AAC873 /* Pods-CloudpaymentsSdk.debug.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -298,9 +298,9 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Cloudpayments;
+				PRODUCT_NAME = CloudpaymentsSdk;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Cloudpayments-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CloudpaymentsSdk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -308,7 +308,7 @@
 		};
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8FF5A3021AECA203D7DAD99 /* Pods-Cloudpayments.release.xcconfig */;
+			baseConfigurationReference = E8FF5A3021AECA203D7DAD99 /* Pods-CloudpaymentsSdk.release.xcconfig */;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -319,9 +319,9 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Cloudpayments;
+				PRODUCT_NAME = CloudpaymentsSdk;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Cloudpayments-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CloudpaymentsSdk-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -329,7 +329,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "Cloudpayments" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "CloudpaymentsSdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -338,7 +338,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "Cloudpayments" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "CloudpaymentsSdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
