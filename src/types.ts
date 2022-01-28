@@ -1,4 +1,5 @@
 import PAYMENT_NETWORK from './PaymentNetwork';
+import Currency from './Currency';
 
 export interface Parametres3DS {
   transactionId: string;
@@ -28,6 +29,28 @@ export interface MethodDataPayment {
   countryCode: string;
   currencyCode: string;
   environmentRunning?: EnvironmentRunningGooglePay;
+}
+
+export interface PaymentData {
+  publicId: string;
+  totalAmount: string;
+  currency: Currency;
+  accountId: string;
+  applePayMerchantId: string;
+  description?: string;
+  ipAddress?: string;
+  invoiceId?: string;
+}
+
+export interface PaymentJsonData {
+  age?: string;
+  name?: string;
+  phone?: string;
+}
+
+export interface Configuration {
+  useDualMessagePayment: boolean;
+  disableApplePay: boolean;
 }
 
 export type EnvironmentRunningGooglePay = 'Test' | 'Production';
