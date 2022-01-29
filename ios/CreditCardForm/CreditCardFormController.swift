@@ -19,42 +19,55 @@ class CardFormController: UIViewController {
         disableApplePay: disableApplePay
     );
   }
-    
+
   func showCreditCardForm() -> Void {
     DispatchQueue.main.async {
       guard let rootViewController = RCTPresentedViewController() else {
         return
       };
 
-      PaymentForm.present(with: self.configuration, from: rootViewController);
+      rootViewController.present(self, animated: true, completion: nil)
+      PaymentForm.present(with: self.configuration, from: self);
+    }
+  }
+
+  private func hideController() -> Void {
+    DispatchQueue.main.async {
+      guard let rootViewController = RCTPresentedViewController() else {
+        return
+      }
+
+      rootViewController.dismiss(animated: true, completion: nil)
     }
   }
 };
 
 extension CardFormController: PaymentDelegate {
   func onPaymentFinished(_ transactionId: Int?) {
-    
+    guard let resolve = CreditCardFormManager.resolve else {
+      return
+    };
+
+    resolve(transactionId);
   }
-    
+
   func onPaymentFailed(_ errorMessage: String?) {
-     
+    guard let reject = CreditCardFormManager.reject else {
+      return
+    };
+
+    reject("error", errorMessage, nil);
   }
 };
 
 extension CardFormController: PaymentUIDelegate {
-  func paymentFormWillDisplay() {
- 
-  }
-    
-  func paymentFormDidDisplay() {
- 
-  }
-    
-  func paymentFormWillHide() {
+  func paymentFormWillDisplay() {}
 
-  }
-    
+  func paymentFormDidDisplay() {}
+
+  func paymentFormWillHide() {}
+
   func paymentFormDidHide() {
-
+    self.hideController();
   }
 };

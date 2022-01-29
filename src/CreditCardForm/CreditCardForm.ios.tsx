@@ -22,8 +22,12 @@ class CreditCardForm {
     CreditCardFormManager.initialPaymentData(paymentData, jsonData);
   };
 
-  public showCreditCardForm = (configuration: Configuration): void => {
-    CreditCardFormManager.showCreditCardForm(configuration);
+  public showCreditCardForm = async (
+    configuration: Configuration
+  ): Promise<Number> => {
+    const transactionId: number =
+      await CreditCardFormManager.showCreditCardForm(configuration);
+    return transactionId;
   };
 }
 

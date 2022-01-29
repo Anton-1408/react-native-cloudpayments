@@ -6,10 +6,10 @@ class ThreeDSecure: NSObject {
   public static var reject: RCTPromiseRejectBlock?;
 
   @objc
-  public func requestThreeDSecure(_ parametres3DS: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    let transactionId = parametres3DS.value(forKey: "transactionId") as! String;
-    let paReq = parametres3DS.value(forKey: "paReq") as! String;
-    let acsUrl = parametres3DS.value(forKey: "acsUrl") as! String;
+  public func requestThreeDSecure(_ parametres3DS: Dictionary<String, String>, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+    let transactionId = parametres3DS["transactionId"]!;
+    let paReq = parametres3DS["paReq"]!;
+    let acsUrl = parametres3DS["acsUrl"]!;
 
     ThreeDSecure.resolve = resolve;
     ThreeDSecure.reject = reject;
