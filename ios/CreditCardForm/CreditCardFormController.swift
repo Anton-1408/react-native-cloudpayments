@@ -11,12 +11,12 @@ class CardFormController: UIViewController {
     let disableApplePay = configuration["disableApplePay"]!;
 
     self.configuration = PaymentConfiguration.init(
-        paymentData: paymentData,
-        delegate: self,
-        uiDelegate: self,
-        scanner: nil,
-        useDualMessagePayment: useDualMessagePayment,
-        disableApplePay: disableApplePay
+      paymentData: paymentData,
+      delegate: self,
+      uiDelegate: nil,
+      scanner: nil,
+      useDualMessagePayment: useDualMessagePayment,
+      disableApplePay: disableApplePay
     );
   }
 
@@ -48,14 +48,4 @@ extension CardFormController: PaymentDelegate {
 
     reject("error", errorMessage, nil);
   }
-};
-
-extension CardFormController: PaymentUIDelegate {
-  func paymentFormWillDisplay() {}
-
-  func paymentFormDidDisplay() {}
-
-  func paymentFormWillHide() {}
-
-  func paymentFormDidHide() {}
 };
