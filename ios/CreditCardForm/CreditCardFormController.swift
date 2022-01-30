@@ -26,18 +26,8 @@ class CardFormController: UIViewController {
         return
       };
 
-      rootViewController.present(self, animated: true, completion: nil)
-      PaymentForm.present(with: self.configuration, from: self);
-    }
-  }
-
-  private func hideController() -> Void {
-    DispatchQueue.main.async {
-      guard let rootViewController = RCTPresentedViewController() else {
-        return
-      }
-
-      rootViewController.dismiss(animated: true, completion: nil)
+      rootViewController.addChild(self);
+      PaymentForm.present(with: self.configuration, from: rootViewController);
     }
   }
 };
@@ -67,7 +57,5 @@ extension CardFormController: PaymentUIDelegate {
 
   func paymentFormWillHide() {}
 
-  func paymentFormDidHide() {
-    self.hideController();
-  }
+  func paymentFormDidHide() {}
 };
