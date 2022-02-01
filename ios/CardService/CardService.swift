@@ -61,7 +61,7 @@ class CardService: NSObject {
     }
 
     CloudpaymentsApi.getBankInfo(cardNumber: cardNumber) { (info, error) in
-      let bankInfo: NSMutableDictionary = [:];
+      var bankInfo: Dictionary<String, String?> = [:];
 
       if let error = error {
         reject("Error", error.message, nil);
