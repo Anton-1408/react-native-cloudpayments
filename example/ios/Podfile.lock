@@ -1,5 +1,6 @@
 PODS:
   - boost-for-react-native (1.63.0)
+  - CardIO (5.4.1)
   - Cloudpayments (1.1.1):
     - CloudpaymentsNetworking
   - CloudpaymentsNetworking (1.0.1)
@@ -241,6 +242,7 @@ PODS:
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
   - react-native-cloudpayments-sdk (1.5.1):
+    - CardIO
     - Cloudpayments
     - CloudpaymentsNetworking
     - React-Core
@@ -309,6 +311,7 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
+  - CardIO
   - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`)
   - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -363,6 +366,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - CardIO
     - CocoaAsyncSocket
     - Flipper
     - Flipper-Boost-iOSX
@@ -449,6 +453,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
   Cloudpayments: 3be553d44b1c61da9dd85ea6365b4e719b900303
   CloudpaymentsNetworking: c16a709b98a0a3222da8d3afa4c15eb364161e35
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -478,7 +483,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-cloudpayments-sdk: c93006c74697dfe6617b190e0b281012bb420540
+  react-native-cloudpayments-sdk: 25d5d8138d10217f5585c2c9437098027272cd1d
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -492,6 +497,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 013ead2c4d3448d85611fcaa6b2c1a3a10133d75
+PODFILE CHECKSUM: a7a1ad9b2d8ecb427e633cfcf8a3d87a3e2382da
 
 COCOAPODS: 1.10.1

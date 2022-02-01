@@ -4,3 +4,4 @@
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
 #import <UIKit/UIKit.h>
+#import "CardIO.h"

@@ -3,6 +3,7 @@ import Cloudpayments;
 
 class CardFormController: UIViewController {
   var configuration: PaymentConfiguration!;
+  var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
   convenience init(paymentData: PaymentData, configuration: Dictionary<String, Bool>) {
     self.init();
@@ -14,7 +15,7 @@ class CardFormController: UIViewController {
       paymentData: paymentData,
       delegate: self,
       uiDelegate: nil,
-      scanner: nil,
+      scanner: self,
       useDualMessagePayment: useDualMessagePayment,
       disableApplePay: disableApplePay
     );
@@ -49,3 +50,22 @@ extension CardFormController: PaymentDelegate {
     reject("error", errorMessage, nil);
   }
 };
+
+extension CardFormController: PaymentCardScanner {
+  func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
+    self.scannerCompletion = completion;
+    let scanController = CardIOPaymentViewController.init(paymentDelegate: self)
+    return scanController
+  }
+}
+
+extension CardFormController: CardIOPaymentViewControllerDelegate {
+  func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+    paymentViewController.dismiss(animated: true, completion: nil)
+  }
+
+  func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+    self.scannerCompletion?(cardInfo.cardNumber, cardInfo.expiryMonth, cardInfo.expiryYear, cardInfo.cvv)
+    paymentViewController.dismiss(animated: true, completion: nil)
+  }
+}

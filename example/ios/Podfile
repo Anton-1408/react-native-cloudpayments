@@ -12,6 +12,7 @@ target 'CloudpaymentsExample' do
 
   pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
   pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+  pod 'CardIO'
 
   # Enables Flipper.
   #

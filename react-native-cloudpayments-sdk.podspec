@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.dependency "React-Core"
   s.dependency "Cloudpayments"
   s.dependency "CloudpaymentsNetworking"
+  s.dependency "CardIO"
 end

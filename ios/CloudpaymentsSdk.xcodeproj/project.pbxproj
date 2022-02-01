@@ -88,18 +88,26 @@
 			path = CreditCardForm;
 			sourceTree = "<group>";
 		};
+		3AD6CC9527A6518F009CA18E /* ThreeDSecure */ = {
+			isa = PBXGroup;
+			children = (
+				3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */,
+				3AF4190D26CAC1C400187204 /* ThreeDSecure.m */,
+				3AF4190E26CAC30700187204 /* ThreeDSecure.swift */,
+			);
+			path = ThreeDSecure;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				3AD6CC9527A6518F009CA18E /* ThreeDSecure */,
 				3AD6CC89279D2F71009CA18E /* CreditCardForm */,
 				3ABA284A2765CD1C00616F46 /* CloudpaymentsSdk-Bridging-Header.h */,
-				3AB93B0027172CEC00DB5CFC /* ThreeDSecureController.swift */,
 				3ABEBF3B26F75D700081EADB /* ApplePayController.m */,
 				3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */,
 				3A39B83326DBBE040073FB00 /* EventEmitter.swift */,
 				3A39B83226DBBDF50073FB00 /* EventEmitter.m */,
-				3AF4190E26CAC30700187204 /* ThreeDSecure.swift */,
-				3AF4190D26CAC1C400187204 /* ThreeDSecure.m */,
 				F4FF95D6245B92E800C19C63 /* CardService.swift */,
 				B3E7B5891CC2AC0600A0062D /* CardService.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
