@@ -26,12 +26,13 @@ class ApplePayController: NSObject {
   }
 
   @objc
-  func setProducts(_ products: Array<NSDictionary>) {
+  func setProducts(_ products: Array<Dictionary<String, String>>) {
     var listProducts: Array<PKPaymentSummaryItem> = [];
     for product in products {
-      let nameProduct = product.value(forKey: "name") as! String;
-      let priceProduct = Int(product.value(forKey: "price") as! String);
+      let nameProduct = product["name"]!;
+      let priceProduct = Int(product["price"]!);
       let paymentItem = PKPaymentSummaryItem.init(label: nameProduct, amount: NSDecimalNumber(value: priceProduct!));
+
       listProducts.append(paymentItem);
     }
     self.requestPay.paymentSummaryItems = listProducts;
