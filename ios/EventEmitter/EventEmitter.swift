@@ -1,3 +1,5 @@
+import Foundation
+
 @objc(EventEmitter)
 open class EventEmitter: RCTEventEmitter {
   public static var emitter: RCTEventEmitter!

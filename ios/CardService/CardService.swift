@@ -1,3 +1,4 @@
+import Foundation
 import Cloudpayments
 
 @objc(CardService)
@@ -44,7 +45,7 @@ class CardService: NSObject {
   }
 
   @objc
-  func makeCardCryptogramPacket(_ cvv: String, resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
+  func makeCardCryptogramPacketForCvv(_ cvv: String, resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
     guard let _ = reject, let resolve = resolve else {
       return
     }

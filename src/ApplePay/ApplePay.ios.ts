@@ -1,6 +1,6 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
 import { ListenerCryptogramCard, Product, MethodDataPayment } from '../types';
-import PAYMENT_NETWORK from '../PaymentNetwork';
+import { PAYMENT_NETWORK } from '../constants';
 
 const { EventEmitter, ApplePayController } = NativeModules;
 

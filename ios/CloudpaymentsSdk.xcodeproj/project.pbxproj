@@ -15,6 +15,9 @@
 		3AD6CC88279D2F68009CA18E /* CreditCardFormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6CC84279D2ED0009CA18E /* CreditCardFormController.swift */; };
 		3AD6CC9927A97FA0009CA18E /* CardService.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* CardService.m */; };
 		3AD6CC9C27A981A1009CA18E /* EventEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A39B83226DBBDF50073FB00 /* EventEmitter.m */; };
+		3AD6CCA027AAC70B009CA18E /* CloudPaymentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6CC9F27AAC70B009CA18E /* CloudPaymentsApi.swift */; };
+		3AD6CCA227AAC753009CA18E /* CloudPaymentsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6CCA127AAC753009CA18E /* CloudPaymentsApi.m */; };
+		3AD6CCA627AC2014009CA18E /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD6CCA527AC2014009CA18E /* utils.swift */; };
 		684655E52F59904583675E12 /* Pods_CloudpaymentsSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */; };
 		F4FF95D7245B92E800C19C63 /* CardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* CardService.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +45,9 @@
 		3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayController.swift; sourceTree = "<group>"; };
 		3ABEBF3B26F75D700081EADB /* ApplePayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePayController.m; sourceTree = "<group>"; };
 		3AD6CC84279D2ED0009CA18E /* CreditCardFormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardFormController.swift; sourceTree = "<group>"; };
+		3AD6CC9F27AAC70B009CA18E /* CloudPaymentsApi.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CloudPaymentsApi.swift; sourceTree = "<group>"; tabWidth = 2; };
+		3AD6CCA127AAC753009CA18E /* CloudPaymentsApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudPaymentsApi.m; sourceTree = "<group>"; };
+		3AD6CCA527AC2014009CA18E /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		3AF4190D26CAC1C400187204 /* ThreeDSecure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDSecure.m; sourceTree = "<group>"; };
 		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; };
 		6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudpaymentsSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,9 +133,28 @@
 			path = EventEmitter;
 			sourceTree = "<group>";
 		};
+		3AD6CC9E27AAC677009CA18E /* CloudPaymentsApi */ = {
+			isa = PBXGroup;
+			children = (
+				3AD6CC9F27AAC70B009CA18E /* CloudPaymentsApi.swift */,
+				3AD6CCA127AAC753009CA18E /* CloudPaymentsApi.m */,
+			);
+			path = CloudPaymentsApi;
+			sourceTree = "<group>";
+		};
+		3AD6CCA427AC1EEF009CA18E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				3AD6CCA527AC2014009CA18E /* utils.swift */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				3AD6CCA427AC1EEF009CA18E /* lib */,
+				3AD6CC9E27AAC677009CA18E /* CloudPaymentsApi */,
 				3AD6CC9B27A98192009CA18E /* EventEmitter */,
 				3AD6CC9A27A98107009CA18E /* ApplePayController */,
 				3AD6CC9827A97F8B009CA18E /* CardService */,
@@ -236,12 +261,15 @@
 				3ABEBF3A26F75D5A0081EADB /* ApplePayController.swift in Sources */,
 				3AD6CC86279D2F65009CA18E /* CreditCardFormManager.m in Sources */,
 				F4FF95D7245B92E800C19C63 /* CardService.swift in Sources */,
+				3AD6CCA627AC2014009CA18E /* utils.swift in Sources */,
 				3AD6CC9927A97FA0009CA18E /* CardService.m in Sources */,
 				3AB93B022717303400DB5CFC /* ThreeDSecureController.swift in Sources */,
 				3AD6CC88279D2F68009CA18E /* CreditCardFormController.swift in Sources */,
 				3AD6CC9C27A981A1009CA18E /* EventEmitter.m in Sources */,
+				3AD6CCA227AAC753009CA18E /* CloudPaymentsApi.m in Sources */,
 				3AD6CC85279D2F63009CA18E /* CreditCardFormManager.swift in Sources */,
 				3A39B83426DBBE040073FB00 /* EventEmitter.swift in Sources */,
+				3AD6CCA027AAC70B009CA18E /* CloudPaymentsApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

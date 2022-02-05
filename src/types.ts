@@ -1,5 +1,4 @@
-import PAYMENT_NETWORK from './PaymentNetwork';
-import Currency from './Currency';
+import { Currency, PAYMENT_NETWORK } from './constants';
 
 export interface Parametres3DS {
   transactionId: string;
@@ -56,3 +55,45 @@ export interface Configuration {
 export type EnvironmentRunningGooglePay = 'Test' | 'Production';
 
 export type ListenerCryptogramCard = (cryptogram: string) => void;
+
+export interface TransactionResponse {
+  success?: boolean;
+  message?: string;
+  model?: Transaction;
+}
+
+interface Transaction {
+  transactionId?: number;
+  amount?: number;
+  currency?: string;
+  currencyCode?: number;
+  invoiceId?: string;
+  accountId?: string;
+  email?: string;
+  description?: string;
+  authCode?: string;
+  testMode?: boolean;
+  ipAddress?: string;
+  ipCountry?: string;
+  ipCity?: string;
+  ipRegion?: string;
+  ipDistrict?: string;
+  ipLatitude?: number;
+  ipLongitude?: number;
+  cardFirstSix?: string;
+  cardLastFour?: string;
+  cardExpDate?: string;
+  cardType?: string;
+  cardTypeCode?: number;
+  issuer?: string;
+  issuerBankCountry?: string;
+  status?: string;
+  statusCode?: number;
+  reason?: string;
+  reasonCode?: number;
+  cardHolderMessage?: string;
+  name?: string;
+  paReq?: string;
+  acsUrl?: string;
+  threeDsCallbackId: string;
+}

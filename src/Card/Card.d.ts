@@ -1,5 +1,5 @@
-import CardAndroid from './Card.android';
+import CardIos from './Card.ios';
 
-declare var _cardAndroid: typeof CardAndroid;
+declare var _cardIos: typeof CardIos;
 
-export default CardAndroid;
+export default CardIos;

@@ -1,3 +1,4 @@
+import Foundation
 import PassKit
 import Cloudpayments
 import UIKit

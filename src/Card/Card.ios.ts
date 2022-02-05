@@ -43,7 +43,7 @@ class Card {
         merchantId
       );
     }
-    return await CardService.makeCardCryptogramPacket(cvv);
+    return await CardService.makeCardCryptogramPacketForCvv(cvv);
   };
 
   public cardType = async (
