@@ -20,7 +20,16 @@ class ApplePayController: NSObject {
   }
 
   @objc
-  func canMakePayments(_ resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
+  func canMakePayments(_ resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
+    guard let reject = reject, let resolve = resolve else {
+        return
+    };
+
+    guard !self.paymentNetworks.isEmpty else {
+      reject("error", "PaymentNetworks is empty", nil)
+      return;
+    }
+
     let isCanMakePayments = PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: self.paymentNetworks)
     resolve(isCanMakePayments);
   }
