@@ -57,51 +57,15 @@ class CloudPaymentsApi: NSObject {
     })
   }
 
-  func convertResponseToDictionaryForReactNative(response: TransactionResponse) -> Dictionary<String, Any> {
-    var responseDictionary: Dictionary<String, Any> = [:]
-    let model = response.model;
+  func convertResponseToDictionaryForReactNative(response: TransactionResponse) -> String {
+    let jsonEncode = JSONEncoder();
 
-    responseDictionary["message"] = response.message;
-    responseDictionary["success"] = response.success;
+    guard let jsonData = try? jsonEncode.encode(response) else {
+      return "Response is empty";
+    };
 
-    if (model != nil) {
-      responseDictionary["model"] = [
-        "transactionId": model?.transactionId as Any,
-        "amount": model?.amount as Any,
-        "currency": model?.currency as Any,
-        "currencyCode": model?.currencyCode as Any,
-        "invoiceId": model?.invoiceId as Any,
-        "accountId": model?.accountId as Any,
-        "email": model?.email as Any,
-        "description": model?.description as Any,
-        "authCode": model?.authCode as Any,
-        "testMode": model?.testMode as Any,
-        "ipAddress": model?.ipAddress as Any,
-        "ipCountry": model?.ipCountry as Any,
-        "ipCity": model?.ipCity as Any,
-        "ipRegion": model?.ipRegion as Any,
-        "ipDistrict": model?.ipDistrict as Any,
-        "ipLatitude": model?.ipLatitude as Any,
-        "ipLongitude": model?.ipLongitude as Any,
-        "cardFirstSix": model?.cardFirstSix as Any,
-        "cardLastFour": model?.cardLastFour as Any,
-        "cardExpDate": model?.cardExpDate as Any,
-        "cardType": model?.cardType as Any,
-        "cardTypeCode": model?.cardTypeCode as Any,
-        "issuer": model?.issuer as Any,
-        "issuerBankCountry": model?.issuerBankCountry as Any,
-        "status": model?.status as Any,
-        "statusCode": model?.statusCode as Any,
-        "reason": model?.reason as Any,
-        "reasonCode": model?.reasonCode as Any,
-        "cardHolderMessage": model?.cardHolderMessage as Any,
-        "name": model?.name as Any,
-        "paReq": model?.paReq as Any,
-        "acsUrl": model?.acsUrl as Any,
-        "threeDsCallbackId": model?.threeDsCallbackId as Any
-      ];
-    }
+    let jsonString = String(data: jsonData, encoding: .utf8)
 
-    return responseDictionary;
+    return jsonString ?? "Response is empty";
   }
 }

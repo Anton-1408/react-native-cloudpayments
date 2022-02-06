@@ -1,6 +1,7 @@
 import Foundation;
 import UIKit;
 import Cloudpayments;
+import AVFoundation;
 
 class CardFormController: UIViewController {
   var configuration: PaymentConfiguration!;
@@ -15,7 +16,7 @@ class CardFormController: UIViewController {
     self.configuration = PaymentConfiguration.init(
       paymentData: paymentData,
       delegate: self,
-      uiDelegate: nil,
+      uiDelegate: self,
       scanner: self,
       useDualMessagePayment: useDualMessagePayment,
       disableApplePay: disableApplePay
@@ -69,4 +70,35 @@ extension CardFormController: CardIOPaymentViewControllerDelegate {
     self.scannerCompletion?(cardInfo.cardNumber, cardInfo.expiryMonth, cardInfo.expiryYear, cardInfo.cvv)
     paymentViewController.dismiss(animated: true, completion: nil)
   }
+}
+
+extension CardFormController:  PaymentUIDelegate {
+  func paymentFormWillDisplay() {}
+
+  func paymentFormDidDisplay() {
+    switch AVCaptureDevice.authorizationStatus(for: .video) {
+      case .authorized:
+          print("authorized")
+        break;
+      case .notDetermined:
+        AVCaptureDevice.requestAccess(for: .video) { granted in
+          if granted {
+            print("notDetermined - granted")
+          }
+        }
+        break;
+      case .denied:
+          print("denied")
+        break;
+      case .restricted:
+          print("restricted")
+        break;
+      default:
+        break;
+    }
+  }
+
+  func paymentFormWillHide() {}
+
+  func paymentFormDidHide() {}
 }

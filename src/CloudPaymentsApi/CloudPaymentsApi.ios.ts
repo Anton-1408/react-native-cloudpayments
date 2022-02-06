@@ -27,22 +27,22 @@ class CloudPaymentsApi {
     cardCryptogramPacket: string,
     email: string
   ): Promise<TransactionResponse> => {
-    const result: TransactionResponse = await CloudPaymentsApiModule.auth(
+    const result: string = await CloudPaymentsApiModule.auth(
       cardCryptogramPacket,
       email
     );
-    return result;
+    return JSON.parse(result);
   };
 
   public charge = async (
     cardCryptogramPacket: string,
     email: string
   ): Promise<TransactionResponse> => {
-    const result: TransactionResponse = await CloudPaymentsApiModule.charge(
+    const result: string = await CloudPaymentsApiModule.charge(
       cardCryptogramPacket,
       email
     );
-    return result;
+    return JSON.parse(result);
   };
 }
 
