@@ -28,7 +28,8 @@
     "release": "dotenv release-it --",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "clear": "watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn install"
   },
   "keywords": [
     "react-native",
