@@ -1,5 +1,5 @@
 import { NativeModules, DeviceEventEmitter } from 'react-native';
-import PAYMENT_NETWORK from '../PaymentNetwork';
+import { PAYMENT_NETWORK } from '../constants';
 import {
   ListenerCryptogramCard,
   Product,

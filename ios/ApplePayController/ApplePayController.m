@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "React/RCTViewManager.h"
 
-@interface RCT_EXTERN_MODULE(ApplePayController, RCTViewManager)
+@interface RCT_EXTERN_MODULE(ApplePayController, NSObject)
   RCT_EXTERN_METHOD(openApplePay)
   RCT_EXTERN_METHOD(setProducts: (NSArray*)products)
   RCT_EXTERN_METHOD(setRequestPay: (NSString*)countryCode currencyCode: (NSString*)currencyCode merchantId: (NSString*)merchantId)

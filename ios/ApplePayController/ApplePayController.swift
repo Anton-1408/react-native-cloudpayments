@@ -1,7 +1,8 @@
 import Foundation
+import PassKit
 
 @objc(ApplePayController)
-class ApplePayController: RCTViewManager {
+class ApplePayController: NSObject {
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
@@ -9,25 +10,38 @@ class ApplePayController: RCTViewManager {
   func setPaymentNetworks(_ paymentNetworks: Array<String>) -> Void {
     var listPaymentNetwork: Array<PKPaymentNetwork> = [];
     for paymentNetwork in paymentNetworks {
-      let networkPay = checkPaymentNetwork(paymentNetwork);
+      guard let networkPay = checkPaymentNetwork(paymentNetwork) else {
+        continue
+      };
+
       listPaymentNetwork.append(networkPay);
     }
     self.paymentNetworks = listPaymentNetwork;
   }
 
   @objc
-  func canMakePayments(_ resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
+  func canMakePayments(_ resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
+    guard let reject = reject, let resolve = resolve else {
+        return
+    };
+
+    guard !self.paymentNetworks.isEmpty else {
+      reject("error", "PaymentNetworks is empty", nil)
+      return;
+    }
+
     let isCanMakePayments = PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: self.paymentNetworks)
     resolve(isCanMakePayments);
   }
 
   @objc
-  func setProducts(_ products: Array<NSDictionary>) {
+  func setProducts(_ products: Array<Dictionary<String, String>>) {
     var listProducts: Array<PKPaymentSummaryItem> = [];
     for product in products {
-      let nameProduct = product.value(forKey: "name") as! String;
-      let priceProduct = Int(product.value(forKey: "price") as! String);
+      let nameProduct = product["name"]!;
+      let priceProduct = Int(product["price"]!);
       let paymentItem = PKPaymentSummaryItem.init(label: nameProduct, amount: NSDecimalNumber(value: priceProduct!));
+
       listProducts.append(paymentItem);
     }
     self.requestPay.paymentSummaryItems = listProducts;
@@ -56,7 +70,7 @@ class ApplePayController: RCTViewManager {
     }
   }
 
-  private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork {
+  private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork? {
     switch paymentNetwork {
       case "VISA":
         return PKPaymentNetwork.visa;
@@ -72,13 +86,13 @@ class ApplePayController: RCTViewManager {
         if #available(iOS 14.5, *) {
             return PKPaymentNetwork.mir
         } else {
-            return PKPaymentNetwork.visa;
+            return nil;
         };
       case "JCB":
         if #available(iOS 10.1, *) {
             return PKPaymentNetwork.JCB
         } else {
-            return PKPaymentNetwork.visa;
+            return nil;
         };
       default:
         return PKPaymentNetwork.visa;
@@ -86,7 +100,7 @@ class ApplePayController: RCTViewManager {
   }
 
   @objc
-  override static func requiresMainQueueSetup() -> Bool {
+  static func requiresMainQueueSetup() -> Bool {
     return true
   }
 }
@@ -98,12 +112,12 @@ extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
 
   func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
 
-      guard let cryptogram = PKPaymentConverter.convert(toString: payment) else {
-        completion(PKPaymentAuthorizationStatus.failure)
-        return
-      }
-    
-     EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
-     completion(PKPaymentAuthorizationStatus.success)
+    guard let cryptogram = payment.convertToString() else {
+      completion(PKPaymentAuthorizationStatus.failure)
+      return
+    }
+
+    EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
+    completion(PKPaymentAuthorizationStatus.success)
   }
 }

@@ -9,7 +9,10 @@ import {
 import {
   PAYMENT_NETWORK,
   PaymentService,
+  CreditCardForm,
+  Currency,
 } from 'react-native-cloudpayments-sdk';
+import { PaymentServiceButton } from './components';
 
 const PAYMENT_DATA = Platform.select({
   ios: () => {
@@ -57,12 +60,34 @@ const PRODUCTS = [
   { name: 'example_3', price: '15' },
 ];
 
+const PAYMENT_DATA_CARD = {
+  publicId: 'publicId',
+  totalAmount: '10',
+  currency: Currency.ruble,
+  accountId: '1202',
+  applePayMerchantId: 'merchant.com.energo.rnapp',
+  description: 'Test',
+  ipAddress: '8.8.8.8',
+  invoiceId: '123',
+};
+
+const PAYMENT_JSON_DATA_CARD = {
+  age: '24',
+  name: 'Anton',
+  phone: '+7912343569',
+};
+
 const App = () => {
   const [isSupportPayments, setIsSupportPayments] = useState(false);
 
   useEffect(() => {
     PaymentService.initial(PAYMENT_DATA);
     PaymentService.setProducts(PRODUCTS);
+
+    CreditCardForm.initialPaymentData(
+      PAYMENT_DATA_CARD,
+      PAYMENT_JSON_DATA_CARD
+    );
 
     PaymentService.listenerCryptogramCard((cryptogram) => {
       console.warn(cryptogram);
@@ -80,18 +105,25 @@ const App = () => {
     setIsSupportPayments(isMakePayments);
   };
 
+  const onPayWithService = () => {
+    PaymentService.openServicePay();
+  };
+
+  const onPayWithCard = async () => {
+    const result = await CreditCardForm.showCreditCardForm({
+      useDualMessagePayment: true,
+      disableApplePay: true,
+    });
+
+    console.warn(result);
+  };
+
   return (
     <View style={styles.container}>
-      {isSupportPayments && (
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            PaymentService.openServicePay();
-          }}
-        >
-          <Text style={styles.title}>Оплатить</Text>
-        </TouchableOpacity>
-      )}
+      {isSupportPayments && <PaymentServiceButton onPay={onPayWithService} />}
+      <TouchableOpacity style={styles.button} onPress={onPayWithCard}>
+        <Text style={styles.title}>Card Form</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -102,11 +134,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
   button: {
     height: 50,
     width: 200,
@@ -114,6 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#2962FF',
     borderRadius: 4,
+    marginTop: 10,
   },
   title: {
     color: '#ffffff',
