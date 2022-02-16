@@ -1,7 +1,7 @@
 import { Currency, PAYMENT_NETWORK } from './constants';
 
 export interface Parametres3DS {
-  transactionId: string;
+  transactionId: number;
   paReq: string;
   acsUrl: string;
 }

@@ -63,7 +63,12 @@ class Card {
   public requestThreeDSecure = async (
     parametres3DS: Parametres3DS
   ): Promise<Result3DS> => {
-    const result = await ThreeDSecure.requestThreeDSecure(parametres3DS);
+    const transactionId = String(parametres3DS.transactionId);
+
+    const result = await ThreeDSecure.requestThreeDSecure({
+      ...parametres3DS,
+      transactionId,
+    });
     return result;
   };
 }
