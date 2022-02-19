@@ -7,9 +7,7 @@ class ThreeDSecure: NSObject {
 
   @objc
   public func requestThreeDSecure(_ parametres3DS: Dictionary<String, String>, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    let transactionId = parametres3DS["transactionId"]!;
-    let paReq = parametres3DS["paReq"]!;
-    let acsUrl = parametres3DS["acsUrl"]!;
+    let requestData = PARAMETRES_3DS(parametres3DS: parametres3DS);
 
     ThreeDSecure.resolve = resolve;
     ThreeDSecure.reject = reject;
@@ -18,7 +16,11 @@ class ThreeDSecure: NSObject {
       let threeDSecure = ThreeDSecureController();
 
       threeDSecure.onShowController();
-      threeDSecure.onRequest(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
+      threeDSecure.onRequest(
+        transactionId: requestData.transactionId,
+        paReq: requestData.paReq,
+        acsUrl: requestData.acsUrl
+      );
     }
   }
 

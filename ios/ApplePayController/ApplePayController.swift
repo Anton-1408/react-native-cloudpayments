@@ -7,7 +7,14 @@ class ApplePayController: NSObject {
   private let requestPay = PKPaymentRequest();
 
   @objc
-  func setPaymentNetworks(_ paymentNetworks: Array<String>) -> Void {
+  func initialData(_ methodData: Dictionary<String, Any>) -> Void {
+    let initialData = METHOD_DATA.init(methodData: methodData);
+
+    self.setPaymentNetworks(paymentNetworks: initialData.supportedNetworks);
+    self.setRequestPay(countryCode: initialData.countryCode, currencyCode: initialData.currencyCode, merchantId: initialData.merchantId)
+  }
+
+  private func setPaymentNetworks(paymentNetworks: Array<String>) -> Void {
     var listPaymentNetwork: Array<PKPaymentNetwork> = [];
     for paymentNetwork in paymentNetworks {
       guard let networkPay = checkPaymentNetwork(paymentNetwork) else {
@@ -17,6 +24,15 @@ class ApplePayController: NSObject {
       listPaymentNetwork.append(networkPay);
     }
     self.paymentNetworks = listPaymentNetwork;
+  }
+
+  private func setRequestPay(countryCode: String, currencyCode: String, merchantId: String) -> Void {
+    self.requestPay.merchantIdentifier = merchantId;
+    self.requestPay.supportedNetworks = self.paymentNetworks;
+    self.requestPay.merchantCapabilities = PKMerchantCapability.capability3DS;
+    self.requestPay.countryCode = countryCode;
+    self.requestPay.currencyCode = currencyCode;
+    self.requestPay.merchantCapabilities = [.capability3DS, .capabilityEMV];
   }
 
   @objc
@@ -45,16 +61,6 @@ class ApplePayController: NSObject {
       listProducts.append(paymentItem);
     }
     self.requestPay.paymentSummaryItems = listProducts;
-  }
-
-  @objc
-  func setRequestPay(_ countryCode: String, currencyCode: String, merchantId: String) -> Void {
-    self.requestPay.merchantIdentifier = merchantId;
-    self.requestPay.supportedNetworks = self.paymentNetworks;
-    self.requestPay.merchantCapabilities = PKMerchantCapability.capability3DS;
-    self.requestPay.countryCode = countryCode;
-    self.requestPay.currencyCode = currencyCode;
-    self.requestPay.merchantCapabilities = [.capability3DS, .capabilityEMV];
   }
 
   @objc

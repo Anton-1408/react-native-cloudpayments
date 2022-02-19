@@ -1,48 +1,68 @@
 import Foundation
 import Cloudpayments;
 
-func convertToPaymentData(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> PaymentData {
-  let publicId = paymentData["publicId"]!;
-  let totalAmount = paymentData["totalAmount"]!;
-  let accountId = paymentData["accountId"]!;
-  let applePayMerchantId = paymentData["applePayMerchantId"]!;
-  let currency = paymentData["currency"]!;
+struct METHOD_DATA {
+  var merchantId: String
+  var supportedNetworks: Array<String>
+  var countryCode: String
+  var currencyCode: String
 
-  let description = paymentData["description"];
-  let ipAddress = paymentData["ipAddress"];
-  let invoiceId = paymentData["invoiceId"];
-
-  let options = convertRnJsonToSwiftArrayOption(jsonData: jsonData);
-
-  let currencyConvert = Currency.init(rawValue: currency);
-
-  let initialPaymentData = PaymentData.init(publicId: publicId)
-    .setCurrency(currencyConvert!)
-    .setAmount(totalAmount)
-    .setAccountId(accountId)
-    .setDescription(description)
-    .setApplePayMerchantId(applePayMerchantId)
-    .setIpAddress(ipAddress)
-    .setInvoiceId(invoiceId)
-    .setJsonData(options)
-
-    return initialPaymentData;
+  init(methodData: Dictionary<String, Any>) {
+    self.countryCode = methodData["countryCode"] as! String;
+    self.currencyCode = methodData["currencyCode"] as! String;
+    self.merchantId = methodData["merchantId"] as! String;
+    self.supportedNetworks = methodData["supportedNetworks"] as! Array<String>;
+  }
 }
 
-private func convertRnJsonToSwiftArrayOption (jsonData: Dictionary<String, String>?) -> [String: String] {
-  var arrayInformationUser: [String: String] = [:];
-
-  if ((jsonData?["age"]) != nil) {
-    arrayInformationUser["age"] = jsonData?["age"];
+struct PARAMETRES_3DS {
+  var transactionId: String
+  var paReq: String
+  var acsUrl: String
+  init(parametres3DS: Dictionary<String, String>) {
+    self.acsUrl = parametres3DS["acsUrl"]!;
+    self.paReq = parametres3DS["paReq"]!;
+    self.transactionId = parametres3DS["transactionId"]!;
   }
+}
 
-  if ((jsonData?["name"]) != nil) {
-    arrayInformationUser["name"] = jsonData?["name"];
+struct PAYMENT_DATA {
+  var publicId: String
+  var totalAmount: String
+  var accountId: String
+  var applePayMerchantId: String
+  var currency: Currency
+  var description: String
+  var ipAddress: String
+  var invoiceId: String
+  var jsonData: [String: String]?
+  init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
+    self.publicId = paymentData["publicId"]!;
+    self.totalAmount = paymentData["totalAmount"]!;
+    self.accountId = paymentData["accountId"]!;
+    self.applePayMerchantId = paymentData["applePayMerchantId"]!;
+    
+    let currencyString = paymentData["currency"]!;
+    self.currency = Currency.init(rawValue: currencyString)!;
+    
+    self.description = paymentData["description"]!;
+    self.ipAddress = paymentData["ipAddress"]!;
+    self.invoiceId = paymentData["invoiceId"]!;
+    
+    var arrayInformationUser: [String: String] = [:];
+
+    if ((jsonData?["age"]) != nil) {
+      arrayInformationUser["age"] = jsonData?["age"];
+    }
+
+    if ((jsonData?["name"]) != nil) {
+      arrayInformationUser["name"] = jsonData?["name"];
+    }
+
+    if ((jsonData?["phone"]) != nil) {
+      arrayInformationUser["phone"] = jsonData?["phone"];
+    }
+    
+    self.jsonData = arrayInformationUser;
   }
-
-  if ((jsonData?["phone"]) != nil) {
-    arrayInformationUser["phone"] = jsonData?["phone"];
-  }
-
-  return arrayInformationUser;
 }

@@ -1,6 +1,5 @@
 import { NativeModules, NativeEventEmitter } from 'react-native';
 import { ListenerCryptogramCard, Product, MethodDataPayment } from '../types';
-import { PAYMENT_NETWORK } from '../constants';
 
 const { EventEmitter, ApplePayController } = NativeModules;
 
@@ -19,30 +18,11 @@ class ApplePay {
   }
 
   public initial = (methodData: MethodDataPayment): void => {
-    this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setRequestPay(
-      methodData.countryCode,
-      methodData.currencyCode,
-      methodData.merchantId
-    );
+    ApplePayController.initialData(methodData);
   };
 
   public setProducts = (product: Product[]): void => {
     ApplePayController.setProducts(product);
-  };
-
-  private setPaymentNetworks = (
-    paymentNetworks: Array<PAYMENT_NETWORK>
-  ): void => {
-    ApplePayController.setPaymentNetworks(paymentNetworks);
-  };
-
-  private setRequestPay = async (
-    countryCode: string,
-    currencyCode: string,
-    merchantId: string
-  ) => {
-    ApplePayController.setRequestPay(countryCode, currencyCode, merchantId);
   };
 
   public canMakePayments = async (): Promise<boolean> => {

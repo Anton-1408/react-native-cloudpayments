@@ -57,7 +57,7 @@ extension ThreeDSecureController: ThreeDsDelegate {
         return
     };
 
-    let result: NSMutableDictionary = [:];
+    var result: Dictionary<String, String> = [:];
 
     result["TransactionId"] = md;
     result["PaRes"] = paRes;

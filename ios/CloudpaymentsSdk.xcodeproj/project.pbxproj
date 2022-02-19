@@ -42,13 +42,13 @@
 		3ABA284A2765CD1C00616F46 /* CloudpaymentsSdk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CloudpaymentsSdk-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ABA2855276F38EB00616F46 /* CreditCardFormManager.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CreditCardFormManager.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3ABA2856276F390A00616F46 /* CreditCardFormManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreditCardFormManager.m; sourceTree = "<group>"; };
-		3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayController.swift; sourceTree = "<group>"; };
+		3ABEBF3926F75D5A0081EADB /* ApplePayController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ApplePayController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3ABEBF3B26F75D700081EADB /* ApplePayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePayController.m; sourceTree = "<group>"; };
 		3AD6CC84279D2ED0009CA18E /* CreditCardFormController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CreditCardFormController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3AD6CC9F27AAC70B009CA18E /* CloudPaymentsApi.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CloudPaymentsApi.swift; sourceTree = "<group>"; tabWidth = 2; };
 		3AD6CCA127AAC753009CA18E /* CloudPaymentsApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudPaymentsApi.m; sourceTree = "<group>"; };
 		3AF4190D26CAC1C400187204 /* ThreeDSecure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThreeDSecure.m; sourceTree = "<group>"; };
-		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; };
+		3AF4190E26CAC30700187204 /* ThreeDSecure.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ThreeDSecure.swift; sourceTree = "<group>"; tabWidth = 2; };
 		6AF1896A9162F5FE538B7437 /* Pods_CloudpaymentsSdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CloudpaymentsSdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5891CC2AC0600A0062D /* CardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardService.m; sourceTree = "<group>"; };
 		CB43D7BC1E6A152537AAC873 /* Pods-CloudpaymentsSdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CloudpaymentsSdk.debug.xcconfig"; path = "Target Support Files/Pods-CloudpaymentsSdk/Pods-CloudpaymentsSdk.debug.xcconfig"; sourceTree = "<group>"; };

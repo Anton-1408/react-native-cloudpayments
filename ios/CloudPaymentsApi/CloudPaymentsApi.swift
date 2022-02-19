@@ -10,7 +10,18 @@ class CloudPaymentsApi: NSObject {
   @objc
   func initApi(_ publicId: String, paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> Void {
     self.api = CloudpaymentsApi(publicId: publicId);
-    self.paymentData = convertToPaymentData(paymentData: paymentData, jsonData: jsonData);
+
+    let initialData = PAYMENT_DATA(paymentData: paymentData, jsonData: jsonData);
+
+    self.paymentData = PaymentData.init(publicId: initialData.publicId)
+      .setCurrency(initialData.currency)
+      .setAmount(initialData.totalAmount)
+      .setAccountId(initialData.accountId)
+      .setDescription(initialData.description)
+      .setApplePayMerchantId(initialData.applePayMerchantId)
+      .setIpAddress(initialData.ipAddress)
+      .setInvoiceId(initialData.invoiceId)
+      .setJsonData(initialData.jsonData!)
   }
 
   @objc
