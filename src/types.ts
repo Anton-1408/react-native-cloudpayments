@@ -97,3 +97,10 @@ interface Transaction {
   acsUrl?: string;
   threeDsCallbackId: string;
 }
+
+export interface CardInfo {
+  cardNumber?: string;
+  expDate?: string;
+  cvv: string;
+  merchantId?: string;
+}
