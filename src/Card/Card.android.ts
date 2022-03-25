@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
-import { /*Parametres3DS, Result3DS,*/ BankInfo, CardInfo } from '../types';
+import { Parametres3DS, Result3DS, BankInfo, CardInfo } from '../types';
 
-const { CardService } = NativeModules;
+const { CardService, ThreeDSecure } = NativeModules;
 
 class Card {
   private static instance: Card;
@@ -59,14 +59,18 @@ class Card {
     return await CardService.makeCardCryptogramPacketForCvv(cvv);
   };
 
-  // public requestThreeDSecure = async (
-  //   parametres3DS: Parametres3DS
-  // ): Promise<Result3DS> => {
-  //   const result: string = await CardService.requestThreeDSecure(
-  //     parametres3DS
-  //   );
-  //   return JSON.parse(result);
-  // };
+  public requestThreeDSecure = async (
+    parametres3DS: Parametres3DS
+  ): Promise<Result3DS> => {
+    const transactionId = String(parametres3DS.transactionId);
+
+    const result: string = await ThreeDSecure.requestThreeDSecure({
+      ...parametres3DS,
+      transactionId,
+    });
+
+    return JSON.parse(result);
+  };
 }
 
 export default Card.getInstance();
