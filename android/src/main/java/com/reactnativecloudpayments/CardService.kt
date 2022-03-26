@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.module.annotations.ReactModule;
+import com.fasterxml.jackson.databind.ObjectMapper
 
 import ru.cloudpayments.sdk.card.CardType;
 import ru.cloudpayments.sdk.card.Card;
@@ -13,8 +14,6 @@ import ru.cloudpayments.sdk.api.CloudpaymentsApi;
 
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.android.schedulers.AndroidSchedulers
-
-import org.json.JSONObject
 
 
 @ReactModule(name = CardService.MODULE_NAME)
@@ -62,13 +61,11 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe({ info ->
-        val bankInfo = JSONObject();
+         val objectMapper = ObjectMapper();
+         val bankInfo = objectMapper.writeValueAsString(info)
 
-        bankInfo.put("logoUrl", info.logoUrl)
-        bankInfo.put("bankName", info.bankName)
-
-        promise?.resolve(bankInfo.toString()
-        ) },
-        {error -> promise?.reject(error)})
+         promise?.resolve(bankInfo)
+      },
+      {error -> promise?.reject(error)})
   }
 }
