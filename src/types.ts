@@ -36,9 +36,11 @@ export interface PaymentData {
   currency: Currency;
   accountId: string;
   applePayMerchantId: string;
+  googlePayMerchantId?: string;
   description?: string;
-  ipAddress?: string;
+  ipAddress: string;
   invoiceId?: string;
+  cardHolderName: string;
 }
 
 export interface PaymentJsonData {

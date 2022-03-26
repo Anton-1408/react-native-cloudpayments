@@ -63,8 +63,10 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe({ info ->
         val bankInfo = JSONObject();
+
         bankInfo.put("logoUrl", info.logoUrl)
         bankInfo.put("bankName", info.bankName)
+
         promise?.resolve(bankInfo.toString()
         ) },
         {error -> promise?.reject(error)})

@@ -1,4 +1,7 @@
-import { PaymentData, PaymentJsonData } from '../types';
+import { PaymentData, PaymentJsonData, TransactionResponse } from '../types';
+import { NativeModules } from 'react-native';
+
+const { CloudPaymentsApi: CloudPaymentsApiModule } = NativeModules;
 
 class CloudPaymentsApi {
   private static instance: CloudPaymentsApi;
@@ -13,20 +16,35 @@ class CloudPaymentsApi {
   }
 
   public initApi = (
-    _publicId: string,
-    _paymentData: PaymentData,
-    _jsonData?: PaymentJsonData
-  ): void => {};
+    paymentData: PaymentData,
+    jsonData?: PaymentJsonData
+  ): void => {
+    const jsonDataString = jsonData && JSON.stringify(jsonData);
+
+    CloudPaymentsApiModule.initApi(paymentData, jsonDataString);
+  };
 
   public auth = async (
-    _cardCryptogramPacket: string,
-    _email: string
-  ): Promise<any> => {};
+    cardCryptogramPacket: string,
+    email: string
+  ): Promise<TransactionResponse> => {
+    const result: string = await CloudPaymentsApiModule.auth(
+      cardCryptogramPacket,
+      email
+    );
+    return JSON.parse(result);
+  };
 
   public charge = async (
-    _cardCryptogramPacket: string,
-    _email: string
-  ): Promise<any> => {};
+    cardCryptogramPacket: string,
+    email: string
+  ): Promise<TransactionResponse> => {
+    const result: string = await CloudPaymentsApiModule.charge(
+      cardCryptogramPacket,
+      email
+    );
+    return JSON.parse(result);
+  };
 }
 
 export default CloudPaymentsApi.getInstance();
