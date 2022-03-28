@@ -3,7 +3,7 @@ package com.reactnativecloudpayments
 import com.facebook.react.bridge.ReadableMap
 
 
-data class PaymentData(var paymentData: ReadableMap, val jsonDataParams: String?) {
+data class InitialPaymentData(var paymentData: ReadableMap, val jsonDataParams: String?) {
   var publicId: String = paymentData.getString("publicId") as String;
   var totalAmount: String = paymentData.getString("totalAmount") as String;
   var accountId: String? = paymentData.getString("accountId");

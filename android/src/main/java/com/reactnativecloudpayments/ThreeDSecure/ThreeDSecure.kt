@@ -23,12 +23,15 @@ class ThreeDSecure(reactContext: ReactApplicationContext): ReactContextBaseJavaM
 
     ThreeDSecure.promise = promise;
 
+    // действие для запуска нового экрана (из текущего в ThreeDSecureActivity)
     val intent = Intent(currentActivity, ThreeDSecureActivity::class.java);
 
+    //передаем параметры
     intent.putExtra("acsUrl", acsUrl);
     intent.putExtra("paReq", paReq);
     intent.putExtra("md", md);
 
+    // переключаемся на новый экран
     currentActivity?.startActivity(intent);
   }
 }

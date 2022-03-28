@@ -22,11 +22,15 @@ class CreditCardForm {
     CreditCardFormManager.initialPaymentData(paymentData, jsonData);
   };
 
-  public showCreditCardForm = async (
-    configuration: Configuration
-  ): Promise<Number> => {
+  public showCreditCardForm = async ({
+    disableApplePay,
+    useDualMessagePayment,
+  }: Configuration): Promise<Number> => {
     const transactionId: number =
-      await CreditCardFormManager.showCreditCardForm(configuration);
+      await CreditCardFormManager.showCreditCardForm({
+        useDualMessagePayment,
+        disableApplePay,
+      });
     return transactionId;
   };
 }

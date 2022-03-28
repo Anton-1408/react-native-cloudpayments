@@ -21,13 +21,13 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
     const val MODULE_NAME = "CloudPaymentsApi"
   }
 
-  lateinit var paymentData: PaymentData;
-  lateinit var api: CloudpaymentsApi;
+  private lateinit var paymentData: InitialPaymentData;
+  private lateinit var api: CloudpaymentsApi;
   override fun getName() = MODULE_NAME
 
   @ReactMethod
   fun initApi(infoData: ReadableMap, jsonData: String?) {
-    paymentData = PaymentData(infoData, jsonData);
+    paymentData = InitialPaymentData(infoData, jsonData);
     api = CloudpaymentsSDK.createApi(paymentData.publicId)
   }
 
@@ -56,7 +56,7 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
         val transaction = objectMapper.writeValueAsString(results)
 
         promise?.resolve(transaction);
-      }, {error -> promise?.reject(error)})
+      }, {error -> promise?.reject("", error.message)})
   }
 
   @ReactMethod
@@ -75,8 +75,8 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
     )
 
     api.auth(body)
-      .toObservable()
-      .flatMap(CloudpaymentsTransactionResponse::handleError)
+      .toObservable() // преобразование в Observable
+      .flatMap(CloudpaymentsTransactionResponse::handleError) //  возращение результата Single
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe({ results ->
@@ -84,6 +84,6 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
         val transaction = objectMapper.writeValueAsString(results)
 
         promise?.resolve(transaction);
-      }, {error -> promise?.reject(error)})
+      }, {error -> promise?.reject("", error.message)})
   }
 }

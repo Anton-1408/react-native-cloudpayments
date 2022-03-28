@@ -52,6 +52,7 @@ export interface PaymentJsonData {
 export interface Configuration {
   useDualMessagePayment: boolean;
   disableApplePay: boolean;
+  disableGPay: boolean;
 }
 
 export type EnvironmentRunningGooglePay = 'Test' | 'Production';

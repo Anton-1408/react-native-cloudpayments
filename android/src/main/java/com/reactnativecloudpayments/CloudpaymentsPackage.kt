@@ -7,7 +7,12 @@ import com.facebook.react.uimanager.ViewManager
 
 class CloudpaymentsPackage : ReactPackage {
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-    return listOf(CardService(reactContext), ThreeDSecure(reactContext), CloudPaymentsApi(reactContext))
+    return listOf(
+      CardService(reactContext),
+      ThreeDSecure(reactContext),
+      CloudPaymentsApi(reactContext),
+      CreditCardForm(reactContext),
+    )
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {

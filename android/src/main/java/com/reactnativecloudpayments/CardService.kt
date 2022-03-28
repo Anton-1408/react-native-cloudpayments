@@ -58,14 +58,14 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
   fun getBinInfo(cardNumber: String, merchantId: String, promise: Promise?) {
     val api: CloudpaymentsApi = CloudpaymentsSDK.createApi(merchantId)
     api.getBinInfo(cardNumber)
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeOn(Schedulers.io()) // указываем в каком потоке будет выполнятся процесс observe
+      .observeOn(AndroidSchedulers.mainThread()) // получаем выполнение в главном потоке
       .subscribe({ info ->
          val objectMapper = ObjectMapper();
          val bankInfo = objectMapper.writeValueAsString(info)
 
          promise?.resolve(bankInfo)
       },
-      {error -> promise?.reject(error)})
+      {error -> promise?.reject("", error.message)})
   }
 }
