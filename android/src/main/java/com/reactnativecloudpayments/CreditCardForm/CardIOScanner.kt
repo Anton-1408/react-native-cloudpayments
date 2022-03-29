@@ -8,6 +8,11 @@ import kotlinx.android.parcel.Parcelize
 import ru.cloudpayments.sdk.scanner.CardData
 import ru.cloudpayments.sdk.scanner.CardScanner
 
+/*
+  * анотация к классу Parcelize - автоматическая генерация реализации класса Parcel
+  * реализация абстрактного класса CardScanner, предоставление класса осуществляется в виде массива байтов
+  * Это нужно для того востановления состояния экрана
+*/
 
 @Parcelize
 class CardIOScanner: CardScanner() {
