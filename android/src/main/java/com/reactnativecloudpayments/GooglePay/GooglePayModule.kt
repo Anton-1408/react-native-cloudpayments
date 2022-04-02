@@ -28,14 +28,16 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   // реализация метода onActivityResult для получение результата оплаты
   override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
-      data?.let { intent ->
-        val eventEmitter = EventEmitter()
-        val paymentData = PaymentData.getFromIntent(intent);
+      if (resultCode == Activity.RESULT_OK) {
+        data?.let { intent ->
+          val eventEmitter = EventEmitter()
+          val paymentData = PaymentData.getFromIntent(intent);
 
-        val paymentMethodData: JSONObject = JSONObject(paymentData.toJson()).getJSONObject("paymentMethodData")
-        val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token")
+          val paymentMethodData: JSONObject = JSONObject(paymentData.toJson()).getJSONObject("paymentMethodData")
+          val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token")
 
-        eventEmitter.sendEvent(reactApplicationContext,"listenerCryptogramCard",  tokenGP)
+          eventEmitter.sendEvent(reactApplicationContext,"listenerCryptogramCard",  tokenGP)
+        }
       }
     }
   }
