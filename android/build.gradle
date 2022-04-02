@@ -1,17 +1,23 @@
 buildscript {
-    if (project == rootProject) {
-        repositories {
-            google()
-            jcenter()
-        }
+    ext {
+        kotlinVersion = '1.6.10'
+        androidToolsVersion = '3.5.3'
+    }
 
-        dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
-        }
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$project.ext.androidToolsVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$project.ext.kotlinVersion"
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
@@ -21,7 +27,7 @@ android {
     compileSdkVersion safeExtGet('Cloudpayments_compileSdkVersion', 29)
     buildToolsVersion safeExtGet('Cloudpayments_buildToolsVersion', '29.0.2')
     defaultConfig {
-        minSdkVersion safeExtGet('Cloudpayments_minSdkVersion', 16)
+        minSdkVersion safeExtGet('Cloudpayments_minSdkVersion', 21)
         targetSdkVersion safeExtGet('Cloudpayments_targetSdkVersion', 29)
         versionCode 1
         versionName "1.0"
@@ -48,7 +54,7 @@ repositories {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url("$rootDir/../node_modules/react-native/android")
     }
-    maven { url 'https://www.jitpack.io' }
+    maven { url 'https://jitpack.io' }
     google()
     jcenter()
 }
@@ -56,6 +62,12 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'ru.cloudpayments.android:sdk:1.0.8'
     implementation 'com.google.android.gms:play-services-wallet:16.0.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$project.ext.kotlinVersion"
+    implementation 'com.github.cloudpayments:CloudPayments-SDK-Android:1.0.4'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation 'io.card:android-sdk:5.5.0'
 }
