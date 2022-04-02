@@ -1,92 +1,50 @@
 import { NativeModules, DeviceEventEmitter } from 'react-native';
-import { PAYMENT_NETWORK } from '../constants';
-import {
-  ListenerCryptogramCard,
-  Product,
-  MethodDataPayment,
-  EnvironmentRunningGooglePay,
-} from '../types';
+import { ListenerCryptogramCard, Product, MethodDataPayment } from '../types';
 
-const { GooglePay } = NativeModules;
+const { GooglePayModule } = NativeModules;
 
-class GooglePayModule {
-  private static instance: GooglePayModule;
+class GooglePay {
+  private static instance: GooglePay;
   private constructor() {}
 
-  public static getInstance(): GooglePayModule {
-    if (!GooglePayModule.instance) {
-      GooglePayModule.instance = new GooglePayModule();
+  public static getInstance(): GooglePay {
+    if (!GooglePay.instance) {
+      GooglePay.instance = new GooglePay();
     }
 
-    return GooglePayModule.instance;
+    return GooglePay.instance;
   }
 
-  public initial = (methodData: MethodDataPayment): void => {
-    this.setEnvironment(methodData.environmentRunning!);
-    this.setPaymentNetworks(methodData.supportedNetworks);
-    this.setGatewayTokenSpecification(
-      methodData.gateway!.service,
-      methodData.gateway!.merchantId
-    );
-    this.setRequestPay(
-      methodData.countryCode,
-      methodData.currencyCode,
-      methodData.merchantName!,
-      methodData.merchantId
-    );
+  public initial = ({
+    supportedNetworks,
+    ...rest
+  }: MethodDataPayment): void => {
+    const numberConstantEnvironment = rest.environmentRunning
+      ? WalletConstants[rest.environmentRunning]
+      : WalletConstants.Test;
+
+    const initialData = {
+      ...rest,
+      environmentRunning: numberConstantEnvironment,
+    };
+
+    GooglePayModule.initial(initialData, supportedNetworks);
   };
 
   public setProducts = (product: Product[]): void => {
     const sumPrice = product.reduce((previousValue, currentValue) => {
       return previousValue + Number(currentValue.price);
     }, 0);
-    GooglePay.setProducts(String(sumPrice));
-  };
-
-  private setEnvironment = (
-    environmentRunning: EnvironmentRunningGooglePay
-  ): void => {
-    const numberConstantEnvironment =
-      environmentRunning === 'Test'
-        ? WalletConstants.ENVIRONMENT_TEST
-        : WalletConstants.ENVIRONMENT_PRODUCTION;
-    GooglePay.setEnvironment(numberConstantEnvironment);
-  };
-
-  private setPaymentNetworks = (
-    paymentNetworks: Array<PAYMENT_NETWORK>
-  ): void => {
-    GooglePay.setPaymentNetworks(paymentNetworks);
-  };
-
-  private setRequestPay = (
-    countryCode: string,
-    currencyCode: string,
-    merchantName: string,
-    merchantId: string
-  ): void => {
-    GooglePay.setRequestPay(
-      countryCode,
-      currencyCode,
-      merchantName,
-      merchantId
-    );
-  };
-
-  private setGatewayTokenSpecification = (
-    gateway: string,
-    gatewayMerchantId: string
-  ): void => {
-    GooglePay.setGatewayTokenSpecification(gateway, gatewayMerchantId);
+    GooglePayModule.setProducts(String(sumPrice));
   };
 
   public canMakePayments = async (): Promise<boolean> => {
-    const isCanMakePayments: boolean = await GooglePay.canMakePayments();
+    const isCanMakePayments: boolean = await GooglePayModule.canMakePayments();
     return isCanMakePayments;
   };
 
   public openServicePay = (): void => {
-    GooglePay.openGooglePay();
+    GooglePayModule.openGooglePay();
   };
 
   public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {
@@ -99,8 +57,8 @@ class GooglePayModule {
 }
 
 enum WalletConstants {
-  ENVIRONMENT_TEST = 3,
-  ENVIRONMENT_PRODUCTION = 1,
+  Test = 3,
+  Production = 1,
 }
 
-export default GooglePayModule.getInstance();
+export default GooglePay.getInstance();

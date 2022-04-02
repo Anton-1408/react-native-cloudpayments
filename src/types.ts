@@ -55,7 +55,7 @@ export interface Configuration {
   disableGPay: boolean;
 }
 
-export type EnvironmentRunningGooglePay = 'Test' | 'Production';
+type EnvironmentRunningGooglePay = 'Test' | 'Production';
 
 export type ListenerCryptogramCard = (cryptogram: string) => void;
 

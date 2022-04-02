@@ -12,6 +12,7 @@ class CloudpaymentsPackage : ReactPackage {
       ThreeDSecure(reactContext),
       CloudPaymentsApi(reactContext),
       CreditCardForm(reactContext),
+      GooglePayModule(reactContext),
     )
   }
 

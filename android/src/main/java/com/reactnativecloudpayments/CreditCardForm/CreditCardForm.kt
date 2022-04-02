@@ -16,7 +16,7 @@ import ru.cloudpayments.sdk.configuration.PaymentData
 class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener  {
   companion object {
     const val MODULE_NAME: String = "CreditCardForm"
-    private var REQUEST_CODE_PAYMENT = 69 // код выполнения оплаты для получения результата
+    private var REQUEST_CODE_PAYMENT = 69 // код выполнения оплаты для отслеживания выполнения операции
   }
 
   private lateinit var paymentData: PaymentData;

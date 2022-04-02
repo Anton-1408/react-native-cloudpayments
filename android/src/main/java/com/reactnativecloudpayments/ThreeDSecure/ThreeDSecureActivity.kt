@@ -33,10 +33,12 @@ class ThreeDSecureActivity: FragmentActivity(), ThreeDsDialogFragment.ThreeDSDia
   override fun onStart() {
     super.onStart()
 
+    // получаей параметры
     val acsUrl = intent.getStringExtra("acsUrl");
     val paReq = intent.getStringExtra("paReq");
     val md = intent.getStringExtra("md");
 
+    // запускаем экран для подтверждения оплаты
     ThreeDsDialogFragment
       .newInstance(acsUrl, paReq, md)
       .show(supportFragmentManager, "3DS")
