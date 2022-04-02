@@ -9,8 +9,6 @@ import com.google.android.gms.wallet.*
 import org.json.JSONObject
 
 
-
-
 @ReactModule(name = GooglePayModule.MODULE_NAME)
 class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener {
   companion object {
