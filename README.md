@@ -41,7 +41,7 @@ npm install react-native-cloudpayments-sdk
 
 * В файле `/android/build.gradle` в разделе `allprojects -> repositories` добавьте `jcenter()`
 
-* Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay.
+* Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay в режиме Production.
 
 #### Документации по интеграции Google Pay
 
