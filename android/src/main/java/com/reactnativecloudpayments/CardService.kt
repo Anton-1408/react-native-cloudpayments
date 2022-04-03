@@ -61,6 +61,7 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
       .subscribeOn(Schedulers.io()) // указываем в каком потоке будет выполнятся процесс observe
       .observeOn(AndroidSchedulers.mainThread()) // получаем результат в главном потоке
       .subscribe({ info ->
+        // конвертируем класс в json для передачи в rn
          val objectMapper = ObjectMapper();
          val bankInfo = objectMapper.writeValueAsString(info)
 
