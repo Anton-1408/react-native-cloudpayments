@@ -69,6 +69,7 @@ class CloudPaymentsApi: NSObject {
     })
   }
 
+  // конвертируем ответ с бэка в формат json для передачи в RN
   func convertResponseToDictionaryForReactNative(response: TransactionResponse) -> String {
     let jsonEncode = JSONEncoder();
 

@@ -29,9 +29,14 @@ class ApplePayController: NSObject {
   private func setRequestPay(countryCode: String, currencyCode: String, merchantId: String) -> Void {
     self.requestPay.merchantIdentifier = merchantId;
     self.requestPay.supportedNetworks = self.paymentNetworks;
+
+    //безопасный способ обработки дебетовых и кредитных карт
     self.requestPay.merchantCapabilities = PKMerchantCapability.capability3DS;
     self.requestPay.countryCode = countryCode;
     self.requestPay.currencyCode = currencyCode;
+
+    //capabilityEMV поддержка транзакций China Union Pay
+    //capability3DS поддержка 3-D Secure protocol
     self.requestPay.merchantCapabilities = [.capability3DS, .capabilityEMV];
   }
 
@@ -65,13 +70,19 @@ class ApplePayController: NSObject {
 
   @objc
   func openApplePay() -> Void {
+    // ассинхронный вызов операций в основном потоке
     DispatchQueue.main.async {
+      // получаем главный ViewController
       guard let rootViewController = RCTPresentedViewController() else {
         return
       }
 
+      // инициализируем контроллер в переменную
       let applePayController = PKPaymentAuthorizationViewController(paymentRequest: self.requestPay)
+      // получение выполнения оплаты будет осуществляться в текущем контроллере
+      // делегируем работу на текущий контроллер
       applePayController?.delegate = self;
+      //запускаем контроллер для выполнения оплаты через apple pay
       rootViewController.present(applePayController!, animated: true, completion: nil);
     }
   }
@@ -111,6 +122,8 @@ class ApplePayController: NSObject {
   }
 }
 
+// реализация методов делегирования класса
+// получаем рузультат и отправляем через native events
 extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
   func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
     controller.dismiss(animated: true, completion: nil)

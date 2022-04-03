@@ -29,6 +29,7 @@ class CardFormController: UIViewController {
         return
       };
 
+      //Добавляем контроллер представления в качестве дочернего элемента текущего контроллера представления.
       rootViewController.addChild(self);
       PaymentForm.present(with: self.configuration, from: rootViewController);
     }
