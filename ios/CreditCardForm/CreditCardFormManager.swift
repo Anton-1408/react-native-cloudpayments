@@ -20,6 +20,7 @@ class CreditCardFormManager: NSObject {
       .setApplePayMerchantId(initialData.applePayMerchantId)
       .setIpAddress(initialData.ipAddress)
       .setInvoiceId(initialData.invoiceId)
+      .setCardholderName(initialData.cardholderName)
       .setJsonData(initialData.jsonData!)
   }
 

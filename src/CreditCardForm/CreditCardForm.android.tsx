@@ -1,4 +1,7 @@
 import { PaymentData, Configuration, PaymentJsonData } from '../types';
+import { NativeModules } from 'react-native';
+
+const { CreditCardForm: CreditCardFormManager } = NativeModules;
 
 class CreditCardForm {
   private static instance: CreditCardForm;
@@ -13,11 +16,25 @@ class CreditCardForm {
   }
 
   public initialPaymentData = (
-    _paymentData: PaymentData,
-    _jsonData?: PaymentJsonData
-  ): void => {};
+    paymentData: PaymentData,
+    jsonData?: PaymentJsonData
+  ): void => {
+    const jsonDataString = jsonData && JSON.stringify(jsonData);
 
-  public showCreditCardForm = (_configuration: Configuration): void => {};
+    CreditCardFormManager.initialPaymentData(paymentData, jsonDataString);
+  };
+
+  public showCreditCardForm = async ({
+    disableGPay,
+    useDualMessagePayment,
+  }: Configuration): Promise<number> => {
+    const transactionId: number =
+      await CreditCardFormManager.showCreditCardForm({
+        disableGPay,
+        useDualMessagePayment,
+      });
+    return transactionId;
+  };
 }
 
 export default CreditCardForm.getInstance();

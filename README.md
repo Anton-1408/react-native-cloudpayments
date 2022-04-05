@@ -4,14 +4,10 @@
 
 CloudPayments SDK позволяет интегрировать прием платежей в мобильные приложение.
 
-## Схема работы мобильного приложения:
+## Требования:
 
-![Схема проведения платежа](https://cloudpayments.ru/storage/SNbUKmXtE1XgZoL7ypOSJBTFKvRpfMaWtWiNI51U.png)
-
-1. В приложении необходимо получить данные карты: номер, срок действия, имя держателя и CVV;
-2. Создать криптограмму карточных данных при помощи SDK;
-3. Отправить криптограмму и все данные для платежа с мобильного устройства на ваш сервер;
-4. С сервера выполнить оплату через платежное API CloudPayments.
+1. Для работы CloudPayments SDK необходим iOS версии 11.0 и выше.
+2. Для работы CloudPayments SDK необходим Android версии 4.4 или выше (API level 21)
 
 ## Установка
 
@@ -45,7 +41,7 @@ npm install react-native-cloudpayments-sdk
 
 * В файле `/android/build.gradle` в разделе `allprojects -> repositories` добавьте `jcenter()`
 
-* Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay.
+* Убедитесь, что дебажная версия приложения подписана релизным ключом, чтобы тестировать Google Pay в режиме Production.
 
 #### Документации по интеграции Google Pay
 
@@ -53,14 +49,18 @@ npm install react-native-cloudpayments-sdk
 
 [Документация](https://developers.google.com/pay/api/android/guides/setup)
 
-[Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-Android)
+[Официальный репозиторий SDK](https://github.com/cloudpayments/CloudPayments-SDK-Android)
 
 ### IOS
 
 * Добавьте в `ios/Podfile`
 
 ```
-pod 'SDK-iOS', :git =>  "https://github.com/cloudpayments/SDK-iOS", :branch => "master", :modular_headers => true
+pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+
+pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+
+pod 'CardIO'
 ```
 
 * Выполните `pod install` в папке ios
@@ -71,7 +71,7 @@ pod 'SDK-iOS', :git =>  "https://github.com/cloudpayments/SDK-iOS", :branch => "
 
 [О Apple Pay](https://developers.cloudpayments.ru/#apple-pay)
 
-[Официальный репозиторий SDK](https://github.com/cloudpayments/SDK-iOS)
+[Официальный репозиторий SDK](https://github.com/cloudpayments/CloudPayments-SDK-iOS)
 
 
 ## Использвание
@@ -96,24 +96,32 @@ const isExpDate = await Card.isExpDateValid(expDate); // expDate в формат
 * Определение типа платежной системы
 
 ```js
-const cardType = await Card.cardType(cardNumber, expDate, cvv);
+const cardType = await Card.cardType(cardNumber);
 ```
 
 * Определение банка эмитента
 
 ```js
-const { bankName, logoUrl } = await Card.getBinInfo(cardNumber);
+const { bankName, logoUrl } = await Card.getBinInfo(cardNumber, merchantId);
 ```
 
 * Шифрование карточных данных и создание криптограммы для отправки на сервер
 
 ```js
-const cryptogramPacket = await Card.cardCryptogramPacket(
+const cryptogramPacket = await Card.makeCardCryptogramPacket({
   cardNumber,
   expDate,
   cvv,
-  merchantPublicID
-);
+  merchantId,
+});
+```
+
+* Шифрование cvv при оплате сохраненной картой и создание криптограммы для отправки на сервер
+
+```js
+const cryptogramPacket = await Card.makeCardCryptogramPacket({
+  cvv,
+});
 ```
 
 * Отображение 3DS формы и получении результата 3DS аутентификации
@@ -122,11 +130,104 @@ const cryptogramPacket = await Card.cardCryptogramPacket(
 const { TransactionId, PaRes } = await Card.requestThreeDSecure({
   transactionId,
   paReq,
-  acsUrl,
+  acsUrl
 })
 ```
 
 Смотрите документацию по API: Платёж - [обработка 3-D Secure](https://developers.cloudpayments.ru/#obrabotka-3-d-secure)
+
+#### Использование стандартной платежной формы Cloudpayments:
+
+```js
+import { CreditCardForm } from "react-native-cloudpayments-sdk";
+```
+
+* Инициализация
+
+```js
+const PAYMENT_DATA_CARD = {
+  publicId: 'publicId',
+  totalAmount: '10',
+  currency: Currency.ruble,
+  accountId: '1202',
+  applePayMerchantId: 'merchant',
+  description: 'Test',
+  ipAddress: '8.8.8.8',
+  invoiceId: '123',
+  cardHolderName: 'Votinov Anton',
+};
+
+const PAYMENT_JSON_DATA_CARD = {
+  age: '24',
+  name: 'Anton',
+  phone: '+7912343569',
+};
+
+CreditCardForm.initialPaymentData(
+  PAYMENT_DATA_CARD,
+  PAYMENT_JSON_DATA_CARD
+);
+```
+
+* Вызов формы оплаты.
+
+```js
+const result = await CreditCardForm.showCreditCardForm({
+  useDualMessagePayment: true,  // Использовать двухстадийную схему проведения платежа, по умолчанию используется одностадийная схема
+  disableApplePay: true, // Выключить Apple Pay, по умолчанию Google Pay включен
+  disableGPay: true, // Выключить Google Pay, по умолчанию Google Pay включен
+});
+```
+
+#### Использование вашей платежной формы с использованием функций CloudpaymentsApi:
+```js
+import { CloudPaymentsApi } from "react-native-cloudpayments-sdk";
+```
+
+* Инициализация
+
+```js
+const PAYMENT_DATA_CARD = {
+  publicId: 'publicId',
+  totalAmount: '10',
+  currency: Currency.ruble,
+  accountId: '1202',
+  applePayMerchantId: 'merchant',
+  description: 'Test',
+  ipAddress: '8.8.8.8',
+  invoiceId: '123',
+  cardHolderName: 'Votinov Anton',
+};
+
+const PAYMENT_JSON_DATA_CARD = {
+  age: '24',
+  name: 'Anton',
+  phone: '+7912343569',
+};
+
+CloudPaymentsApi.initApi(PAYMENT_DATA_CARD, PAYMENT_JSON_DATA_CARD)
+```
+
+* Создайте криптограмму карточных данных
+
+```js
+const cryptogramPacket = await Card.makeCardCryptogramPacket({
+  cardNumber,
+  expDate,
+  cvv,
+  merchantId,
+});
+```
+
+* Выполните запрос на проведения платежа. Создайте объект CloudpaymentApi и вызовите функцию charge для одностадийного платежа или auth для двухстадийного. Укажите email, на который будет выслана квитанция об оплате.
+
+```js
+const results = await CloudPaymentsApi.auth(cryptogramPacket, email)
+```
+
+```js
+const results = await CloudPaymentsApi.charge(cryptogramPacket, email)
+```
 
 #### Использования Google Pay / Apple Pay
 

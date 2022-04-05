@@ -8,10 +8,10 @@ class CloudPaymentsApi: NSObject {
   var paymentData: PaymentData?;
 
   @objc
-  func initApi(_ publicId: String, paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> Void {
-    self.api = CloudpaymentsApi(publicId: publicId);
-
+  func initApi(_ paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> Void {
     let initialData = PAYMENT_DATA(paymentData: paymentData, jsonData: jsonData);
+
+    self.api = CloudpaymentsApi(publicId: initialData.publicId);
 
     self.paymentData = PaymentData.init(publicId: initialData.publicId)
       .setCurrency(initialData.currency)
@@ -21,6 +21,7 @@ class CloudPaymentsApi: NSObject {
       .setApplePayMerchantId(initialData.applePayMerchantId)
       .setIpAddress(initialData.ipAddress)
       .setInvoiceId(initialData.invoiceId)
+      .setCardholderName(initialData.cardholderName)
       .setJsonData(initialData.jsonData!)
   }
 
@@ -68,6 +69,7 @@ class CloudPaymentsApi: NSObject {
     })
   }
 
+  // конвертируем ответ с бэка в формат json для передачи в RN
   func convertResponseToDictionaryForReactNative(response: TransactionResponse) -> String {
     let jsonEncode = JSONEncoder();
 

@@ -16,16 +16,15 @@ class CloudPaymentsApi {
   }
 
   public initApi = (
-    publicId: string,
     paymentData: PaymentData,
     jsonData?: PaymentJsonData
   ): void => {
-    CloudPaymentsApiModule.initApi(publicId, paymentData, jsonData);
+    CloudPaymentsApiModule.initApi(paymentData, jsonData);
   };
 
   public auth = async (
     cardCryptogramPacket: string,
-    email: string
+    email?: string
   ): Promise<TransactionResponse> => {
     const result: string = await CloudPaymentsApiModule.auth(
       cardCryptogramPacket,
@@ -36,7 +35,7 @@ class CloudPaymentsApi {
 
   public charge = async (
     cardCryptogramPacket: string,
-    email: string
+    email?: string
   ): Promise<TransactionResponse> => {
     const result: string = await CloudPaymentsApiModule.charge(
       cardCryptogramPacket,

@@ -65,10 +65,11 @@ const PAYMENT_DATA_CARD = {
   totalAmount: '10',
   currency: Currency.ruble,
   accountId: '1202',
-  applePayMerchantId: 'merchant.com.energo.rnapp',
+  applePayMerchantId: 'merchant',
   description: 'Test',
   ipAddress: '8.8.8.8',
   invoiceId: '123',
+  cardHolderName: 'Votinov Anton',
 };
 
 const PAYMENT_JSON_DATA_CARD = {
@@ -113,6 +114,7 @@ const App = () => {
     const result = await CreditCardForm.showCreditCardForm({
       useDualMessagePayment: true,
       disableApplePay: true,
+      disableGPay: true,
     });
 
     console.warn(result);
@@ -141,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#2962FF',
     borderRadius: 4,
-    marginTop: 10,
+    marginTop: 20,
   },
   title: {
     color: '#ffffff',

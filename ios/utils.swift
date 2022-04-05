@@ -32,23 +32,26 @@ struct PAYMENT_DATA {
   var accountId: String
   var applePayMerchantId: String
   var currency: Currency
-  var description: String
+  var description: String?
   var ipAddress: String
-  var invoiceId: String
+  var invoiceId: String?
+  var cardholderName: String
   var jsonData: [String: String]?
+
   init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
     self.publicId = paymentData["publicId"]!;
     self.totalAmount = paymentData["totalAmount"]!;
     self.accountId = paymentData["accountId"]!;
     self.applePayMerchantId = paymentData["applePayMerchantId"]!;
-    
+
     let currencyString = paymentData["currency"]!;
     self.currency = Currency.init(rawValue: currencyString)!;
-    
-    self.description = paymentData["description"]!;
+
+    self.description = paymentData["description"] ?? nil;
     self.ipAddress = paymentData["ipAddress"]!;
-    self.invoiceId = paymentData["invoiceId"]!;
-    
+    self.invoiceId = paymentData["invoiceId"] ?? nil;
+    self.cardholderName = paymentData["cardHolderName"]!;
+
     var arrayInformationUser: [String: String] = [:];
 
     if ((jsonData?["age"]) != nil) {
@@ -62,7 +65,7 @@ struct PAYMENT_DATA {
     if ((jsonData?["phone"]) != nil) {
       arrayInformationUser["phone"] = jsonData?["phone"];
     }
-    
+
     self.jsonData = arrayInformationUser;
   }
 }

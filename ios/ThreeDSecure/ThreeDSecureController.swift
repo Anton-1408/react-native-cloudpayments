@@ -10,6 +10,7 @@ class ThreeDSecureController: UIViewController {
   public func onRequest(transactionId: String, paReq: String, acsUrl: String) {
     let data = ThreeDsData.init(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);
 
+    // запускаем контроллер с подтверждением оплаты
     threeDsProcessor.make3DSPayment(with: data, delegate: self);
   }
 
@@ -19,6 +20,7 @@ class ThreeDSecureController: UIViewController {
         return
       }
 
+      // запускаем пустой контроллер из главного
       rootViewController.present(self, animated: true, completion: nil);
       self.view.backgroundColor = .white;
     }
@@ -37,11 +39,15 @@ class ThreeDSecureController: UIViewController {
 
 extension ThreeDSecureController: ThreeDsDelegate {
   func willPresentWebView(_ webView: WKWebView) {
+    // располагаем webview в view текущего контроллера
     webView.frame = self.view.bounds
+    // запретить автоматическое изменение размпера
     webView.translatesAutoresizingMaskIntoConstraints = false
 
+    // запускаем webView
     self.view.addSubview(webView)
 
+    // растягиваем контейнер на весь контроллер
     NSLayoutConstraint.activate([
       webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
       webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),

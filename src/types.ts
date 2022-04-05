@@ -36,9 +36,11 @@ export interface PaymentData {
   currency: Currency;
   accountId: string;
   applePayMerchantId: string;
+  googlePayMerchantId?: string;
   description?: string;
-  ipAddress?: string;
+  ipAddress: string;
   invoiceId?: string;
+  cardHolderName: string;
 }
 
 export interface PaymentJsonData {
@@ -50,9 +52,10 @@ export interface PaymentJsonData {
 export interface Configuration {
   useDualMessagePayment: boolean;
   disableApplePay: boolean;
+  disableGPay: boolean;
 }
 
-export type EnvironmentRunningGooglePay = 'Test' | 'Production';
+type EnvironmentRunningGooglePay = 'Test' | 'Production';
 
 export type ListenerCryptogramCard = (cryptogram: string) => void;
 
@@ -96,4 +99,11 @@ interface Transaction {
   paReq?: string;
   acsUrl?: string;
   threeDsCallbackId: string;
+}
+
+export interface CardInfo {
+  cardNumber?: string;
+  expDate?: string;
+  cvv: string;
+  merchantId?: string;
 }

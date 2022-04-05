@@ -1,5 +1,5 @@
 import { NativeModules } from 'react-native';
-import { Parametres3DS, BankInfo, Result3DS } from '../types';
+import { Parametres3DS, BankInfo, Result3DS, CardInfo } from '../types';
 
 const { CardService, ThreeDSecure } = NativeModules;
 
@@ -29,12 +29,12 @@ class Card {
     return isExpDateValid;
   };
 
-  public makeCardCryptogramPacket = async (
-    cvv: string,
-    cardNumber?: string,
-    expDate?: string,
-    merchantId?: string
-  ): Promise<string> => {
+  public makeCardCryptogramPacket = async ({
+    cardNumber,
+    expDate,
+    cvv,
+    merchantId,
+  }: CardInfo): Promise<string> => {
     if (cardNumber && expDate && merchantId) {
       return await CardService.makeCardCryptogramPacket(
         cardNumber,
@@ -46,16 +46,15 @@ class Card {
     return await CardService.makeCardCryptogramPacketForCvv(cvv);
   };
 
-  public cardType = async (
-    cardNumber: string,
-    _expDate: string,
-    _cvv: string
-  ): Promise<string> => {
+  public cardType = async (cardNumber: string): Promise<string> => {
     const cardType: string = await CardService.cardType(cardNumber);
     return cardType;
   };
 
-  public getBinInfo = async (cardNumb: string): Promise<BankInfo> => {
+  public getBinInfo = async (
+    cardNumb: string,
+    _merchantId: string
+  ): Promise<BankInfo> => {
     const binInfo: BankInfo = await CardService.getBinInfo(cardNumb);
     return binInfo;
   };
