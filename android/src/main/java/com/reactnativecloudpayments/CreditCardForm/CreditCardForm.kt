@@ -6,9 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
-import com.fasterxml.jackson.databind.ObjectMapper
-import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK
 
+import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK
 import ru.cloudpayments.sdk.configuration.PaymentConfiguration
 import ru.cloudpayments.sdk.configuration.PaymentData
 
@@ -19,7 +18,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
     private var REQUEST_CODE_PAYMENT = 69 // код выполнения оплаты для отслеживания выполнения операции
   }
 
-  private lateinit var paymentData: PaymentData;
+  private lateinit var paymentDataInitialValues: InitialPaymentData;
   private lateinit var promise: Promise;
 
   override fun getName() = MODULE_NAME;
@@ -56,27 +55,17 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
 
   @ReactMethod
   fun initialPaymentData(initialData: ReadableMap, jsonData: String?) {
-    val initialPaymentData = InitialPaymentData(initialData, jsonData);
-    val objectMapper = ObjectMapper();
+    this.paymentDataInitialValues = InitialPaymentData(initialData);
 
-    val jsonDataToMap = if(!initialPaymentData.jsonData.isNullOrEmpty()) {
-      //если не undefined/null jsonData приводим к типу HashMap для PaymentData
-      objectMapper.readValue(initialPaymentData.jsonData, Map::class.java) as HashMap<String, Any>;
-    } else {
-      HashMap()
+    if (!jsonData.isNullOrEmpty()) {
+      this.paymentDataInitialValues.setJsonData(jsonData);
     }
+  }
 
-    this.paymentData = PaymentData(
-      initialPaymentData.publicId,
-      initialPaymentData.totalAmount,
-      currency = initialPaymentData.currency,
-      invoiceId = initialPaymentData.invoiceId,
-      accountId = initialPaymentData.accountId,
-      ipAddress = initialPaymentData.ipAddress,
-      description = initialPaymentData.description,
-      cardholderName = initialPaymentData.cardHolderName,
-      jsonData = jsonDataToMap
-    )
+  @ReactMethod
+  fun setTotalAmount(totalAmount: String, currency: String) {
+    paymentDataInitialValues.totalAmount = totalAmount;
+    paymentDataInitialValues.currency = currency;
   }
 
   @ReactMethod
@@ -86,8 +75,20 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
     val disableGPay = initialData.getBoolean("disableGPay")
     val useDualMessagePayment = initialData.getBoolean("useDualMessagePayment")
 
+    val paymentData = PaymentData(
+      paymentDataInitialValues.publicId,
+      paymentDataInitialValues.totalAmount,
+      currency = paymentDataInitialValues.currency,
+      invoiceId = paymentDataInitialValues.invoiceId,
+      accountId = paymentDataInitialValues.accountId,
+      ipAddress = paymentDataInitialValues.ipAddress,
+      description = paymentDataInitialValues.description,
+      cardholderName = paymentDataInitialValues.cardHolderName,
+      jsonData = paymentDataInitialValues.jsonDataHash
+    )
+
     val configuration = PaymentConfiguration(
-      this.paymentData,
+      paymentData,
       CardIOScanner(),
       useDualMessagePayment,
       disableGPay

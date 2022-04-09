@@ -5,20 +5,8 @@ const { GooglePayModule } = NativeModules;
 
 class GooglePay {
   private static instance: GooglePay;
-  private constructor() {}
 
-  public static getInstance(): GooglePay {
-    if (!GooglePay.instance) {
-      GooglePay.instance = new GooglePay();
-    }
-
-    return GooglePay.instance;
-  }
-
-  public initial = ({
-    supportedNetworks,
-    ...rest
-  }: MethodDataPayment): void => {
+  private constructor({ supportedNetworks, ...rest }: MethodDataPayment) {
     const numberConstantEnvironment = rest.environmentRunning
       ? WalletConstants[rest.environmentRunning]
       : WalletConstants.Test;
@@ -29,12 +17,21 @@ class GooglePay {
     };
 
     GooglePayModule.initial(initialData, supportedNetworks);
-  };
+  }
+
+  public static initial(initialData: MethodDataPayment): GooglePay {
+    if (!GooglePay.instance) {
+      GooglePay.instance = new GooglePay(initialData);
+    }
+
+    return GooglePay.instance;
+  }
 
   public setProducts = (product: Product[]): void => {
     const sumPrice = product.reduce((previousValue, currentValue) => {
       return previousValue + Number(currentValue.price);
     }, 0);
+
     GooglePayModule.setProducts(String(sumPrice));
   };
 
@@ -61,4 +58,4 @@ enum WalletConstants {
   Production = 1,
 }
 
-export default GooglePay.getInstance();
+export default GooglePay;

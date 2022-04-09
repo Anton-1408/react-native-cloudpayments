@@ -7,19 +7,18 @@ const eventCryptogramCard = new NativeEventEmitter(EventEmitter);
 
 class ApplePay {
   private static instance: ApplePay;
-  private constructor() {}
 
-  public static getInstance(): ApplePay {
+  private constructor(methodData: MethodDataPayment) {
+    ApplePayController.initialData(methodData);
+  }
+
+  public static initial(methodData: MethodDataPayment): ApplePay {
     if (!ApplePay.instance) {
-      ApplePay.instance = new ApplePay();
+      ApplePay.instance = new ApplePay(methodData);
     }
 
     return ApplePay.instance;
   }
-
-  public initial = (methodData: MethodDataPayment): void => {
-    ApplePayController.initialData(methodData);
-  };
 
   public setProducts = (product: Product[]): void => {
     ApplePayController.setProducts(product);
@@ -44,4 +43,4 @@ class ApplePay {
   };
 }
 
-export default ApplePay.getInstance();
+export default ApplePay;

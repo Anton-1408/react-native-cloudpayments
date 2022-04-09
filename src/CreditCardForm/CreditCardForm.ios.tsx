@@ -1,26 +1,34 @@
 import { NativeModules } from 'react-native';
-import { PaymentData, Configuration, PaymentJsonData } from '../types';
+import {
+  PaymentData,
+  Configuration,
+  PaymentJsonData,
+  TotalAmount,
+} from '../types';
 
 const { CreditCardFormManager } = NativeModules;
 
 class CreditCardForm {
   private static instance: CreditCardForm;
-  private constructor() {}
 
-  public static getInstance(): CreditCardForm {
+  private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
+    CreditCardFormManager.initialPaymentData(paymentData, jsonData);
+  }
+
+  public static initialPaymentData(
+    paymentData: PaymentData,
+    jsonData?: PaymentJsonData
+  ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm();
+      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
     }
 
     return CreditCardForm.instance;
   }
 
-  public initialPaymentData = (
-    paymentData: PaymentData,
-    jsonData?: PaymentJsonData
-  ): void => {
-    CreditCardFormManager.initialPaymentData(paymentData, jsonData);
-  };
+  public setTotalAmount({ totalAmount, currency }: TotalAmount): void {
+    CreditCardFormManager.setTotalAmount(totalAmount, currency);
+  }
 
   public showCreditCardForm = async ({
     disableApplePay,
@@ -35,4 +43,4 @@ class CreditCardForm {
   };
 }
 
-export default CreditCardForm.getInstance();
+export default CreditCardForm;

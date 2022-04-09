@@ -7,6 +7,7 @@ class CardFormController: UIViewController {
   var configuration: PaymentConfiguration!;
   var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
+  // создаем дополнительный конструктор
   convenience init(paymentData: PaymentData, configuration: Dictionary<String, Bool>) {
     self.init();
 

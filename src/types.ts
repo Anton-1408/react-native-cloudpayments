@@ -32,8 +32,6 @@ export interface MethodDataPayment {
 
 export interface PaymentData {
   publicId: string;
-  totalAmount: string;
-  currency: Currency;
   accountId: string;
   applePayMerchantId: string;
   googlePayMerchantId?: string;
@@ -41,6 +39,11 @@ export interface PaymentData {
   ipAddress: string;
   invoiceId?: string;
   cardHolderName: string;
+}
+
+export interface TotalAmount {
+  totalAmount: string;
+  currency: Currency;
 }
 
 export interface PaymentJsonData {

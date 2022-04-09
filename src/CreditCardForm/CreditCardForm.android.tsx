@@ -1,28 +1,35 @@
-import { PaymentData, Configuration, PaymentJsonData } from '../types';
+import {
+  PaymentData,
+  Configuration,
+  PaymentJsonData,
+  TotalAmount,
+} from '../types';
 import { NativeModules } from 'react-native';
 
 const { CreditCardForm: CreditCardFormManager } = NativeModules;
 
 class CreditCardForm {
   private static instance: CreditCardForm;
-  private constructor() {}
 
-  public static getInstance(): CreditCardForm {
+  private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
+    const jsonDataString = jsonData && JSON.stringify(jsonData);
+    CreditCardFormManager.initialPaymentData(paymentData, jsonDataString);
+  }
+
+  public static initialPaymentData(
+    paymentData: PaymentData,
+    jsonData?: PaymentJsonData
+  ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm();
+      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
     }
 
     return CreditCardForm.instance;
   }
 
-  public initialPaymentData = (
-    paymentData: PaymentData,
-    jsonData?: PaymentJsonData
-  ): void => {
-    const jsonDataString = jsonData && JSON.stringify(jsonData);
-
-    CreditCardFormManager.initialPaymentData(paymentData, jsonDataString);
-  };
+  public setTotalAmount({ totalAmount, currency }: TotalAmount): void {
+    CreditCardFormManager.setTotalAmount(totalAmount, currency);
+  }
 
   public showCreditCardForm = async ({
     disableGPay,
@@ -37,4 +44,4 @@ class CreditCardForm {
   };
 }
 
-export default CreditCardForm.getInstance();
+export default CreditCardForm;
