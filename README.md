@@ -7,7 +7,7 @@ CloudPayments SDK позволяет интегрировать прием пл�
 ## Требования:
 
 1. Для работы CloudPayments SDK необходим iOS версии 11.0 и выше.
-2. Для работы CloudPayments SDK необходим Android версии 4.4 или выше (API level 21)
+2. Для работы CloudPayments SDK необходим Android версии 5.0 или выше (API level 21)
 
 ## Установка
 
@@ -57,9 +57,7 @@ npm install react-native-cloudpayments-sdk
 
 ```
 pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
-
 pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
-
 pod 'CardIO'
 ```
 
@@ -147,8 +145,6 @@ import { CreditCardForm } from "react-native-cloudpayments-sdk";
 ```js
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
-  totalAmount: '10',
-  currency: Currency.ruble,
   accountId: '1202',
   applePayMerchantId: 'merchant',
   description: 'Test',
@@ -163,19 +159,28 @@ const PAYMENT_JSON_DATA_CARD = {
   phone: '+7912343569',
 };
 
-CreditCardForm.initialPaymentData(
+const creditCardForm = CreditCardForm.initialPaymentData(
   PAYMENT_DATA_CARD,
   PAYMENT_JSON_DATA_CARD
 );
 ```
 
+* Инициализация суммы оплаты.
+
+```js
+creditCardForm.setTotalAmount({
+  currency: Currency.ruble,
+  totalAmount: '100',
+});
+```
+
 * Вызов формы оплаты.
 
 ```js
-const result = await CreditCardForm.showCreditCardForm({
+const result = await creditCardForm.showCreditCardForm({
   useDualMessagePayment: true,  // Использовать двухстадийную схему проведения платежа, по умолчанию используется одностадийная схема
-  disableApplePay: true, // Выключить Apple Pay, по умолчанию Google Pay включен
-  disableGPay: true, // Выключить Google Pay, по умолчанию Google Pay включен
+  disableApplePay: true, // Выключить Apple Pay
+  disableGPay: true, // Выключить Google Pay
 });
 ```
 
@@ -189,8 +194,6 @@ import { CloudPaymentsApi } from "react-native-cloudpayments-sdk";
 ```js
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
-  totalAmount: '10',
-  currency: Currency.ruble,
   accountId: '1202',
   applePayMerchantId: 'merchant',
   description: 'Test',
@@ -205,7 +208,16 @@ const PAYMENT_JSON_DATA_CARD = {
   phone: '+7912343569',
 };
 
-CloudPaymentsApi.initApi(PAYMENT_DATA_CARD, PAYMENT_JSON_DATA_CARD)
+const cloudPaymentsApi = CloudPaymentsApi.initApi(PAYMENT_DATA_CARD, PAYMENT_JSON_DATA_CARD)
+```
+
+* Инициализация суммы оплаты.
+
+```js
+cloudPaymentsApi.setTotalAmount({
+  currency: Currency.ruble,
+  totalAmount: '100',
+});
 ```
 
 * Создайте криптограмму карточных данных
@@ -222,11 +234,11 @@ const cryptogramPacket = await Card.makeCardCryptogramPacket({
 * Выполните запрос на проведения платежа. Создайте объект CloudpaymentApi и вызовите функцию charge для одностадийного платежа или auth для двухстадийного. Укажите email, на который будет выслана квитанция об оплате.
 
 ```js
-const results = await CloudPaymentsApi.auth(cryptogramPacket, email)
+const results = await cloudPaymentsApi.auth(cryptogramPacket, email)
 ```
 
 ```js
-const results = await CloudPaymentsApi.charge(cryptogramPacket, email)
+const results = await cloudPaymentsApi.charge(cryptogramPacket, email)
 ```
 
 #### Использования Google Pay / Apple Pay
@@ -285,7 +297,7 @@ const PAYMENT_DATA = Platform.select({
   },
 })!();
 
-PaymentService.initial(PAYMENT_DATA);
+const paymentService = PaymentService.initial(PAYMENT_DATA);
 ```
 ##### Примичание
 
@@ -294,7 +306,7 @@ PaymentService.initial(PAYMENT_DATA);
 * Проверка, доступны ли пользователю эти платежные системы
 
 ```js
-const isSupportPayments = await PaymentService.canMakePayments();
+const isSupportPayments = await paymentService.canMakePayments();
 ```
 
 * Создайте массив покупок и передайте его в метод setProducts
@@ -306,19 +318,19 @@ const PRODUCTS = [
   { name: 'example_3', price: '15' },
 ];
 
-PaymentService.setProducts(PRODUCTS);
+paymentService.setProducts(PRODUCTS);
 ```
 
 * Чтобы получить результат оплаты, нужно подписаться на listener
 
 ```js
 useEffect(() => {
-  PaymentService.listenerCryptogramCard((cryptogram) => {
+  paymentService.listenerCryptogramCard((cryptogram) => {
     console.warn(cryptogram);
   });
 
   return () => {
-    PaymentService.removeListenerCryptogramCard();
+    paymentService.removeListenerCryptogramCard();
   };
 }, []);
 ```
@@ -326,7 +338,7 @@ useEffect(() => {
 * Выполните оплату
 
 ```js
-PaymentService.openServicePay();
+paymentService.openServicePay();
 ```
 
 ## Поддержка
