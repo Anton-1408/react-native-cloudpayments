@@ -23,12 +23,22 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
 
   private lateinit var paymentData: InitialPaymentData;
   private lateinit var api: CloudpaymentsApi;
+  private var jsonData: String? = null;
+
   override fun getName() = MODULE_NAME
 
   @ReactMethod
   fun initApi(infoData: ReadableMap, jsonData: String?) {
-    paymentData = InitialPaymentData(infoData, jsonData);
+    paymentData = InitialPaymentData(infoData);
     api = CloudpaymentsSDK.createApi(paymentData.publicId)
+
+    this.jsonData = jsonData;
+  }
+
+  @ReactMethod
+  fun setTotalAmount(totalAmount: String, currency: String) {
+    paymentData.totalAmount = totalAmount;
+    paymentData.currency = currency;
   }
 
   @ReactMethod
@@ -39,12 +49,13 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
       ipAddress = paymentData.ipAddress,
       name = paymentData.cardHolderName,
       cryptogram = cardCryptogramPacket,
-      jsonData = paymentData.jsonData,
+      jsonData = jsonData,
       invoiceId = paymentData.invoiceId,
       description = paymentData.description,
       accountId = paymentData.accountId,
       email = email,
     )
+    
 
     api.charge(body)
       .toObservable()
@@ -67,7 +78,7 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
       ipAddress = paymentData.ipAddress,
       name = paymentData.cardHolderName,
       cryptogram = cardCryptogramPacket,
-      jsonData = paymentData.jsonData,
+      jsonData = jsonData,
       invoiceId = paymentData.invoiceId,
       description = paymentData.description,
       accountId = paymentData.accountId,

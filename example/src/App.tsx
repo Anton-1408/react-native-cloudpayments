@@ -62,8 +62,6 @@ const PRODUCTS = [
 
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
-  totalAmount: '10',
-  currency: Currency.ruble,
   accountId: '1202',
   applePayMerchantId: 'merchant',
   description: 'Test',
@@ -78,40 +76,46 @@ const PAYMENT_JSON_DATA_CARD = {
   phone: '+7912343569',
 };
 
+const paymentService = PaymentService.initial(PAYMENT_DATA);
+
+const creditCardForm = CreditCardForm.initialPaymentData(
+  PAYMENT_DATA_CARD,
+  PAYMENT_JSON_DATA_CARD
+);
+
 const App = () => {
   const [isSupportPayments, setIsSupportPayments] = useState(false);
 
   useEffect(() => {
-    PaymentService.initial(PAYMENT_DATA);
-    PaymentService.setProducts(PRODUCTS);
-
-    CreditCardForm.initialPaymentData(
-      PAYMENT_DATA_CARD,
-      PAYMENT_JSON_DATA_CARD
-    );
-
-    PaymentService.listenerCryptogramCard((cryptogram) => {
+    paymentService.listenerCryptogramCard((cryptogram) => {
       console.warn(cryptogram);
     });
 
     getIsSupportPayments();
 
     return () => {
-      PaymentService.removeListenerCryptogramCard();
+      paymentService.removeListenerCryptogramCard();
     };
   }, []);
 
   const getIsSupportPayments = async () => {
-    const isMakePayments = await PaymentService.canMakePayments();
+    const isMakePayments = await paymentService.canMakePayments();
     setIsSupportPayments(isMakePayments);
   };
 
   const onPayWithService = () => {
-    PaymentService.openServicePay();
+    paymentService.setProducts(PRODUCTS);
+
+    paymentService.openServicePay();
   };
 
   const onPayWithCard = async () => {
-    const result = await CreditCardForm.showCreditCardForm({
+    creditCardForm.setTotalAmount({
+      currency: Currency.ruble,
+      totalAmount: '100',
+    });
+
+    const result = await creditCardForm.showCreditCardForm({
       useDualMessagePayment: true,
       disableApplePay: true,
       disableGPay: true,

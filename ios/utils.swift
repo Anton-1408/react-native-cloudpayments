@@ -28,10 +28,8 @@ struct PARAMETRES_3DS {
 
 struct PAYMENT_DATA {
   var publicId: String
-  var totalAmount: String
   var accountId: String
   var applePayMerchantId: String
-  var currency: Currency
   var description: String?
   var ipAddress: String
   var invoiceId: String?
@@ -40,12 +38,8 @@ struct PAYMENT_DATA {
 
   init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
     self.publicId = paymentData["publicId"]!;
-    self.totalAmount = paymentData["totalAmount"]!;
     self.accountId = paymentData["accountId"]!;
     self.applePayMerchantId = paymentData["applePayMerchantId"]!;
-
-    let currencyString = paymentData["currency"]!;
-    self.currency = Currency.init(rawValue: currencyString)!;
 
     self.description = paymentData["description"] ?? nil;
     self.ipAddress = paymentData["ipAddress"]!;
