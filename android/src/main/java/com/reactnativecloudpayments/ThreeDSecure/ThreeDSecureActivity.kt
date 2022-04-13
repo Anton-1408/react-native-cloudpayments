@@ -34,9 +34,9 @@ class ThreeDSecureActivity: FragmentActivity(), ThreeDsDialogFragment.ThreeDSDia
     super.onStart()
 
     // получаей параметры
-    val acsUrl = intent.getStringExtra("acsUrl");
-    val paReq = intent.getStringExtra("paReq");
-    val md = intent.getStringExtra("md");
+    val acsUrl = intent.getStringExtra("acsUrl") as String;
+    val paReq = intent.getStringExtra("paReq") as String;
+    val md = intent.getStringExtra("md") as String;
 
     // запускаем экран для подтверждения оплаты
     ThreeDsDialogFragment
