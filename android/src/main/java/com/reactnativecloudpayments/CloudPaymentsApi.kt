@@ -55,7 +55,6 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
       accountId = paymentData.accountId,
       email = email,
     )
-    
 
     api.charge(body)
       .toObservable()

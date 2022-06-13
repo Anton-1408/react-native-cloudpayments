@@ -69,11 +69,11 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun showCreditCardForm(initialData: ReadableMap, promise: Promise) {
+  fun showCreditCardForm(initialConfiguration: ReadableMap, promise: Promise) {
     this.promise = promise;
 
-    val disableGPay = initialData.getBoolean("disableGPay")
-    val useDualMessagePayment = initialData.getBoolean("useDualMessagePayment")
+    val disableGPay = initialConfiguration.getBoolean("disableGPay")
+    val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment")
 
     val paymentData = PaymentData(
       paymentDataInitialValues.publicId,
@@ -98,5 +98,5 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
 
     // получаем экземпляр класса, запускае activity с оплатой из текущего activity
     CloudpaymentsSDK.getInstance().start(configuration, appCompatActivity, REQUEST_CODE_PAYMENT)
-   }
+  }
 }
