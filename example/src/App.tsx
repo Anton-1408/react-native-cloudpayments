@@ -117,8 +117,10 @@ const App = () => {
 
     const result = await creditCardForm.showCreditCardForm({
       useDualMessagePayment: true,
-      disableApplePay: true,
-      disableGPay: true,
+      disableApplePay: false,
+      disableGPay: false,
+      disableYandexPay: false,
+      yandexPayMerchantID: 'yandexPayMerchantID',
     });
 
     console.warn(result);

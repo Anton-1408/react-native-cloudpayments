@@ -33,11 +33,15 @@ class CreditCardForm {
   public showCreditCardForm = async ({
     disableApplePay,
     useDualMessagePayment,
+    disableYandexPay,
+    yandexPayMerchantID,
   }: Configuration): Promise<Number> => {
     const transactionId: number =
       await CreditCardFormManager.showCreditCardForm({
         useDualMessagePayment,
         disableApplePay,
+        disableYandexPay,
+        yandexPayMerchantID,
       });
     return transactionId;
   };

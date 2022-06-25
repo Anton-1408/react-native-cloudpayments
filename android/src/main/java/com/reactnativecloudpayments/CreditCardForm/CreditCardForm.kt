@@ -34,7 +34,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
         if (transactionStatus == CloudpaymentsSDK.TransactionStatus.Succeeded) {
           this.promise.resolve(transactionId);
         } else {
-          val reasonCode = data.getIntExtra(CloudpaymentsSDK.IntentKeys.TransactionReasonCode.name, 0) ?: 0
+          val reasonCode = data.getIntExtra(CloudpaymentsSDK.IntentKeys.TransactionReasonCode.name, 0);
 
           if (reasonCode > 0) {
             this.promise.reject(reasonCode.toString(), "Ошибка! Транзакция №$transactionId.");
@@ -72,8 +72,10 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   fun showCreditCardForm(initialConfiguration: ReadableMap, promise: Promise) {
     this.promise = promise;
 
-    val disableGPay = initialConfiguration.getBoolean("disableGPay")
-    val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment")
+    val disableGPay = initialConfiguration.getBoolean("disableGPay");
+    val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment");
+    val disableYandexPay = initialConfiguration.getBoolean("disableYandexPay");
+    val yandexPayMerchantID = initialConfiguration.getString("yandexPayMerchantID") as String;
 
     val paymentData = PaymentData(
       paymentDataInitialValues.publicId,
@@ -91,7 +93,9 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
       paymentData,
       CardIOScanner(),
       useDualMessagePayment,
-      disableGPay
+      disableGPay,
+      disableYandexPay,
+      yandexPayMerchantID
     )
 
     val appCompatActivity = currentActivity as AppCompatActivity;

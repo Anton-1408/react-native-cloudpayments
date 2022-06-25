@@ -12,7 +12,7 @@ class GooglePayRequest (
   merchantName: String,
   googlePayMerchantId: String,
   gateway: ReadableMap,
-  paymentNetworks: ArrayList<String>,
+  paymentNetworks: ArrayList<Any>,
 ) {
   private var baseCardPaymentMethod: JSONObject = JSONObject();
   private var baseRequest: JSONObject = JSONObject();

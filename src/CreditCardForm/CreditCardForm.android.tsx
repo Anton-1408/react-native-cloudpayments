@@ -34,11 +34,15 @@ class CreditCardForm {
   public showCreditCardForm = async ({
     disableGPay,
     useDualMessagePayment,
+    disableYandexPay,
+    yandexPayMerchantID,
   }: Configuration): Promise<number> => {
     const transactionId: number =
       await CreditCardFormManager.showCreditCardForm({
         disableGPay,
         useDualMessagePayment,
+        disableYandexPay,
+        yandexPayMerchantID,
       });
     return transactionId;
   };
