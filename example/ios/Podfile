@@ -10,8 +10,8 @@ target 'CloudpaymentsExample' do
 
   pod 'react-native-cloudpayments-sdk', :path => '../..'
 
-  pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
-  pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+  pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
+  pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
   pod 'CardIO'
 
   # Enables Flipper.

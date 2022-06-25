@@ -77,12 +77,14 @@ android {
 - Добавьте в `ios/Podfile`
 
 ```
-pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
-pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master"
+pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
+pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
 pod 'CardIO'
 ```
 
 - Выполните `pod install` в папке ios
+
+- Yandex Pay для ios пока не доступно
 
 Для использования технологии Apple Pay вам необходимо зарегистрировать Merchant ID, сформировать платежный сертификат, сертификат для веб-платежей и подтвердить владение доменами сайтов, на которых будет производиться оплата.
 

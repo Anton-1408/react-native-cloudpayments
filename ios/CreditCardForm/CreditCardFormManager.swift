@@ -35,7 +35,7 @@ class CreditCardFormManager: NSObject {
   }
 
   @objc
-  func showCreditCardForm(_ configuration: Dictionary<String, Bool>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func showCreditCardForm(_ configuration: Dictionary<String, Any>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     CreditCardFormManager.resolve = resolve;
     CreditCardFormManager.reject = reject;
 
