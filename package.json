@@ -40,7 +40,7 @@
     "android"
   ],
   "repository": "https://github.com/PurrwebTeam/react-native-cloudpayments",
-  "author": "Votinov Anton <antonvotinov@gmail.com> (https://github.com/Anton-1408)",
+  "author": "Anton Votinov <antonvotinov@gmail.com> (https://github.com/Anton-1408)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/PurrwebTeam/react-native-cloudpayments/issues"

@@ -1,7 +1,7 @@
 PODS:
   - boost-for-react-native (1.63.0)
   - CardIO (5.4.1)
-  - Cloudpayments (1.1.1):
+  - Cloudpayments (1.1.6):
     - CloudpaymentsNetworking
   - CloudpaymentsNetworking (1.0.1)
   - CocoaAsyncSocket (7.6.5)
@@ -323,8 +323,8 @@ PODS:
 
 DEPENDENCIES:
   - CardIO
-  - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`)
-  - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`)
+  - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`, tag `1.1.9`)
+  - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`, tag `1.1.9`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -396,9 +396,11 @@ EXTERNAL SOURCES:
   Cloudpayments:
     :branch: master
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
+    :tag: 1.1.9
   CloudpaymentsNetworking:
     :branch: master
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
+    :tag: 1.1.9
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -456,17 +458,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Cloudpayments:
-    :commit: f936ef99b4e4ee2b9291e0b7748412766f479bda
+    :commit: 199b7007acbc534c7fa1e1af452ece6b65ae5043
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
+    :tag: 1.1.9
   CloudpaymentsNetworking:
-    :commit: f936ef99b4e4ee2b9291e0b7748412766f479bda
+    :commit: 199b7007acbc534c7fa1e1af452ece6b65ae5043
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
+    :tag: 1.1.9
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CardIO: 56983b39b62f495fc6dae9ad7cf875143df06443
-  Cloudpayments: 3be553d44b1c61da9dd85ea6365b4e719b900303
-  CloudpaymentsNetworking: c16a709b98a0a3222da8d3afa4c15eb364161e35
+  Cloudpayments: e4cea0e9c1decaf6047a4916946a2cf19b1f860b
+  CloudpaymentsNetworking: c888643c447d2ba487ff47300c9ed570f07d41d6
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
@@ -508,6 +512,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: b1730f9c41f8c59b46570833d0f7c6988836b74b
+PODFILE CHECKSUM: b2fe79a7b0e790c25cf85668d21bd257b0da5750
 
 COCOAPODS: 1.10.1

@@ -31,8 +31,8 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
           val eventEmitter = EventEmitter()
           val paymentData = PaymentData.getFromIntent(intent);
 
-          val paymentMethodData: JSONObject = JSONObject(paymentData.toJson()).getJSONObject("paymentMethodData")
-          val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token")
+          val paymentMethodData: JSONObject = JSONObject(paymentData?.toJson() as String).getJSONObject("paymentMethodData")
+          val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token") as String;
 
           eventEmitter.sendEvent(reactApplicationContext,"listenerCryptogramCard",  tokenGP)
         }
@@ -44,12 +44,12 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   override fun onNewIntent(intent: Intent?) = Unit
 
   @ReactMethod
-  fun initial(initialData: ReadableMap, paymentNetworks: ReadableArray, promise: Promise) {
-    val environmentRunning = initialData.getInt("environmentRunning") as Int;
+  fun initial(initialData: ReadableMap, paymentNetworks: ReadableArray) {
+    val environmentRunning = initialData.getInt("environmentRunning");
     val merchantName = initialData.getString("merchantName") as String;
     val googlePayMerchantId = initialData.getString("merchantId") as String;
     val gateway = initialData.getMap("gateway") as ReadableMap;
-    val paymentNetworksList = paymentNetworks.toArrayList() as ArrayList<String>;
+    val paymentNetworksList = paymentNetworks.toArrayList();
 
     googlePayRequest = GooglePayRequest(
       merchantName,
@@ -75,7 +75,7 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   @ReactMethod
   fun canMakePayments(promise: Promise) {
     val isReadyToPayJson = googlePayRequest.isReadyToPayRequest() ?: return
-    val request = IsReadyToPayRequest.fromJson(isReadyToPayJson.toString()) ?: return
+    val request = IsReadyToPayRequest.fromJson(isReadyToPayJson.toString());
     val task = paymentsClient.isReadyToPay(request)
 
     task.addOnCompleteListener { completedTask ->
@@ -97,8 +97,6 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
     val paymentDataRequest: String = googlePayRequest.getPaymentDataRequest().toString()
     val request = PaymentDataRequest.fromJson(paymentDataRequest) // конвертация из json в класс дата
 
-    if (request != null) {
-      AutoResolveHelper.resolveTask(paymentsClient.loadPaymentData(request), currentActivity, REQUEST_CODE_PAYMENT)
-    }
+    AutoResolveHelper.resolveTask(paymentsClient.loadPaymentData(request), currentActivity!!, REQUEST_CODE_PAYMENT)
   }
 }

@@ -56,6 +56,8 @@ export interface Configuration {
   useDualMessagePayment: boolean;
   disableApplePay: boolean;
   disableGPay: boolean;
+  disableYandexPay: boolean;
+  yandexPayMerchantID: string;
 }
 
 type EnvironmentRunningGooglePay = 'Test' | 'Production';
