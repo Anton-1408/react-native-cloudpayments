@@ -15,25 +15,22 @@ class ThreeDSecureController: UIViewController {
   }
 
   public func onShowController() {
-    DispatchQueue.main.async {
-      guard let rootViewController = RCTPresentedViewController() else {
-        return
-      }
-
-      // запускаем пустой контроллер из главного
-      rootViewController.present(self, animated: true, completion: nil);
-      self.view.backgroundColor = .white;
+    guard let rootViewController = RCTPresentedViewController() else {
+      return
     }
+
+    // запускаем контроллер из главного
+    rootViewController.present(self, animated: true, completion: nil);
+
+    self.view.backgroundColor = .white;
   }
 
   private func hideController() {
-    DispatchQueue.main.async {
-      guard let rootViewController = RCTPresentedViewController() else {
-        return
-      }
-
-      rootViewController.dismiss(animated: true, completion: nil)
+    guard let rootViewController = RCTPresentedViewController() else {
+      return
     }
+
+    rootViewController.dismiss(animated: true, completion: nil)
   }
 }
 

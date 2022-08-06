@@ -8,13 +8,12 @@ class CardFormController: UIViewController {
   var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
   // создаем дополнительный конструктор
-  convenience init(paymentData: PaymentData, configuration: Dictionary<String, Any>) {
+  convenience init(paymentData: PaymentData, configuration: Dictionary<String, Bool>) {
     self.init();
 
-    let useDualMessagePayment = configuration["useDualMessagePayment"] as! Bool;
-    let disableApplePay = configuration["disableApplePay"] as! Bool;
-//    let disableYandexPay = configuration["disableYandexPay"] as! Bool;
-//    let yandexPayMerchantID = configuration["yandexPayMerchantID"] as! String;
+    let useDualMessagePayment = configuration["useDualMessagePayment"]!;
+    let disableApplePay = configuration["disableApplePay"]!;
+//    let disableYandexPay = configuration["disableYandexPay"]!;
 
     self.configuration = PaymentConfiguration.init(
       paymentData: paymentData,
@@ -27,15 +26,14 @@ class CardFormController: UIViewController {
   }
 
   func showCreditCardForm() -> Void {
-    DispatchQueue.main.async {
-      guard let rootViewController = RCTPresentedViewController() else {
-        return
-      };
+    guard let rootViewController = RCTPresentedViewController() else {
+      return
+    };
 
-      //Добавляем контроллер представления в качестве дочернего элемента текущего контроллера представления.
-      rootViewController.addChild(self);
-      PaymentForm.present(with: self.configuration, from: rootViewController);
-    }
+    //Добавляем контроллер в качестве дочернего элемента текущего контроллера .
+    rootViewController.addChild(self);
+
+    PaymentForm.present(with: self.configuration, from: rootViewController);
   }
 };
 

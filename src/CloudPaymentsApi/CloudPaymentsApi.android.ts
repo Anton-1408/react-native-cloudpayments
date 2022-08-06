@@ -2,7 +2,7 @@ import {
   PaymentData,
   PaymentJsonData,
   TransactionResponse,
-  TotalAmount,
+  DetailsOfPayment,
 } from '../types';
 import { NativeModules } from 'react-native';
 
@@ -28,8 +28,8 @@ class CloudPaymentsApi {
     return CloudPaymentsApi.instance;
   }
 
-  public setTotalAmount({ totalAmount, currency }: TotalAmount): void {
-    CloudPaymentsApiModule.setTotalAmount(totalAmount, currency);
+  public setDetailsOfPayment(details: DetailsOfPayment): void {
+    CloudPaymentsApiModule.setDetailsOfPayment(details);
   }
 
   public auth = async (
