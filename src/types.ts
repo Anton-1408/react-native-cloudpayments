@@ -36,6 +36,7 @@ export interface PaymentData {
   applePayMerchantId: string;
   googlePayMerchantId?: string;
   ipAddress?: string;
+  cardHolderName: string;
 }
 
 export interface DetailsOfPayment {

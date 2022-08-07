@@ -34,6 +34,7 @@ struct PAYMENT_DATA {
   var ipAddress: String
   var invoiceId: String?
   var jsonData: [String: String]?
+  var cardholderName: String
 
   init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
     self.publicId = paymentData["publicId"]!;
@@ -43,6 +44,7 @@ struct PAYMENT_DATA {
     self.description = paymentData["description"] ?? nil;
     self.ipAddress = paymentData["ipAddress"]!;
     self.invoiceId = paymentData["invoiceId"] ?? nil;
+    self.cardholderName = paymentData["cardHolderName"]!;
 
     var arrayInformationUser: [String: String] = [:];
 
