@@ -33,8 +33,8 @@ struct PAYMENT_DATA {
   var description: String?
   var ipAddress: String
   var invoiceId: String?
-  var cardholderName: String
   var jsonData: [String: String]?
+  var cardholderName: String
 
   init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
     self.publicId = paymentData["publicId"]!;

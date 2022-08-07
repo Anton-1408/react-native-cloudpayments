@@ -4,7 +4,6 @@ import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import com.fasterxml.jackson.databind.ObjectMapper
 
-
 import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK;
 import ru.cloudpayments.sdk.api.CloudpaymentsApi;
 import ru.cloudpayments.sdk.api.models.CloudpaymentsTransactionResponse
@@ -36,9 +35,16 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
   }
 
   @ReactMethod
-  fun setTotalAmount(totalAmount: String, currency: String) {
+  fun setDetailsOfPayment(details: ReadableMap) {
+    val totalAmount = details.getString("totalAmount") as String;
+    val currency = details.getString("currency") as String;
+    val description = details.getString("description");
+    val invoiceId = details.getString("invoiceId");
+
     paymentData.totalAmount = totalAmount;
     paymentData.currency = currency;
+    paymentData.description = description;
+    paymentData.invoiceId = invoiceId;
   }
 
   @ReactMethod

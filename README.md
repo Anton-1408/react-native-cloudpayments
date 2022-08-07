@@ -7,12 +7,12 @@ CloudPayments SDK позволяет интегрировать прием пл�
 ## Требования:
 
 1. Для работы CloudPayments SDK необходим iOS версии 11.0 и выше.
-2. Для работы CloudPayments SDK необходим Android версии 6.0 или выше, и следующие зависимости (
-   API level 23,
+2. Для работы CloudPayments SDK необходим Android версии 6.0 или выше, и следующие зависимости (API level 23)
+
+   минимальные версии окружения:
    compileSdkVersion 31,
    build:gradle 3.6.0,
    ndkVersion 21.4.7075529
-   )
 
 ## Установка
 
@@ -170,9 +170,8 @@ const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
   applePayMerchantId: 'merchant',
-  description: 'Test',
+  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
-  invoiceId: '123',
   cardHolderName: 'Votinov Anton',
 };
 
@@ -191,9 +190,11 @@ const creditCardForm = CreditCardForm.initialPaymentData(
 - Инициализация суммы оплаты.
 
 ```js
-creditCardForm.setTotalAmount({
+creditCardForm.setDetailsOfPayment({
   currency: Currency.ruble,
-  totalAmount: '100',
+  totalAmount: '1000',
+  invoiceId: '123',
+  description: 'Test',
 });
 ```
 
@@ -222,9 +223,8 @@ const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
   applePayMerchantId: 'merchant',
-  description: 'Test',
+  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
-  invoiceId: '123',
   cardHolderName: 'Votinov Anton',
 };
 
@@ -243,9 +243,11 @@ const cloudPaymentsApi = CloudPaymentsApi.initApi(
 - Инициализация суммы оплаты.
 
 ```js
-cloudPaymentsApi.setTotalAmount({
+cloudPaymentsApi.setDetailsOfPayment({
   currency: Currency.ruble,
-  totalAmount: '100',
+  totalAmount: '1000',
+  invoiceId: '123',
+  description: 'Test',
 });
 ```
 

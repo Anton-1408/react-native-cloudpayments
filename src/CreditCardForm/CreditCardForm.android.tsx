@@ -2,7 +2,7 @@ import {
   PaymentData,
   Configuration,
   PaymentJsonData,
-  TotalAmount,
+  DetailsOfPayment,
 } from '../types';
 import { NativeModules } from 'react-native';
 
@@ -27,8 +27,8 @@ class CreditCardForm {
     return CreditCardForm.instance;
   }
 
-  public setTotalAmount({ totalAmount, currency }: TotalAmount): void {
-    CreditCardFormManager.setTotalAmount(totalAmount, currency);
+  public setDetailsOfPayment(details: DetailsOfPayment): void {
+    CreditCardFormManager.setDetailsOfPayment(details);
   }
 
   public showCreditCardForm = async ({

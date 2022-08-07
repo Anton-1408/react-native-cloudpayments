@@ -3,6 +3,8 @@ import PassKit
 
 @objc(ApplePayController)
 class ApplePayController: NSObject {
+  @objc var bridge: RCTBridge!
+
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
@@ -70,8 +72,8 @@ class ApplePayController: NSObject {
 
   @objc
   func openApplePay() -> Void {
-    // ассинхронный вызов операций в основном потоке
-    DispatchQueue.main.async {
+    // вызов операций в основном потоке
+    RCTExecuteOnMainQueue {
       // получаем главный ViewController
       guard let rootViewController = RCTPresentedViewController() else {
         return

@@ -3,7 +3,7 @@ import {
   PaymentData,
   Configuration,
   PaymentJsonData,
-  TotalAmount,
+  DetailsOfPayment,
 } from '../types';
 
 const { CreditCardFormManager } = NativeModules;
@@ -26,22 +26,20 @@ class CreditCardForm {
     return CreditCardForm.instance;
   }
 
-  public setTotalAmount({ totalAmount, currency }: TotalAmount): void {
-    CreditCardFormManager.setTotalAmount(totalAmount, currency);
+  public setDetailsOfPayment(details: DetailsOfPayment): void {
+    CreditCardFormManager.setDetailsOfPayment(details);
   }
 
   public showCreditCardForm = async ({
     disableApplePay,
     useDualMessagePayment,
     disableYandexPay,
-    yandexPayMerchantID,
   }: Configuration): Promise<Number> => {
     const transactionId: number =
       await CreditCardFormManager.showCreditCardForm({
         useDualMessagePayment,
         disableApplePay,
         disableYandexPay,
-        yandexPayMerchantID,
       });
     return transactionId;
   };

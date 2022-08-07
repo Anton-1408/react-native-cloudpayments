@@ -64,9 +64,8 @@ const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
   applePayMerchantId: 'merchant',
-  description: 'Test',
+  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
-  invoiceId: '123',
   cardHolderName: 'Votinov Anton',
 };
 
@@ -110,9 +109,11 @@ const App = () => {
   };
 
   const onPayWithCard = async () => {
-    creditCardForm.setTotalAmount({
+    creditCardForm.setDetailsOfPayment({
       currency: Currency.ruble,
-      totalAmount: '100',
+      totalAmount: '1000',
+      invoiceId: '123',
+      description: 'Test',
     });
 
     const result = await creditCardForm.showCreditCardForm({

@@ -63,9 +63,16 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun setTotalAmount(totalAmount: String, currency: String) {
+  fun setDetailsOfPayment(details: ReadableMap) {
+    val totalAmount = details.getString("totalAmount") as String;
+    val currency = details.getString("currency") as String;
+    val description = details.getString("description");
+    val invoiceId = details.getString("invoiceId");
+
     paymentDataInitialValues.totalAmount = totalAmount;
     paymentDataInitialValues.currency = currency;
+    paymentDataInitialValues.description = description;
+    paymentDataInitialValues.invoiceId = invoiceId;
   }
 
   @ReactMethod

@@ -35,15 +35,15 @@ export interface PaymentData {
   accountId: string;
   applePayMerchantId: string;
   googlePayMerchantId?: string;
-  description?: string;
-  ipAddress: string;
-  invoiceId?: string;
+  ipAddress?: string;
   cardHolderName: string;
 }
 
-export interface TotalAmount {
+export interface DetailsOfPayment {
   totalAmount: string;
   currency: Currency;
+  invoiceId?: string;
+  description?: string;
 }
 
 export interface PaymentJsonData {
