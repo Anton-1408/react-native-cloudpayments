@@ -170,9 +170,8 @@ const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
   applePayMerchantId: 'merchant',
-  description: 'Test',
+  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
-  invoiceId: '123',
   cardHolderName: 'Votinov Anton',
 };
 
@@ -191,9 +190,11 @@ const creditCardForm = CreditCardForm.initialPaymentData(
 - Инициализация суммы оплаты.
 
 ```js
-creditCardForm.setTotalAmount({
+creditCardForm.setDetailsOfPayment({
   currency: Currency.ruble,
-  totalAmount: '100',
+  totalAmount: '1000',
+  invoiceId: '123',
+  description: 'Test',
 });
 ```
 
@@ -222,9 +223,8 @@ const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
   applePayMerchantId: 'merchant',
-  description: 'Test',
+  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
-  invoiceId: '123',
   cardHolderName: 'Votinov Anton',
 };
 
@@ -243,9 +243,11 @@ const cloudPaymentsApi = CloudPaymentsApi.initApi(
 - Инициализация суммы оплаты.
 
 ```js
-cloudPaymentsApi.setTotalAmount({
+cloudPaymentsApi.setDetailsOfPayment({
   currency: Currency.ruble,
-  totalAmount: '100',
+  totalAmount: '1000',
+  invoiceId: '123',
+  description: 'Test',
 });
 ```
 
