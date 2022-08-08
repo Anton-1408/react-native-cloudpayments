@@ -11,12 +11,21 @@ const { CloudPaymentsApi: CloudPaymentsApiModule } = NativeModules;
 class CloudPaymentsApi {
   private static instance: CloudPaymentsApi;
 
-  private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
+  private constructor(
+    paymentData: Omit<
+      PaymentData,
+      'applePayMerchantId' | 'googlePayMerchantId'
+    >,
+    jsonData?: PaymentJsonData
+  ) {
     CloudPaymentsApiModule.initApi(paymentData, jsonData);
   }
 
   public static initialApi(
-    paymentData: PaymentData,
+    paymentData: Omit<
+      PaymentData,
+      'applePayMerchantId' | 'googlePayMerchantId'
+    >,
     jsonData?: PaymentJsonData
   ): CloudPaymentsApi {
     if (!CloudPaymentsApi.instance) {
