@@ -1,7 +1,5 @@
 # CloudPayments SDK for React Native
 
-Всем привет! Мы - [Purrweb](https://www.purrweb.com/ru/), однажды, заказчик крупного проекта [EnerGO](https://energo.app/) захотел перейти на платежную систему Cloud Payments, но, к сожалению, официальной библиотеки под React Native не оказалось, и нашему разработчику пришлось самому ее пилить. Сегодня мы хотим поделится с вами данной разработкой, поэтому ставьте звезды и пишите issues, мы постараемся поддерживать данный пакет.
-
 CloudPayments SDK позволяет интегрировать прием платежей в мобильные приложение.
 
 ## Требования:
@@ -222,8 +220,6 @@ import { CloudPaymentsApi } from 'react-native-cloudpayments-sdk';
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
   accountId: '1202',
-  applePayMerchantId: 'merchant',
-  googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
   cardHolderName: 'Votinov Anton',
 };

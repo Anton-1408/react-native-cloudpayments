@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   s.summary      = package["description"]
   s.homepage     = package["homepage"]
   s.license      = package["license"]
-  s.authors      = package["author"]
 
   s.platforms    = { :ios => "11.0" }
   s.source       = { :git => "https://github.com/PurrwebTeam/react-native-cloudpayments.git", :tag => "#{s.version}" }
+  s.author       = { "Anton Votinov" => "antonvotinov@gmail.com" }
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
