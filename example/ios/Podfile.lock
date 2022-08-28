@@ -252,7 +252,7 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-cloudpayments-sdk (2.2.0):
+  - react-native-cloudpayments-sdk (2.2.1):
     - CardIO
     - Cloudpayments
     - CloudpaymentsNetworking
@@ -323,8 +323,8 @@ PODS:
 
 DEPENDENCIES:
   - CardIO
-  - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`, tag `1.1.9`)
-  - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, branch `master`, tag `1.1.9`)
+  - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, tag `1.1.9`)
+  - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, tag `1.1.9`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -394,11 +394,9 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Cloudpayments:
-    :branch: master
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
     :tag: 1.1.9
   CloudpaymentsNetworking:
-    :branch: master
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
     :tag: 1.1.9
   DoubleConversion:
@@ -458,11 +456,9 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Cloudpayments:
-    :commit: 199b7007acbc534c7fa1e1af452ece6b65ae5043
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
     :tag: 1.1.9
   CloudpaymentsNetworking:
-    :commit: 199b7007acbc534c7fa1e1af452ece6b65ae5043
     :git: https://github.com/cloudpayments/CloudPayments-SDK-iOS
     :tag: 1.1.9
 
@@ -498,7 +494,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-cloudpayments-sdk: 386e1efc3be5427a32a20d50f085a2ba397e6615
+  react-native-cloudpayments-sdk: a382b3b63f75898e737fdd4c826648b1a7b7139d
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -512,6 +508,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: edb7f0239481ac824d2b459dadf85a39f0c0a7b9
+PODFILE CHECKSUM: d1a194b283ccee0ab711e64ef1dc6d2f57b0e1df
 
 COCOAPODS: 1.11.3

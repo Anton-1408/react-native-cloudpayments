@@ -75,8 +75,8 @@ android {
 - Добавьте в `ios/Podfile`
 
 ```
-pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
-pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :branch => "master", :tag => '1.1.9'
+pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
+pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
 pod 'CardIO'
 ```
 
