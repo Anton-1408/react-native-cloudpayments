@@ -322,7 +322,6 @@ PODS:
     - Yoga (~> 1.14)
 
 DEPENDENCIES:
-  - CardIO
   - Cloudpayments (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, tag `1.1.9`)
   - CloudpaymentsNetworking (from `https://github.com/cloudpayments/CloudPayments-SDK-iOS`, tag `1.1.9`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
@@ -508,6 +507,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d1a194b283ccee0ab711e64ef1dc6d2f57b0e1df
+PODFILE CHECKSUM: 7bc1662d956e1b575e10c5f0049306817f776f7c
 
 COCOAPODS: 1.11.3
