@@ -6,11 +6,12 @@ const { GooglePayModule } = NativeModules;
 class GooglePay {
   private static instance: GooglePay;
 
-  private constructor({ supportedNetworks, ...rest }: MethodDataPayment) {
-    const numberConstantEnvironment = rest.environmentRunning
-      ? WalletConstants[rest.environmentRunning]
-      : WalletConstants.Test;
-
+  private constructor({
+    supportedNetworks,
+    environmentRunning = 'Test',
+    ...rest
+  }: MethodDataPayment) {
+    const numberConstantEnvironment = WalletConstant[environmentRunning];
     const initialData = {
       ...rest,
       environmentRunning: numberConstantEnvironment,
@@ -53,7 +54,7 @@ class GooglePay {
   };
 }
 
-enum WalletConstants {
+enum WalletConstant {
   Test = 3,
   Production = 1,
 }

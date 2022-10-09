@@ -3,10 +3,9 @@ import { ListenerCryptogramCard, Product, MethodDataPayment } from '../types';
 
 const { EventEmitter, ApplePayController } = NativeModules;
 
-const eventCryptogramCard = new NativeEventEmitter(EventEmitter);
-
 class ApplePay {
   private static instance: ApplePay;
+  private eventCryptogramCard = new NativeEventEmitter(EventEmitter);
 
   private constructor(methodData: MethodDataPayment) {
     ApplePayController.initialData(methodData);
@@ -35,11 +34,11 @@ class ApplePay {
   };
 
   public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {
-    eventCryptogramCard.addListener('listenerCryptogramCard', callback);
+    this.eventCryptogramCard.addListener('listenerCryptogramCard', callback);
   };
 
   public removeListenerCryptogramCard = (): void => {
-    eventCryptogramCard.removeAllListeners('listenerCryptogramCard');
+    this.eventCryptogramCard.removeAllListeners('listenerCryptogramCard');
   };
 }
 
