@@ -4,6 +4,8 @@ import Cloudpayments;
 
 @objc(CloudPaymentsApi)
 class CloudPaymentsApi: NSObject {
+  @objc var bridge: RCTBridge!
+
   var api: CloudpaymentsApi?;
   var paymentData: PaymentData?;
 
@@ -95,5 +97,15 @@ class CloudPaymentsApi: NSObject {
     let jsonString = String(data: jsonData, encoding: .utf8)
 
     return jsonString ?? "Response is empty";
+  }
+
+  @objc
+  static func requiresMainQueueSetup() -> Bool {
+    return true
+  }
+
+  @objc
+  func methodQueue() -> DispatchQueue {
+    return .main
   }
 }

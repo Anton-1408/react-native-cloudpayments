@@ -31,7 +31,7 @@ struct PAYMENT_DATA {
   var accountId: String
   var applePayMerchantId: String
   var description: String?
-  var ipAddress: String
+  var ipAddress: String?
   var invoiceId: String?
   var jsonData: [String: String]?
   var cardholderName: String
@@ -42,7 +42,7 @@ struct PAYMENT_DATA {
     self.applePayMerchantId = paymentData["applePayMerchantId"]!;
 
     self.description = paymentData["description"] ?? nil;
-    self.ipAddress = paymentData["ipAddress"]!;
+    self.ipAddress = paymentData["ipAddress"] ?? nil;
     self.invoiceId = paymentData["invoiceId"] ?? nil;
     self.cardholderName = paymentData["cardHolderName"]!;
 

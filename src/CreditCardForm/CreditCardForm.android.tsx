@@ -21,7 +21,12 @@ class CreditCardForm {
     jsonData?: PaymentJsonData
   ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
+      const jsonDataInitial = jsonData ?? {};
+
+      CreditCardForm.instance = new CreditCardForm(
+        paymentData,
+        jsonDataInitial
+      );
     }
 
     return CreditCardForm.instance;
