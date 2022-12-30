@@ -170,6 +170,7 @@ const PAYMENT_DATA_CARD = {
   googlePayMerchantId: 'merchant',
   ipAddress: '8.8.8.8',
   cardHolderName: 'Votinov Anton',
+  yandexPayMerchantID: 'yandexPayMerchantID',
 };
 
 const PAYMENT_JSON_DATA_CARD = {
@@ -203,7 +204,6 @@ const result = await creditCardForm.showCreditCardForm({
   disableApplePay: true, // Выключить Apple Pay
   disableGPay: true, // Выключить Google Pay
   disableYandexPay: false, // Выключить Yandex Pay,
-  yandexPayMerchantID: 'yandexPayMerchantID', // Yandex Pay Merchant id
 });
 ```
 

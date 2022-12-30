@@ -65,8 +65,8 @@ const PAYMENT_DATA_CARD = {
   accountId: '1202',
   applePayMerchantId: 'merchant',
   googlePayMerchantId: 'merchant',
-  ipAddress: '8.8.8.8',
   cardHolderName: 'Votinov Anton',
+  yandexPayMerchantID: 'yandexPayMerchantID',
 };
 
 const PAYMENT_JSON_DATA_CARD = {
@@ -121,7 +121,6 @@ const App = () => {
       disableApplePay: false,
       disableGPay: false,
       disableYandexPay: false,
-      yandexPayMerchantID: 'yandexPayMerchantID',
     });
 
     console.warn(result);

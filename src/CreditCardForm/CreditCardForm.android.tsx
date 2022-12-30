@@ -40,14 +40,12 @@ class CreditCardForm {
     disableGPay,
     useDualMessagePayment,
     disableYandexPay,
-    yandexPayMerchantID,
   }: Configuration): Promise<number> => {
     const transactionId: number =
       await CreditCardFormManager.showCreditCardForm({
         disableGPay,
         useDualMessagePayment,
         disableYandexPay,
-        yandexPayMerchantID,
       });
     return transactionId;
   };
