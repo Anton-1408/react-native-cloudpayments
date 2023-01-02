@@ -26,7 +26,7 @@ npm install react-native-cloudpayments-sdk
 
 ### Android
 
-- добавьте Yandex Client ID, для Yandex Pay (если Yandex Pay не используется, добавльте пустое значение)
+- добавьте Yandex Client ID в `android/app/build.gradle`, для Yandex Pay (если Yandex Pay не используется, добавльте пустое значение)
 
 ```gradlew
 android {
@@ -42,7 +42,7 @@ android {
 }
 ```
 
-- Чтобы включить Google Pay в приложении, добавьте следующие метаданные в тег <application> файла AndroidManifest.xml.
+- Чтобы включить Google Pay в приложении, добавьте следующие метаданные в тег `<application>` файла AndroidManifest.xml.
 
 ```xml
 <meta-data
@@ -50,7 +50,7 @@ android {
   android:value="true" />
 ```
 
-- Чтобы использовать экран для подтверждения оплаты, добавьте activity в тег <application> файла AndroidManifest.xml.
+- Чтобы использовать экран для подтверждения оплаты, добавьте activity в тег `<application>` файла AndroidManifest.xml.
 
 ```xml
 <activity
@@ -203,7 +203,7 @@ const result = await creditCardForm.showCreditCardForm({
   useDualMessagePayment: true, // Использовать двухстадийную схему проведения платежа
   disableApplePay: true, // Выключить Apple Pay
   disableGPay: true, // Выключить Google Pay
-  disableYandexPay: false, // Выключить Yandex Pay,
+  disableYandexPay: true, // Выключить Yandex Pay,
 });
 ```
 
