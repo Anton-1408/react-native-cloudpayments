@@ -62,25 +62,14 @@ const PRODUCTS = [
 
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
-  accountId: '1202',
   applePayMerchantId: 'merchant',
   googlePayMerchantId: 'merchant',
-  cardHolderName: 'Votinov Anton',
   yandexPayMerchantID: 'yandexPayMerchantID',
-};
-
-const PAYMENT_JSON_DATA_CARD = {
-  age: '24',
-  name: 'Anton',
-  phone: '+7912343569',
 };
 
 const paymentService = PaymentService.initial(PAYMENT_DATA);
 
-const creditCardForm = CreditCardForm.initialPaymentData(
-  PAYMENT_DATA_CARD,
-  PAYMENT_JSON_DATA_CARD
-);
+const creditCardForm = CreditCardForm.initialPaymentData(PAYMENT_DATA_CARD);
 
 const App = () => {
   const [isSupportPayments, setIsSupportPayments] = useState(false);

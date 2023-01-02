@@ -11,7 +11,7 @@ data class InitialPaymentData(var paymentData: ReadableMap) {
   var description: String? = paymentData.getString("description");
   var ipAddress: String?  = paymentData.getString("ipAddress");
   var invoiceId: String? = paymentData.getString("invoiceId");
-  var cardHolderName: String = paymentData.getString("cardHolderName") as String;
+  var cardHolderName: String? = paymentData.getString("cardHolderName");
   var yandexPayMerchantID: String = paymentData.getString("yandexPayMerchantID") as String;
 
   lateinit var jsonDataHash: HashMap<String, Any>

@@ -32,11 +32,12 @@ export interface MethodDataPayment {
 
 export interface PaymentData {
   publicId: string;
-  accountId: string;
   applePayMerchantId: string;
-  googlePayMerchantId?: string;
+  googlePayMerchantId: string;
+  yandexPayMerchantID: string;
   ipAddress?: string;
-  cardHolderName: string;
+  accountId?: string;
+  cardHolderName?: string;
 }
 
 export interface DetailsOfPayment {

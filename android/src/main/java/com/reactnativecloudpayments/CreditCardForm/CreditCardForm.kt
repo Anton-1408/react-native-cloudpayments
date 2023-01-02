@@ -92,7 +92,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
       accountId = paymentDataInitialValues.accountId,
       ipAddress = paymentDataInitialValues.ipAddress ?: "",
       description = paymentDataInitialValues.description,
-      cardholderName = paymentDataInitialValues.cardHolderName,
+      cardholderName = paymentDataInitialValues.cardHolderName ?: "",
       jsonData = paymentDataInitialValues.jsonDataHash
     )
 
