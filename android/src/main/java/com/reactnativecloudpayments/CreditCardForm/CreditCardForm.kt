@@ -82,7 +82,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
     val disableGPay = initialConfiguration.getBoolean("disableGPay");
     val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment");
     val disableYandexPay = initialConfiguration.getBoolean("disableYandexPay");
-    val yandexPayMerchantID = paymentDataInitialValues.yandexPayMerchantID;
+    val yandexPayMerchantID = paymentDataInitialValues.yandexPayMerchantID ?: "";
 
     val paymentData = PaymentData(
       paymentDataInitialValues.publicId,
@@ -93,7 +93,9 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
       ipAddress = paymentDataInitialValues.ipAddress ?: "",
       description = paymentDataInitialValues.description,
       cardholderName = paymentDataInitialValues.cardHolderName ?: "",
-      jsonData = paymentDataInitialValues.jsonDataHash
+      jsonData = paymentDataInitialValues.jsonDataHash,
+      cultureName = paymentDataInitialValues.cultureName,
+      payer = paymentDataInitialValues.payer
     )
 
     val configuration = PaymentConfiguration(

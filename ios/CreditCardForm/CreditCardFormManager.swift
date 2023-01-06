@@ -6,6 +6,7 @@ class CreditCardFormManager: NSObject {
   @objc var bridge: RCTBridge!
 
   private var paymentData: PaymentData?;
+
   public static var resolve: RCTPromiseResolveBlock?;
   public static var reject: RCTPromiseRejectBlock?;
 
@@ -19,6 +20,8 @@ class CreditCardFormManager: NSObject {
       .setIpAddress(initialData.ipAddress)
       .setCardholderName(initialData.cardholderName)
       .setJsonData(initialData.jsonData!)
+      .setCultureName(initialData.cultureName)
+      .setPayer(initialData.payer)
   }
 
   @objc

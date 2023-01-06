@@ -13,7 +13,7 @@ class CardFormController: UIViewController {
 
     let useDualMessagePayment = configuration["useDualMessagePayment"]!;
     let disableApplePay = configuration["disableApplePay"]!;
-//    let disableYandexPay = configuration["disableYandexPay"]!;
+    let disableYandexPay = configuration["disableYandexPay"]!;
 
     self.configuration = PaymentConfiguration.init(
       paymentData: paymentData,

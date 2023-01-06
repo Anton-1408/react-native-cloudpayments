@@ -28,23 +28,27 @@ struct PARAMETRES_3DS {
 
 struct PAYMENT_DATA {
   var publicId: String
+  var applePayMerchantId: String = ""
+  var invoiceId: String = ""
   var accountId: String?
-  var applePayMerchantId: String
   var description: String?
   var ipAddress: String?
-  var invoiceId: String?
   var jsonData: [String: String]?
   var cardholderName: String?
+  var cultureName: String?
+  var payer: String?
 
   init(paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) {
     self.publicId = paymentData["publicId"]!;
-    self.accountId = paymentData["accountId"] ?? nil;
-    self.applePayMerchantId = paymentData["applePayMerchantId"]!;
+    self.invoiceId = paymentData["invoiceId"] ?? "";
+    self.applePayMerchantId = paymentData["applePayMerchantId"] ?? "";
 
+    self.accountId = paymentData["accountId"] ?? nil;
     self.description = paymentData["description"] ?? nil;
     self.ipAddress = paymentData["ipAddress"] ?? nil;
-    self.invoiceId = paymentData["invoiceId"] ?? nil;
     self.cardholderName = paymentData["cardHolderName"] ?? nil;
+    self.cultureName = paymentData["cultureName"] ?? nil;
+    self.payer = paymentData["payer"] ?? nil;
 
     var arrayInformationUser: [String: String] = [:];
 

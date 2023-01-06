@@ -21,6 +21,8 @@ class CloudPaymentsApi: NSObject {
       .setIpAddress(initialData.ipAddress)
       .setCardholderName(initialData.cardholderName)
       .setJsonData(initialData.jsonData!)
+      .setCultureName(initialData.cultureName)
+      .setPayer(initialData.payer)
   }
 
   @objc

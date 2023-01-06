@@ -17,15 +17,10 @@ class CreditCardForm {
 
   public static initialPaymentData(
     paymentData: PaymentData,
-    jsonData?: PaymentJsonData
+    jsonData: PaymentJsonData = {}
   ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      const jsonDataInitial = jsonData ?? {};
-
-      CreditCardForm.instance = new CreditCardForm(
-        paymentData,
-        jsonDataInitial
-      );
+      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
     }
 
     return CreditCardForm.instance;
@@ -36,9 +31,9 @@ class CreditCardForm {
   }
 
   public showCreditCardForm = async ({
-    disableApplePay,
     useDualMessagePayment,
-    disableYandexPay,
+    disableApplePay = true,
+    disableYandexPay = true,
   }: Configuration): Promise<Number> => {
     const transactionId: number =
       await CreditCardFormManager.showCreditCardForm({

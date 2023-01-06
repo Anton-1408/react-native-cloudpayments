@@ -201,9 +201,9 @@ creditCardForm.setDetailsOfPayment({
 ```js
 const result = await creditCardForm.showCreditCardForm({
   useDualMessagePayment: true, // Использовать двухстадийную схему проведения платежа
-  disableApplePay: true, // Выключить Apple Pay
-  disableGPay: true, // Выключить Google Pay
-  disableYandexPay: true, // Выключить Yandex Pay,
+  disableApplePay: false, // Включить Apple Pay, по умолчанию выключен
+  disableGPay: false, // Включить Google Pay, по умолчанию выключен
+  disableYandexPay: false, // Включить Yandex Pay, по умолчанию выключен
 });
 ```
 

@@ -62,9 +62,6 @@ const PRODUCTS = [
 
 const PAYMENT_DATA_CARD = {
   publicId: 'publicId',
-  applePayMerchantId: 'merchant',
-  googlePayMerchantId: 'merchant',
-  yandexPayMerchantID: 'yandexPayMerchantID',
 };
 
 const paymentService = PaymentService.initial(PAYMENT_DATA);
@@ -107,9 +104,6 @@ const App = () => {
 
     const result = await creditCardForm.showCreditCardForm({
       useDualMessagePayment: true,
-      disableApplePay: false,
-      disableGPay: false,
-      disableYandexPay: false,
     });
 
     console.warn(result);
