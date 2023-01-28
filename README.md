@@ -229,7 +229,7 @@ const PAYMENT_JSON_DATA_CARD = {
   phone: '+7912343569',
 };
 
-const cloudPaymentsApi = CloudPaymentsApi.initApi(
+const cloudPaymentsApi = CloudPaymentsApi.initialApi(
   PAYMENT_DATA_CARD,
   PAYMENT_JSON_DATA_CARD
 );
