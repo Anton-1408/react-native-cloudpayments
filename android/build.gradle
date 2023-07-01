@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.6.10'
+        kotlinVersion = '1.6.20'
         androidToolsVersion = '3.6.0'
     }
 
