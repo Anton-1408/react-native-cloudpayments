@@ -31,6 +31,7 @@ class CardService: NSObject {
     };
 
     let isExpDateValid: Bool = Card.isExpDateValid(cardExpDate)
+
     resolve(isExpDateValid)
   }
 
@@ -40,7 +41,7 @@ class CardService: NSObject {
         return
     };
 
-    let cardCryptogramPacket = Card.makeCardCryptogramPacket(with: cardNumber, expDate: expDate, cvv: cvv, merchantPublicID: merchantId);
+    let cardCryptogramPacket = Card.makeCardCryptogramPacket(cardNumber, expDate: expDate, cvv: cvv, merchantPublicID: merchantId);
 
     resolve(cardCryptogramPacket)
   }
