@@ -1,8 +1,8 @@
 import Foundation
 import Cloudpayments;
 
-@objc(CreditCardFormManager)
-class CreditCardFormManager: NSObject {
+@objc(PaymentFormManager)
+final class PaymentFormManager: NSObject {
   @objc var bridge: RCTBridge!
 
   private var paymentData: PaymentData?;
@@ -12,7 +12,7 @@ class CreditCardFormManager: NSObject {
   public static var reject: RCTPromiseRejectBlock?;
 
   @objc
-  func initialPaymentData (_ paymentData: Dictionary<String, String>) -> Void {
+  func initial(_ paymentData: Dictionary<String, String>) -> Void {
     do {
       let paymentDataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: paymentData, options: .prettyPrinted)
 
@@ -34,7 +34,7 @@ class CreditCardFormManager: NSObject {
           .setCultureName(initialData.cultureName)
           .setPayer(payer)
     } catch {
-      print("initialPaymentData", error)
+      print("initial", error)
     }
   }
 
@@ -59,29 +59,29 @@ class CreditCardFormManager: NSObject {
   }
 
   @objc
-  func showCreditCardForm(_ configuration: Dictionary<String, Bool>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
+  func open(_ configuration: Dictionary<String, Bool>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     do {
       guard let paymentData = self.paymentData else {
         reject("error", "Error initial paymentData", nil);
         return;
       }
 
-      CreditCardFormManager.resolve = resolve;
-      CreditCardFormManager.reject = reject;
+      PaymentFormManager.resolve = resolve;
+      PaymentFormManager.reject = reject;
 
       let configurationFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: configuration, options: .prettyPrinted)
       let configurationData = try JSONDecoder().decode(ConfigurationPaymentForm.self, from: configurationFromDictionaryToJSON)
 
 
-      let cardFormController = CardFormController(
+      let paymentFormController = PaymentFormController(
         paymentData: paymentData,
         configuration: configurationData,
         publicId: publicId
       );
 
-      cardFormController.showCreditCardForm();
+      paymentFormController.onShow();
     } catch {
-      print("showCreditCardForm", error)
+      print("open", error)
     }
   }
 

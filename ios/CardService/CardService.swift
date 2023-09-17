@@ -5,7 +5,6 @@ import Cloudpayments
 class CardService: NSObject {
   @objc
   func cardType(_ cardNumb: String, resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
-    // проверка на фалси значения
     guard let _ = reject, let resolve = resolve else {
         return
     };
@@ -77,7 +76,6 @@ class CardService: NSObject {
     }
   }
 
-  //нужно ли инициализировать модуль в основном потоке до выполнения кода JavaScript
   @objc
   static func requiresMainQueueSetup() -> Bool {
     return true

@@ -14,7 +14,7 @@ class ThreeDSecureController: UIViewController {
     threeDsProcessor.make3DSPayment(with: data, delegate: self);
   }
 
-  public func onShowController() {
+  public func onShow() {
     guard let rootViewController = RCTPresentedViewController() else {
       return
     }
@@ -25,7 +25,7 @@ class ThreeDSecureController: UIViewController {
     self.view.backgroundColor = .white;
   }
 
-  private func hideController() {
+  private func onHide() {
     guard let rootViewController = RCTPresentedViewController() else {
       return
     }
@@ -54,9 +54,9 @@ extension ThreeDSecureController: ThreeDsDelegate {
   }
 
   func onAuthorizationCompleted(with md: String, paRes: String) {
-    self.hideController()
+    self.onHide()
 
-    guard let resolve = ThreeDSecure.resolve else {
+    guard let resolve = ThreeDSecureManager.resolve else {
         return
     };
 
@@ -69,9 +69,9 @@ extension ThreeDSecureController: ThreeDsDelegate {
   }
 
   func onAuthorizationFailed(with html: String) {
-    self.hideController()
+    self.onHide()
 
-    guard let reject = ThreeDSecure.reject else {
+    guard let reject = ThreeDSecureManager.reject else {
       return
     };
 

@@ -15,15 +15,10 @@ struct METHOD_DATA {
   }
 }
 
-struct PARAMETRES_3DS {
-  var transactionId: String
-  var paReq: String
-  var acsUrl: String
-  init(parametres3DS: Dictionary<String, String>) {
-    self.acsUrl = parametres3DS["acsUrl"]!;
-    self.paReq = parametres3DS["paReq"]!;
-    self.transactionId = parametres3DS["transactionId"]!;
-  }
+struct Parametres3DS: Decodable {
+  let transactionId: String
+  let paReq: String
+  let acsUrl: String
 }
 
 struct InitionalPaymentData: Decodable {

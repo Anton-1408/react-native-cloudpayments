@@ -3,7 +3,7 @@ import UIKit;
 import Cloudpayments;
 import AVFoundation;
 
-class CardFormController: UIViewController {
+class PaymentFormController: UIViewController {
   var configuration: PaymentConfiguration!;
   var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
@@ -24,7 +24,7 @@ class CardFormController: UIViewController {
     );
   }
 
-  func showCreditCardForm() -> Void {
+  func onShow() -> Void {
     guard let rootViewController = RCTPresentedViewController() else {
       return
     };
@@ -36,9 +36,9 @@ class CardFormController: UIViewController {
   }
 };
 
-extension CardFormController: PaymentDelegate {
+extension PaymentFormController: PaymentDelegate {
   func onPaymentFinished(_ transactionId: Int?) {
-    guard let resolve = CreditCardFormManager.resolve else {
+    guard let resolve = PaymentFormManager.resolve else {
       return
     };
 
@@ -46,7 +46,7 @@ extension CardFormController: PaymentDelegate {
   }
 
   func onPaymentFailed(_ errorMessage: String?) {
-    guard let reject = CreditCardFormManager.reject else {
+    guard let reject = PaymentFormManager.reject else {
       return
     };
 
@@ -54,7 +54,7 @@ extension CardFormController: PaymentDelegate {
   }
 };
 
-extension CardFormController: PaymentCardScanner {
+extension PaymentFormController: PaymentCardScanner {
   func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
     self.scannerCompletion = completion;
     let scanController = CardIOPaymentViewController.init(paymentDelegate: self)
@@ -62,7 +62,7 @@ extension CardFormController: PaymentCardScanner {
   }
 }
 
-extension CardFormController: CardIOPaymentViewControllerDelegate {
+extension PaymentFormController: CardIOPaymentViewControllerDelegate {
   func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
     paymentViewController.dismiss(animated: true, completion: nil)
   }
