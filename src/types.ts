@@ -39,7 +39,22 @@ export interface PaymentData {
   accountId?: string;
   cardHolderName?: string;
   cultureName?: string;
-  payer?: string;
+  payer?: Payer;
+  email?: string;
+  jsonData?: string;
+}
+
+interface Payer {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  birth: string;
+  address: string;
+  street: string;
+  city: string;
+  country: string;
+  phone: string;
+  postcode: string;
 }
 
 export type PaymentDataApi = Omit<

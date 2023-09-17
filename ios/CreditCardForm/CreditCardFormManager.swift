@@ -6,56 +6,83 @@ class CreditCardFormManager: NSObject {
   @objc var bridge: RCTBridge!
 
   private var paymentData: PaymentData?;
+  private var publicId: String = ""
 
   public static var resolve: RCTPromiseResolveBlock?;
   public static var reject: RCTPromiseRejectBlock?;
 
   @objc
-  func initialPaymentData (_ paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> Void {
-    let initialData = PAYMENT_DATA(paymentData: paymentData, jsonData: jsonData);
+  func initialPaymentData (_ paymentData: Dictionary<String, String>) -> Void {
+    do {
+      let paymentDataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: paymentData, options: .prettyPrinted)
 
-    self.paymentData = PaymentData.init(publicId: initialData.publicId)
-      .setAccountId(initialData.accountId)
-      .setApplePayMerchantId(initialData.applePayMerchantId)
-      .setIpAddress(initialData.ipAddress)
-      .setCardholderName(initialData.cardholderName)
-      .setJsonData(initialData.jsonData!)
-      .setCultureName(initialData.cultureName)
-      .setPayer(initialData.payer)
+      let initialData = try JSONDecoder().decode(InitionalPaymentData.self, from: paymentDataFromDictionaryToJSON)
+
+      let applePayMerchantId = initialData.applePayMerchantId ?? "";
+      let yandexPayMerchantId = initialData.yandexPayMerchantId ?? "";
+      let payer = initialData.payer != nil ? try PaymentDataPayer.init(from: initialData.payer as! Decoder) : nil;
+
+
+      self.publicId = initialData.publicId
+      self.paymentData = PaymentData.init()
+          .setAccountId(initialData.accountId)
+          .setApplePayMerchantId(applePayMerchantId)
+          .setIpAddress(initialData.ipAddress)
+          .setCardholderName(initialData.cardholderName)
+          .setYandexPayMerchantId(yandexPayMerchantId)
+          .setEmail(initialData.email)
+          .setCultureName(initialData.cultureName)
+          .setPayer(payer)
+    } catch {
+      print("initialPaymentData", error)
+    }
   }
 
   @objc
   func setDetailsOfPayment(_ details: Dictionary<String, String>) -> Void {
-    let description = details["description"];
-    let invoiceId = details["invoiceId"];
-    let totalAmount = details["totalAmount"]!;
-    let currency = details["currency"]!
+    do {
+      let detailsFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: details, options: .prettyPrinted)
 
-    let currencyValue = Currency.init(rawValue: currency)!;
+      let initialData = try JSONDecoder().decode(Payment.self, from: detailsFromDictionaryToJSON)
 
-    guard let _ = self.paymentData?
-            .setCurrency(currencyValue)
-            .setAmount(totalAmount)
-            .setDescription(description)
-            .setInvoiceId(invoiceId)
-    else {
-        return
-    };
+      guard let _ = self.paymentData?
+        .setCurrency(initialData.currency)
+        .setAmount(initialData.amount)
+        .setDescription(initialData.description)
+        .setInvoiceId(initialData.invoiceId)
+      else {
+          return
+      };
+    } catch {
+      print("setDetailsOfPayment", error)
+    }
   }
 
   @objc
   func showCreditCardForm(_ configuration: Dictionary<String, Bool>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    CreditCardFormManager.resolve = resolve;
-    CreditCardFormManager.reject = reject;
+    do {
+      guard let paymentData = self.paymentData else {
+        reject("error", "Error initial paymentData", nil);
+        return;
+      }
 
-    guard let paymentData = self.paymentData else {
-      reject("error", "Error initial data", nil);
-      return;
+      CreditCardFormManager.resolve = resolve;
+      CreditCardFormManager.reject = reject;
+
+      let configurationFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: configuration, options: .prettyPrinted)
+      let configurationData = try JSONDecoder().decode(ConfigurationPaymentForm.self, from: configurationFromDictionaryToJSON)
+
+
+      let cardFormController = CardFormController(
+        paymentData: paymentData,
+        configuration: configurationData,
+        publicId: publicId
+      );
+
+      cardFormController.showCreditCardForm();
+    } catch {
+      print("showCreditCardForm", error)
     }
-
-    let cardFormController = CardFormController(paymentData: paymentData, configuration: configuration);
-
-    cardFormController.showCreditCardForm();
   }
 
   @objc

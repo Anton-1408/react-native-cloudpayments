@@ -8,20 +8,19 @@ class CardFormController: UIViewController {
   var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
   // создаем дополнительный конструктор
-  convenience init(paymentData: PaymentData, configuration: Dictionary<String, Bool>) {
+  convenience init(paymentData: PaymentData, configuration: ConfigurationPaymentForm, publicId: String) {
     self.init();
 
-    let useDualMessagePayment = configuration["useDualMessagePayment"]!;
-    let disableApplePay = configuration["disableApplePay"]!;
-    let disableYandexPay = configuration["disableYandexPay"]!;
-
     self.configuration = PaymentConfiguration.init(
+      publicId: publicId,
       paymentData: paymentData,
       delegate: self,
       uiDelegate: nil,
       scanner: self,
-      useDualMessagePayment: useDualMessagePayment,
-      disableApplePay: disableApplePay
+      useDualMessagePayment: configuration.useDualMessagePayment,
+      disableApplePay: configuration.disableApplePay,
+      disableYandexPay: configuration.disableYandexPay,
+      changedEmail: nil
     );
   }
 
