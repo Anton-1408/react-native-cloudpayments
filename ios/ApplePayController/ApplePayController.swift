@@ -1,3 +1,11 @@
+//
+//  ApplePayController.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 06.08.2022.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 import Foundation
 import PassKit
 
@@ -90,6 +98,7 @@ class ApplePayController: NSObject {
   }
 
   private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork? {
+    // заменить на енамки
     switch paymentNetwork {
       case "VISA":
         return PKPaymentNetwork.visa;

@@ -1,3 +1,11 @@
+//
+//  CloudPaymentsApi.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 05.02.2022.
+//  Copyright © 2022 Facebook. All rights reserved.
+//
+
 import Foundation
 import CloudpaymentsNetworking;
 import Cloudpayments;

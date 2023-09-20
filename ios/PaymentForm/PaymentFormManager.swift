@@ -1,3 +1,11 @@
+//
+//  PaymentFormManager.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 17.09.2023.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 import Foundation
 import Cloudpayments;
 
@@ -12,7 +20,7 @@ final class PaymentFormManager: NSObject {
   public static var reject: RCTPromiseRejectBlock?;
 
   @objc
-  func initial(_ paymentData: Dictionary<String, String>) -> Void {
+  func initialization(_ paymentData: Dictionary<String, String>) -> Void {
     do {
       let paymentDataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: paymentData, options: .prettyPrinted)
 
@@ -24,6 +32,7 @@ final class PaymentFormManager: NSObject {
 
 
       self.publicId = initialData.publicId
+
       self.paymentData = PaymentData.init()
           .setAccountId(initialData.accountId)
           .setApplePayMerchantId(applePayMerchantId)
@@ -33,13 +42,26 @@ final class PaymentFormManager: NSObject {
           .setEmail(initialData.email)
           .setCultureName(initialData.cultureName)
           .setPayer(payer)
+          .setDescription(initialData.description)
+
+      let hasInformationAboutPaymentOfProduct = initialData.amount != nil && initialData.currency != nil && initialData.invoiceId != nil
+
+      guard hasInformationAboutPaymentOfProduct else {
+        print("hasInformationAboutPaymentOfProduct=", "false")
+        return
+      }
+
+      self.paymentData!
+        .setCurrency(initialData.currency!)
+        .setAmount(initialData.amount!)
+        .setInvoiceId(initialData.invoiceId!)
     } catch {
       print("initial", error)
     }
   }
 
   @objc
-  func setDetailsOfPayment(_ details: Dictionary<String, String>) -> Void {
+  func setInformationAboutPaymentOfProduct(_ details: Dictionary<String, String>) -> Void {
     do {
       let detailsFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: details, options: .prettyPrinted)
 

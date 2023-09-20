@@ -1,8 +1,18 @@
+//
+//  EventEmitter.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 01.02.2022.
+//  Copyright © 2022 Facebook. All rights reserved.
+//
+
 import Foundation
 
 @objc(EventEmitter)
 open class EventEmitter: RCTEventEmitter {
   public static var emitter: RCTEventEmitter!
+  private let listenerCryptogramCard = "listenerCryptogramCard"
+    
   override init() {
     super.init()
     EventEmitter.emitter = self;
@@ -10,7 +20,7 @@ open class EventEmitter: RCTEventEmitter {
 
   @objc
   open override func supportedEvents() -> [String] {
-    ["listenerCryptogramCard"]
+      [self.listenerCryptogramCard]
   }
 
   @objc

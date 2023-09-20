@@ -1,3 +1,11 @@
+//
+//  ThreeDSecureController.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 01.02.2022.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 import Foundation
 import PassKit
 import Cloudpayments

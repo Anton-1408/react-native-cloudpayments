@@ -1,3 +1,11 @@
+//
+//  ApplePayController.m
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 06.08.2023.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import "React/RCTViewManager.h"
 

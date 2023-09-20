@@ -1,3 +1,11 @@
+//
+//  PaymentFormManager.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 17.09.2023.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 import Foundation;
 import UIKit;
 import Cloudpayments;
@@ -57,7 +65,9 @@ extension PaymentFormController: PaymentDelegate {
 extension PaymentFormController: PaymentCardScanner {
   func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
     self.scannerCompletion = completion;
+    
     let scanController = CardIOPaymentViewController.init(paymentDelegate: self)
+    
     return scanController
   }
 }
@@ -69,6 +79,7 @@ extension PaymentFormController: CardIOPaymentViewControllerDelegate {
 
   func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
     self.scannerCompletion?(cardInfo.cardNumber, cardInfo.expiryMonth, cardInfo.expiryYear, cardInfo.cvv)
+    
     paymentViewController.dismiss(animated: true, completion: nil)
   }
 }

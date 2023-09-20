@@ -1,3 +1,11 @@
+//
+//  Models.swift
+//  CloudpaymentsSdk
+//
+//  Created by Anton Votinov on 17.09.2023.
+//  Copyright © 2023 Facebook. All rights reserved.
+//
+
 import Foundation
 import Cloudpayments;
 
@@ -32,6 +40,11 @@ struct InitionalPaymentData: Decodable {
   let cultureName: String?
   let jsonData: String?
   let payer: Payer?
+
+  let amount: String?
+  let currency: String?
+  let invoiceId: String?
+  let description: String?
 }
 
 struct Payer: Decodable {
@@ -54,8 +67,10 @@ struct Payment: Decodable {
   let description: String?
 }
 
+
 struct ConfigurationPaymentForm: Decodable {
   let useDualMessagePayment: Bool
   let disableApplePay: Bool
   let disableYandexPay: Bool
 }
+
