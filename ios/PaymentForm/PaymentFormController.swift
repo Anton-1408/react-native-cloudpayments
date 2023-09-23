@@ -11,12 +11,16 @@ import UIKit;
 import Cloudpayments;
 import AVFoundation;
 
-class PaymentFormController: UIViewController {
-  var configuration: PaymentConfiguration!;
-  var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
+final class PaymentFormController: UIViewController {
+  private var configuration: PaymentConfiguration!;
+  private var scannerCompletion: ((String?, UInt?, UInt?, String?) -> Void)?;
 
-  // создаем дополнительный конструктор
-  convenience init(paymentData: PaymentData, configuration: ConfigurationPaymentForm, publicId: String) {
+  convenience init(
+    paymentData: PaymentData,
+    configuration: ConfigurationPaymentForm,
+    publicId: String,
+    apiUrl: String
+  ) {
     self.init();
 
     self.configuration = PaymentConfiguration.init(
@@ -28,6 +32,7 @@ class PaymentFormController: UIViewController {
       useDualMessagePayment: configuration.useDualMessagePayment,
       disableApplePay: configuration.disableApplePay,
       disableYandexPay: configuration.disableYandexPay,
+      apiUrl: apiUrl,
       changedEmail: nil
     );
   }

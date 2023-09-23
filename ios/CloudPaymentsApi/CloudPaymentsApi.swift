@@ -11,45 +11,64 @@ import CloudpaymentsNetworking;
 import Cloudpayments;
 
 @objc(CloudPaymentsApi)
-class CloudPaymentsApi: NSObject {
+final class CloudPaymentsApi: NSObject {
   @objc var bridge: RCTBridge!
 
-  var api: CloudpaymentsApi?;
-  var paymentData: PaymentData?;
+  private var api: CloudpaymentsApi?;
+  private var paymentData: PaymentData?;
 
   @objc
-  func initApi(_ paymentData: Dictionary<String, String>, jsonData: Dictionary<String, String>?) -> Void {
-    let initialData = PAYMENT_DATA(paymentData: paymentData, jsonData: jsonData);
+  func initialization(_ paymentData: Dictionary<String, String>) -> Void {
+    let dataParsed = parseDictionaryToStruct(dictionary: paymentData, type: InitionalPaymentData.self)
 
-    self.api = CloudpaymentsApi(publicId: initialData.publicId);
+    if let initialData = dataParsed {
+      self.api = CloudpaymentsApi(publicId: initialData.publicId, apiUrl: initialData.apiUrl);
 
-    self.paymentData = PaymentData.init(publicId: initialData.publicId)
-      .setAccountId(initialData.accountId)
-      .setApplePayMerchantId(initialData.applePayMerchantId)
-      .setIpAddress(initialData.ipAddress)
-      .setCardholderName(initialData.cardholderName)
-      .setJsonData(initialData.jsonData!)
-      .setCultureName(initialData.cultureName)
-      .setPayer(initialData.payer)
+      let applePayMerchantId = initialData.applePayMerchantId ?? "";
+      let yandexPayMerchantId = initialData.yandexPayMerchantId ?? "";
+
+      self.paymentData = PaymentData.init()
+          .setAccountId(initialData.accountId)
+          .setApplePayMerchantId(applePayMerchantId)
+          .setIpAddress(initialData.ipAddress)
+          .setCardholderName(initialData.cardholderName)
+          .setYandexPayMerchantId(yandexPayMerchantId)
+          .setEmail(initialData.email)
+          .setCultureName(initialData.cultureName)
+          .setDescription(initialData.description)
+
+      do {
+        let payer = try PaymentDataPayer.init(from: initialData.payer as! Decoder);
+        self.paymentData?.setPayer(payer)
+      } catch {
+        print("payer init", error)
+      }
+
+      let hasInformationAboutPaymentOfProduct = initialData.amount != nil && initialData.currency != nil && initialData.invoiceId != nil
+
+      guard hasInformationAboutPaymentOfProduct else {
+        print("hasInformationAboutPaymentOfProduct = ", "false")
+        return
+      }
+
+      self.paymentData?
+        .setCurrency(initialData.currency!)
+        .setAmount(initialData.amount!)
+        .setInvoiceId(initialData.invoiceId!)
+    }
   }
 
   @objc
-  func setDetailsOfPayment(_ details: Dictionary<String, String>) -> Void {
-    let description = details["description"];
-    let invoiceId = details["invoiceId"];
-    let totalAmount = details["totalAmount"]!;
-    let currency = details["currency"]!
+  func setInformationAboutPaymentOfProduct(_ details: Dictionary<String, String>) -> Void {
+    let dataParsed = parseDictionaryToStruct(dictionary: details, type: Payment.self)
 
-    let currencyValue = Currency.init(rawValue: currency)!;
-
-    guard let _ = self.paymentData?
-            .setCurrency(currencyValue)
-            .setAmount(totalAmount)
-            .setDescription(description)
-            .setInvoiceId(invoiceId)
-    else {
-        return
-    };
+    if let initialData = dataParsed {
+      self.paymentData?
+        .setCurrency(initialData.currency)
+        .setAmount(initialData.amount)
+        .setDescription(initialData.description)
+        .setInvoiceId(initialData.invoiceId)
+    }
   }
 
   @objc
@@ -65,10 +84,12 @@ class CloudPaymentsApi: NSObject {
 
     api.auth(cardCryptogramPacket: cardCryptogramPacket, email: email, paymentData: paymentData, completion: {(response, error) in
         if let response = response {
-          let result = self.convertResponseToDictionaryForReactNative(response: response)
+          let result = parseResponseFromApiToDictionary(response: response)
+
           resolve(result);
         } else if let error = error {
-          print("error", error);
+          print("auth", error);
+
           reject("Error", error.localizedDescription, nil);
         }
     })
@@ -87,26 +108,15 @@ class CloudPaymentsApi: NSObject {
 
     api.charge(cardCryptogramPacket: cardCryptogramPacket, email: email, paymentData: paymentData, completion: {(response, error) in
         if let response = response {
-            let result = self.convertResponseToDictionaryForReactNative(response: response)
+            let result = parseResponseFromApiToDictionary(response: response)
+
             resolve(result);
         } else if let error = error {
-          print("error", error);
+          print("charge", error);
+
           reject("Error", error.localizedDescription, nil);
         }
     })
-  }
-
-  // конвертируем ответ с бэка в формат json для передачи в RN
-  func convertResponseToDictionaryForReactNative(response: TransactionResponse) -> String {
-    let jsonEncode = JSONEncoder();
-
-    guard let jsonData = try? jsonEncode.encode(response) else {
-      return "Response is empty";
-    };
-
-    let jsonString = String(data: jsonData, encoding: .utf8)
-
-    return jsonString ?? "Response is empty";
   }
 
   @objc

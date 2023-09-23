@@ -12,8 +12,8 @@ import Cloudpayments
 import UIKit
 import WebKit
 
-class ThreeDSecureController: UIViewController {
-  let threeDsProcessor = ThreeDsProcessor();
+final class ThreeDSecureController: UIViewController {
+  private let threeDsProcessor = ThreeDsProcessor();
 
   public func onRequest(transactionId: String, paReq: String, acsUrl: String) {
     let data = ThreeDsData.init(transactionId: transactionId, paReq: paReq, acsUrl: acsUrl);

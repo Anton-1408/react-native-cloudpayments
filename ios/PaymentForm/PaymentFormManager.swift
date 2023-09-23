@@ -15,23 +15,21 @@ final class PaymentFormManager: NSObject {
 
   private var paymentData: PaymentData?;
   private var publicId: String = ""
+  private var apiUrl: String = ""
 
   public static var resolve: RCTPromiseResolveBlock?;
   public static var reject: RCTPromiseRejectBlock?;
 
   @objc
   func initialization(_ paymentData: Dictionary<String, String>) -> Void {
-    do {
-      let paymentDataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: paymentData, options: .prettyPrinted)
-
-      let initialData = try JSONDecoder().decode(InitionalPaymentData.self, from: paymentDataFromDictionaryToJSON)
-
+    let dataParsed = parseDictionaryToStruct(dictionary: paymentData, type: InitionalPaymentData.self)
+      
+    if let initialData = dataParsed {
       let applePayMerchantId = initialData.applePayMerchantId ?? "";
       let yandexPayMerchantId = initialData.yandexPayMerchantId ?? "";
-      let payer = initialData.payer != nil ? try PaymentDataPayer.init(from: initialData.payer as! Decoder) : nil;
-
 
       self.publicId = initialData.publicId
+      self.apiUrl = initialData.apiUrl
 
       self.paymentData = PaymentData.init()
           .setAccountId(initialData.accountId)
@@ -41,69 +39,64 @@ final class PaymentFormManager: NSObject {
           .setYandexPayMerchantId(yandexPayMerchantId)
           .setEmail(initialData.email)
           .setCultureName(initialData.cultureName)
-          .setPayer(payer)
           .setDescription(initialData.description)
+      
+      do {
+        let payer = try PaymentDataPayer.init(from: initialData.payer as! Decoder);
+        self.paymentData?.setPayer(payer)
+      } catch {
+        print("payer init", error)
+      }
 
       let hasInformationAboutPaymentOfProduct = initialData.amount != nil && initialData.currency != nil && initialData.invoiceId != nil
 
       guard hasInformationAboutPaymentOfProduct else {
-        print("hasInformationAboutPaymentOfProduct=", "false")
+        print("hasInformationAboutPaymentOfProduct = ", "false")
         return
       }
 
-      self.paymentData!
+      self.paymentData?
         .setCurrency(initialData.currency!)
         .setAmount(initialData.amount!)
         .setInvoiceId(initialData.invoiceId!)
-    } catch {
-      print("initial", error)
     }
   }
 
   @objc
   func setInformationAboutPaymentOfProduct(_ details: Dictionary<String, String>) -> Void {
-    do {
-      let detailsFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: details, options: .prettyPrinted)
-
-      let initialData = try JSONDecoder().decode(Payment.self, from: detailsFromDictionaryToJSON)
-
-      guard let _ = self.paymentData?
+    let dataParsed = parseDictionaryToStruct(dictionary: details, type: Payment.self)
+    
+    if let initialData = dataParsed {
+      self.paymentData?
         .setCurrency(initialData.currency)
         .setAmount(initialData.amount)
         .setDescription(initialData.description)
         .setInvoiceId(initialData.invoiceId)
-      else {
-          return
-      };
-    } catch {
-      print("setDetailsOfPayment", error)
     }
   }
 
   @objc
   func open(_ configuration: Dictionary<String, Bool>, resolve:  @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    do {
-      guard let paymentData = self.paymentData else {
-        reject("error", "Error initial paymentData", nil);
-        return;
-      }
+    guard let paymentData = self.paymentData else {
+      reject("error", "Error initial paymentData", nil);
+      return;
+    }
 
-      PaymentFormManager.resolve = resolve;
-      PaymentFormManager.reject = reject;
-
-      let configurationFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: configuration, options: .prettyPrinted)
-      let configurationData = try JSONDecoder().decode(ConfigurationPaymentForm.self, from: configurationFromDictionaryToJSON)
-
-
+    PaymentFormManager.resolve = resolve;
+    PaymentFormManager.reject = reject;
+    
+    let dataParsed = parseDictionaryToStruct(dictionary: configuration, type: ConfigurationPaymentForm.self)
+    
+    
+    if let configurationData = dataParsed {
       let paymentFormController = PaymentFormController(
         paymentData: paymentData,
         configuration: configurationData,
-        publicId: publicId
+        publicId: publicId,
+        apiUrl: apiUrl
       );
 
       paymentFormController.onShow();
-    } catch {
-      print("open", error)
     }
   }
 

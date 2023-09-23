@@ -9,18 +9,11 @@
 import Foundation
 import Cloudpayments;
 
-struct METHOD_DATA {
-  var merchantId: String
-  var supportedNetworks: Array<String>
-  var countryCode: String
-  var currencyCode: String
-
-  init(methodData: Dictionary<String, Any>) {
-    self.countryCode = methodData["countryCode"] as! String;
-    self.currencyCode = methodData["currencyCode"] as! String;
-    self.merchantId = methodData["merchantId"] as! String;
-    self.supportedNetworks = methodData["supportedNetworks"] as! Array<String>;
-  }
+struct ApplePayMethodData: Decodable {
+  let merchantId: String
+  let supportedNetworks: Array<String>
+  let countryCode: String
+  let currencyCode: String
 }
 
 struct Parametres3DS: Decodable {
@@ -40,6 +33,7 @@ struct InitionalPaymentData: Decodable {
   let cultureName: String?
   let jsonData: String?
   let payer: Payer?
+  let apiUrl: String
 
   let amount: String?
   let currency: String?
@@ -67,10 +61,8 @@ struct Payment: Decodable {
   let description: String?
 }
 
-
 struct ConfigurationPaymentForm: Decodable {
   let useDualMessagePayment: Bool
   let disableApplePay: Bool
   let disableYandexPay: Bool
 }
-

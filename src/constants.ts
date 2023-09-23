@@ -1,4 +1,6 @@
-enum Currency {
+export const API_URL = 'https://api.cloudpayments.ru/';
+
+export enum Currency {
   ruble = 'RUB', //    Российский рубль
   euro = 'EUR', //    Евро
   usd = 'USD', //    Доллар США
@@ -21,4 +23,12 @@ enum Currency {
   bgl = 'BGL', //    Болгарский лев
 }
 
-export default Currency;
+export enum PAYMENT_NETWORK {
+  visa = 'VISA',
+  masterCard = 'MASTERCARD',
+  amex = 'AMEX',
+  discover = 'DISCOVER',
+  interac = 'INTERAC',
+  jcb = 'JCB',
+  mir = 'MIR',
+}

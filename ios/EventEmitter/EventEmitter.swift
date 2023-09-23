@@ -9,10 +9,11 @@
 import Foundation
 
 @objc(EventEmitter)
-open class EventEmitter: RCTEventEmitter {
+public class EventEmitter: RCTEventEmitter {
   public static var emitter: RCTEventEmitter!
+
   private let listenerCryptogramCard = "listenerCryptogramCard"
-    
+
   override init() {
     super.init()
     EventEmitter.emitter = self;

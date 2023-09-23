@@ -9,7 +9,7 @@
 #import "React/RCTViewManager.h"
 #import <Foundation/Foundation.h>
 
-@interface RCT_EXTERN_MODULE(CreditCardFormManager, NSObject)
+@interface RCT_EXTERN_MODULE(PaymentFormManager, NSObject)
   RCT_EXTERN_METHOD(initialization: (NSDictionary*)paymentData)
   RCT_EXTERN_METHOD(open: (NSDictionary*)configuration resolve: (RCTPromiseResolveBlock)resolve reject: (RCTPromiseRejectBlock)reject)
   RCT_EXTERN_METHOD(setInformationAboutPaymentOfProduct: (NSDictionary*)details)

@@ -10,7 +10,7 @@ import Foundation
 import Cloudpayments
 
 @objc(CardService)
-class CardService: NSObject {
+final class CardService: NSObject {
   @objc
   func cardType(_ cardNumb: String, resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) -> Void {
     guard let _ = reject, let resolve = resolve else {

@@ -10,18 +10,20 @@ import Foundation
 import PassKit
 
 @objc(ApplePayController)
-class ApplePayController: NSObject {
+final class ApplePayController: NSObject {
   @objc var bridge: RCTBridge!
 
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
 
   @objc
-  func initialData(_ methodData: Dictionary<String, Any>) -> Void {
-    let initialData = METHOD_DATA.init(methodData: methodData);
+  func initialization(_ methodData: Dictionary<String, Any>) -> Void {
+    let dataParsed = parseDictionaryToStruct(dictionary: methodData, type: ApplePayMethodData.self)
 
-    self.setPaymentNetworks(paymentNetworks: initialData.supportedNetworks);
-    self.setRequestPay(countryCode: initialData.countryCode, currencyCode: initialData.currencyCode, merchantId: initialData.merchantId)
+    if let initialData = dataParsed  {
+      self.setPaymentNetworks(paymentNetworks: initialData.supportedNetworks);
+      self.setRequest(countryCode: initialData.countryCode, currencyCode: initialData.currencyCode, merchantId: initialData.merchantId)
+    }
   }
 
   private func setPaymentNetworks(paymentNetworks: Array<String>) -> Void {
@@ -36,7 +38,7 @@ class ApplePayController: NSObject {
     self.paymentNetworks = listPaymentNetwork;
   }
 
-  private func setRequestPay(countryCode: String, currencyCode: String, merchantId: String) -> Void {
+  private func setRequest(countryCode: String, currencyCode: String, merchantId: String) -> Void {
     self.requestPay.merchantIdentifier = merchantId;
     self.requestPay.supportedNetworks = self.paymentNetworks;
 
@@ -79,7 +81,7 @@ class ApplePayController: NSObject {
   }
 
   @objc
-  func openApplePay() -> Void {
+  func open() -> Void {
     // вызов операций в основном потоке
     RCTExecuteOnMainQueue {
       // получаем главный ViewController
@@ -98,7 +100,6 @@ class ApplePayController: NSObject {
   }
 
   private func checkPaymentNetwork(_ paymentNetwork: String) -> PKPaymentNetwork? {
-    // заменить на енамки
     switch paymentNetwork {
       case "VISA":
         return PKPaymentNetwork.visa;
@@ -133,8 +134,6 @@ class ApplePayController: NSObject {
   }
 }
 
-// реализация методов делегирования класса
-// получаем рузультат и отправляем через native events
 extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
   func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
     controller.dismiss(animated: true, completion: nil)
@@ -148,6 +147,7 @@ extension ApplePayController: PKPaymentAuthorizationViewControllerDelegate {
     }
 
     EventEmitter.emitter.sendEvent(withName: "listenerCryptogramCard", body: cryptogram);
+
     completion(PKPaymentAuthorizationStatus.success)
   }
 }

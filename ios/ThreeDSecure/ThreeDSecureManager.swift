@@ -8,8 +8,8 @@
 
 import Foundation;
 
-@objc(ThreeDSecure)
-class ThreeDSecureManager: NSObject {
+@objc(ThreeDSecureManager)
+final class ThreeDSecureManager: NSObject {
   @objc var bridge: RCTBridge!
 
   public static var resolve: RCTPromiseResolveBlock?;
@@ -17,14 +17,12 @@ class ThreeDSecureManager: NSObject {
 
   @objc
   public func request(_ parametres3DS: Dictionary<String, String>, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
-    do {
-      ThreeDSecureManager.resolve = resolve;
-      ThreeDSecureManager.reject = reject;
-      
-      let parametres3DSFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: parametres3DS, options: .prettyPrinted)
-      let requestData = try JSONDecoder().decode(Parametres3DS.self, from: parametres3DSFromDictionaryToJSON)
-      
-      
+    ThreeDSecureManager.resolve = resolve;
+    ThreeDSecureManager.reject = reject;
+    
+    let dataParsed = parseDictionaryToStruct(dictionary: parametres3DS, type: Parametres3DS.self)
+    
+    if let requestData = dataParsed {
       let threeDSecureController = ThreeDSecureController();
 
       threeDSecureController.onShow();
@@ -33,8 +31,6 @@ class ThreeDSecureManager: NSObject {
         paReq: requestData.paReq,
         acsUrl: requestData.acsUrl
       );
-    } catch {
-      print("request", error)
     }
   }
 
