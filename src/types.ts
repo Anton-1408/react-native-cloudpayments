@@ -42,6 +42,11 @@ export interface PaymentData {
   payer?: Payer;
   email?: string;
   jsonData?: string;
+  apiUrl?: string;
+  amount?: string;
+  currency?: string;
+  invoiceId?: string;
+  description?: string;
 }
 
 interface Payer {
@@ -57,19 +62,10 @@ interface Payer {
   postcode: string;
 }
 
-export type PaymentDataApi = Omit<
-  PaymentData,
-  | 'applePayMerchantId'
-  | 'googlePayMerchantId'
-  | 'cultureName'
-  | 'payer'
-  | 'yandexPayMerchantID'
->;
-
 export interface DetailsOfPayment {
   totalAmount: string;
   currency: Currency;
-  invoiceId?: string;
+  invoiceId: string;
   description?: string;
 }
 

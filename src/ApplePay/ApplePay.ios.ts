@@ -8,10 +8,10 @@ class ApplePay {
   private eventCryptogramCard = new NativeEventEmitter(EventEmitter);
 
   private constructor(methodData: MethodDataPayment) {
-    ApplePayController.initialData(methodData);
+    ApplePayController.initialization(methodData);
   }
 
-  public static initial(methodData: MethodDataPayment): ApplePay {
+  public static initialization(methodData: MethodDataPayment): ApplePay {
     if (!ApplePay.instance) {
       ApplePay.instance = new ApplePay(methodData);
     }
@@ -29,8 +29,8 @@ class ApplePay {
     return isCanMakePayments;
   };
 
-  public openServicePay = (): void => {
-    ApplePayController.openApplePay();
+  public open = (): void => {
+    ApplePayController.open();
   };
 
   public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {

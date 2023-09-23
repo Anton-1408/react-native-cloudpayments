@@ -1,40 +1,37 @@
-import {
-  PaymentDataApi,
-  PaymentJsonData,
-  TransactionResponse,
-  DetailsOfPayment,
-} from '../types';
+import { API_URL } from 'src/constants';
+import { TransactionResponse, DetailsOfPayment, PaymentData } from '../types';
 import { NativeModules } from 'react-native';
 
-const { CloudPaymentsApi: CloudPaymentsApiModule } = NativeModules;
+const { CloudPaymentsApi: CloudPaymentsApiManager } = NativeModules;
 
 class CloudPaymentsApi {
   private static instance: CloudPaymentsApi;
 
-  private constructor(paymentData: PaymentDataApi, jsonData?: PaymentJsonData) {
-    CloudPaymentsApiModule.initApi(paymentData, jsonData);
+  private constructor({ apiUrl = API_URL, ...rest }: PaymentData) {
+    CloudPaymentsApiManager.initialization({ apiUrl, ...rest });
   }
 
-  public static initialApi(
-    paymentData: PaymentDataApi,
-    jsonData?: PaymentJsonData
-  ): CloudPaymentsApi {
+  public static initialization(paymentData: PaymentData): CloudPaymentsApi {
     if (!CloudPaymentsApi.instance) {
-      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData, jsonData);
+      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData);
     }
 
     return CloudPaymentsApi.instance;
   }
 
-  public setDetailsOfPayment(details: DetailsOfPayment): void {
-    CloudPaymentsApiModule.setDetailsOfPayment(details);
+  public reInitialization({ apiUrl = API_URL, ...rest }: PaymentData) {
+    CloudPaymentsApiManager.initialization({ apiUrl, ...rest });
+  }
+
+  public setInformationAboutPaymentOfProduct(details: DetailsOfPayment): void {
+    CloudPaymentsApiManager.setInformationAboutPaymentOfProduct(details);
   }
 
   public auth = async (
     cardCryptogramPacket: string,
     email?: string
   ): Promise<TransactionResponse> => {
-    const result: string = await CloudPaymentsApiModule.auth(
+    const result: string = await CloudPaymentsApiManager.auth(
       cardCryptogramPacket,
       email
     );
@@ -45,7 +42,7 @@ class CloudPaymentsApi {
     cardCryptogramPacket: string,
     email?: string
   ): Promise<TransactionResponse> => {
-    const result: string = await CloudPaymentsApiModule.charge(
+    const result: string = await CloudPaymentsApiManager.charge(
       cardCryptogramPacket,
       email
     );

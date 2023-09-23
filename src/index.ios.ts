@@ -1,6 +1,6 @@
 import Card from './Card';
 import PaymentService from './ApplePay';
-import CreditCardForm from './CreditCardForm';
+import PaymentForm from './PaymentForm';
 import CloudPaymentsApi from './CloudPaymentsApi';
 
 import { Currency, PAYMENT_NETWORK } from './constants';
@@ -9,7 +9,7 @@ export {
   Card,
   PAYMENT_NETWORK,
   PaymentService,
-  CreditCardForm,
+  PaymentForm,
   Currency,
   CloudPaymentsApi,
 };

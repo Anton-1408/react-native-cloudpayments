@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
 import { Parametres3DS, BankInfo, Result3DS, CardInfo } from '../types';
 
-const { CardService, ThreeDSecure } = NativeModules;
+const { CardService, ThreeDSecureManager } = NativeModules;
 
 class Card {
   private static instance: Card;
@@ -64,7 +64,7 @@ class Card {
   ): Promise<Result3DS> => {
     const transactionId = String(parametres3DS.transactionId);
 
-    const result = await ThreeDSecure.requestThreeDSecure({
+    const result = await ThreeDSecureManager.request({
       ...parametres3DS,
       transactionId,
     });

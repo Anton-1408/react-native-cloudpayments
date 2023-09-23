@@ -9,7 +9,7 @@ import {
 import {
   PAYMENT_NETWORK,
   PaymentService,
-  CreditCardForm,
+  PaymentForm,
   Currency,
 } from 'react-native-cloudpayments-sdk';
 import { PaymentServiceButton } from './components';
@@ -66,7 +66,7 @@ const PAYMENT_DATA_CARD = {
 
 const paymentService = PaymentService.initial(PAYMENT_DATA);
 
-const creditCardForm = CreditCardForm.initialPaymentData(PAYMENT_DATA_CARD);
+const paymentForm = PaymentForm.initialization(PAYMENT_DATA_CARD);
 
 const App = () => {
   const [isSupportPayments, setIsSupportPayments] = useState(false);
@@ -95,14 +95,14 @@ const App = () => {
   };
 
   const onPayWithCard = async () => {
-    creditCardForm.setDetailsOfPayment({
+    paymentForm.setInformationAboutPaymentOfProduct({
       currency: Currency.ruble,
       totalAmount: '1000',
       invoiceId: '123',
       description: 'Test',
     });
 
-    const result = await creditCardForm.showCreditCardForm({
+    const result = await paymentForm.open({
       useDualMessagePayment: true,
     });
 
