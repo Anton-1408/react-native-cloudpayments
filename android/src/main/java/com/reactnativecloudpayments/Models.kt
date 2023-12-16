@@ -45,3 +45,23 @@ data class ConfigurationPaymentForm(val configuration: ReadableMap) {
   val useDualMessagePayment: Boolean = configuration.getBoolean("useDualMessagePayment") as Boolean
   val disableYandexPay: Boolean = configuration.getBoolean("disableYandexPay") as Boolean
 }
+
+data class Parametres3DS(val params: ReadableMap) {
+  val acsUrl: String = params.getString("acsUrl") as String;
+  val paReq: String = params.getString("paReq") as String
+  val md: String = params.getString("transactionId") as String
+}
+
+data class GooglePayMethodData(val params: ReadableMap) {
+  val environmentRunning: Int = params.getInt("environmentRunning") as Int;
+  val merchantName: String = params.getString("merchantName") as String
+  val googlePayMerchantId: String = params.getString("merchantId") as String
+  val gateway = Gateway(params.getMap("gateway") as ReadableMap)
+  val countryCode: String = params.getString("countryCode") as String;
+  val currencyCode = params.getString("currencyCode") as String;
+}
+
+data class Gateway(val gateway: ReadableMap) {
+  val gatewayName = gateway.getString("service") as String;
+  val gatewayMerchantId = gateway.getString("merchantId") as String;
+}

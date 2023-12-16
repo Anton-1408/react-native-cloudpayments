@@ -84,9 +84,7 @@ class PaymentForm(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
   fun open(initialConfiguration: ReadableMap, promise: Promise) {
     this.promise = promise;
 
-    val disableGPay = initialConfiguration.getBoolean("disableGPay");
-    val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment");
-    val disableYandexPay = initialConfiguration.getBoolean("disableYandexPay");
+    val initialConfigurationParsed = ConfigurationPaymentForm(initialConfiguration)
 
     val paymentData = PaymentData(
       amount = this.paymentData.amount,
@@ -103,9 +101,9 @@ class PaymentForm(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
       publicId = this.paymentData.publicId,
       paymentData = paymentData,
       scanner = CardIOScanner(),
-      useDualMessagePayment = useDualMessagePayment,
-      disableGPay = disableGPay,
-      disableYandexPay = disableYandexPay,
+      useDualMessagePayment = initialConfigurationParsed.useDualMessagePayment,
+      disableGPay = initialConfigurationParsed.disableGPay,
+      disableYandexPay = initialConfigurationParsed.disableYandexPay,
       yandexPayMerchantID = this.paymentData.yandexPayMerchantID
     )
 

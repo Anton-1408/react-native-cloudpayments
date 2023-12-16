@@ -23,7 +23,6 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   lateinit var countryCode: String;
   lateinit var currencyCode: String;
 
-  // реализация метода onActivityResult для получение результата оплаты
   override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
       if (resultCode == Activity.RESULT_OK) {
@@ -39,29 +38,26 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
     }
   }
 
-  // Unit эквивалентен void
   override fun onNewIntent(intent: Intent?) = Unit
 
   @ReactMethod
   fun initialization(initialData: ReadableMap, paymentNetworks: ReadableArray) {
-    val environmentRunning = initialData.getInt("environmentRunning");
-    val merchantName = initialData.getString("merchantName") as String;
-    val googlePayMerchantId = initialData.getString("merchantId") as String;
-    val gateway = initialData.getMap("gateway") as ReadableMap;
+    val initialDataParsed = GooglePayMethodData(initialData);
     val paymentNetworksList = paymentNetworks.toArrayList();
 
+    countryCode = initialDataParsed.countryCode;
+    currencyCode = initialDataParsed.currencyCode;
+
     googlePayRequest = GooglePayRequest(
-      merchantName,
-      googlePayMerchantId,
-      gateway,
+      initialDataParsed.merchantName,
+      initialDataParsed.googlePayMerchantId,
+      initialDataParsed.gateway,
       paymentNetworksList
     );
 
-    countryCode = initialData.getString("countryCode") as String;
-    currencyCode = initialData.getString("currencyCode") as String;
-
     val activity = currentActivity as Activity;
-    paymentsClient = googlePayRequest.createPaymentsClient(activity, environmentRunning);
+
+    paymentsClient = googlePayRequest.createPaymentsClient(activity, initialDataParsed.environmentRunning);
 
     reactApplicationContext.addActivityEventListener(this)
   }
