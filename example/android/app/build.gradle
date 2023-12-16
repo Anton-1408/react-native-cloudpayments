@@ -135,7 +135,7 @@ android {
         versionName "1.0"
         ndkVersion '21.4.7075529'
         manifestPlaceholders = [
-            YANDEX_CLIENT_ID: ""
+            YANDEX_CLIENT_ID: "Test"
         ]
     }
     splits {
