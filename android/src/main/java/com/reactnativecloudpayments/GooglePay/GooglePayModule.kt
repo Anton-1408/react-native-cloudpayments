@@ -23,46 +23,41 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   lateinit var countryCode: String;
   lateinit var currencyCode: String;
 
-  // реализация метода onActivityResult для получение результата оплаты
   override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
       if (resultCode == Activity.RESULT_OK) {
         data?.let { intent ->
-          val eventEmitter = EventEmitter()
           val paymentData = PaymentData.getFromIntent(intent);
 
           val paymentMethodData: JSONObject = JSONObject(paymentData?.toJson() as String).getJSONObject("paymentMethodData")
           val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token") as String;
 
-          eventEmitter.sendEvent(reactApplicationContext,"listenerCryptogramCard",  tokenGP)
+          EventEmitter.sendEvent(reactApplicationContext, "listenerCryptogramCard",  tokenGP)
         }
       }
     }
   }
 
-  // Unit эквивалентен void
   override fun onNewIntent(intent: Intent?) = Unit
 
   @ReactMethod
-  fun initial(initialData: ReadableMap, paymentNetworks: ReadableArray) {
-    val environmentRunning = initialData.getInt("environmentRunning");
-    val merchantName = initialData.getString("merchantName") as String;
-    val googlePayMerchantId = initialData.getString("merchantId") as String;
-    val gateway = initialData.getMap("gateway") as ReadableMap;
+  fun initialization(initialData: ReadableMap, paymentNetworks: ReadableArray) {
+    val initialDataParsed = GooglePayMethodData(initialData);
     val paymentNetworksList = paymentNetworks.toArrayList();
 
+    countryCode = initialDataParsed.countryCode;
+    currencyCode = initialDataParsed.currencyCode;
+
     googlePayRequest = GooglePayRequest(
-      merchantName,
-      googlePayMerchantId,
-      gateway,
+      initialDataParsed.merchantName,
+      initialDataParsed.googlePayMerchantId,
+      initialDataParsed.gateway,
       paymentNetworksList
     );
 
-    countryCode = initialData.getString("countryCode") as String;
-    currencyCode = initialData.getString("currencyCode") as String;
-
     val activity = currentActivity as Activity;
-    paymentsClient = googlePayRequest.createPaymentsClient(activity, environmentRunning);
+
+    paymentsClient = googlePayRequest.createPaymentsClient(activity, initialDataParsed.environmentRunning);
 
     reactApplicationContext.addActivityEventListener(this)
   }
@@ -93,7 +88,7 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
   }
 
   @ReactMethod
-  fun openGooglePay() {
+  fun open() {
     val paymentDataRequest: String = googlePayRequest.getPaymentDataRequest().toString()
     val request = PaymentDataRequest.fromJson(paymentDataRequest) // конвертация из json в класс дата
 

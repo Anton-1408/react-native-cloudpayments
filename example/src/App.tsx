@@ -60,13 +60,15 @@ const PRODUCTS = [
   { name: 'example_3', price: '15' },
 ];
 
-const PAYMENT_DATA_CARD = {
-  publicId: 'publicId',
-};
-
 const paymentService = PaymentService.initial(PAYMENT_DATA);
 
-const creditCardForm = CreditCardForm.initialPaymentData(PAYMENT_DATA_CARD);
+const creditCardForm = CreditCardForm.initialPaymentData({
+  publicId: 'publicId',
+  yandexPayMerchantID: 'Test',
+  payer: {
+    address: '',
+  },
+});
 
 const App = () => {
   const [isSupportPayments, setIsSupportPayments] = useState(false);
@@ -104,6 +106,8 @@ const App = () => {
 
     const result = await creditCardForm.showCreditCardForm({
       useDualMessagePayment: true,
+      disableYandexPay: false,
+      disableGPay: false,
     });
 
     console.warn(result);

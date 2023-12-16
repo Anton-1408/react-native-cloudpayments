@@ -6,29 +6,28 @@ import {
 } from '../types';
 import { NativeModules } from 'react-native';
 
-const { CreditCardForm: CreditCardFormManager } = NativeModules;
+const { PaymentForm: PaymentFormManager } = NativeModules;
 
 class CreditCardForm {
   private static instance: CreditCardForm;
 
-  private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
-    const jsonDataString = jsonData && JSON.stringify(jsonData);
-    CreditCardFormManager.initialPaymentData(paymentData, jsonDataString);
+  private constructor(paymentData: PaymentData) {
+    PaymentFormManager.initialization(paymentData);
   }
 
   public static initialPaymentData(
     paymentData: PaymentData,
-    jsonData: PaymentJsonData = {}
+    _jsonData: PaymentJsonData = {}
   ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
+      CreditCardForm.instance = new CreditCardForm(paymentData);
     }
 
     return CreditCardForm.instance;
   }
 
   public setDetailsOfPayment(details: DetailsOfPayment): void {
-    CreditCardFormManager.setDetailsOfPayment(details);
+    PaymentFormManager.setInformationAboutPaymentOfProduct(details);
   }
 
   public showCreditCardForm = async ({
@@ -36,12 +35,11 @@ class CreditCardForm {
     disableGPay = true,
     disableYandexPay = true,
   }: Configuration): Promise<number> => {
-    const transactionId: number =
-      await CreditCardFormManager.showCreditCardForm({
-        disableGPay,
-        useDualMessagePayment,
-        disableYandexPay,
-      });
+    const transactionId: number = await PaymentFormManager.open({
+      disableGPay,
+      useDualMessagePayment,
+      disableYandexPay,
+    });
     return transactionId;
   };
 }

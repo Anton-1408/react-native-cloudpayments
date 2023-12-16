@@ -17,7 +17,7 @@ class GooglePay {
       environmentRunning: numberConstantEnvironment,
     };
 
-    GooglePayModule.initial(initialData, supportedNetworks);
+    GooglePayModule.initialization(initialData, supportedNetworks);
   }
 
   public static initial(initialData: MethodDataPayment): GooglePay {
@@ -42,7 +42,7 @@ class GooglePay {
   };
 
   public openServicePay = (): void => {
-    GooglePayModule.openGooglePay();
+    GooglePayModule.open();
   };
 
   public listenerCryptogramCard = (callback: ListenerCryptogramCard): void => {

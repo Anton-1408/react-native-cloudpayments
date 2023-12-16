@@ -11,7 +11,7 @@ import org.json.JSONObject
 class GooglePayRequest (
   merchantName: String,
   googlePayMerchantId: String,
-  gateway: ReadableMap,
+  gateway: Gateway,
   paymentNetworks: ArrayList<Any>,
 ) {
   private var baseCardPaymentMethod: JSONObject = JSONObject();
@@ -21,9 +21,6 @@ class GooglePayRequest (
   private lateinit var paymentDataRequest: JSONObject;
 
   init {
-    val gatewayName = gateway.getString("service") as String;
-    val gatewayMerchantId = gateway.getString("merchantId") as String;
-
     baseRequest.apply {
       put("apiVersion", 2)
       put("apiVersionMinor", 0)
@@ -32,8 +29,8 @@ class GooglePayRequest (
     gatewayTokenizationSpecification.apply {
       put("type", "PAYMENT_GATEWAY")
       put("parameters", JSONObject(mapOf(
-        "gateway" to gatewayName,
-        "gatewayMerchantId" to gatewayMerchantId)))
+        "gateway" to gateway.gatewayName,
+        "gatewayMerchantId" to gateway.gatewayMerchantId)))
     }
 
     val allowedCardNetworks = JSONArray(paymentNetworks);
