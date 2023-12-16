@@ -8,13 +8,11 @@ import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 
 import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK
-import ru.cloudpayments.sdk.configuration.PaymentConfiguration
-import ru.cloudpayments.sdk.configuration.PaymentData
 
-@ReactModule(name = CreditCardForm.MODULE_NAME)
-class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener  {
+@ReactModule(name = PaymentForm.MODULE_NAME)
+class PaymentForm(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener  {
   companion object {
-    const val MODULE_NAME: String = "CreditCardForm"
+    const val MODULE_NAME: String = "PaymentForm"
     private var REQUEST_CODE_PAYMENT = 69 // код выполнения оплаты для отслеживания выполнения операции
   }
 
@@ -54,7 +52,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun initialPaymentData(initialData: ReadableMap, jsonData: String?) {
+  fun initialization(initialData: ReadableMap, jsonData: String?) {
     this.paymentDataInitialValues = InitialPaymentData(initialData);
 
     if (!jsonData.isNullOrEmpty()) {
@@ -63,7 +61,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun setDetailsOfPayment(details: ReadableMap) {
+  fun setInformationAboutPaymentOfProduct(details: ReadableMap) {
     val totalAmount = details.getString("totalAmount") as String;
     val currency = details.getString("currency") as String;
     val description = details.getString("description");
@@ -76,7 +74,7 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun showCreditCardForm(initialConfiguration: ReadableMap, promise: Promise) {
+  fun open(initialConfiguration: ReadableMap, promise: Promise) {
     this.promise = promise;
 
     val disableGPay = initialConfiguration.getBoolean("disableGPay");
@@ -84,32 +82,32 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
     val disableYandexPay = initialConfiguration.getBoolean("disableYandexPay");
     val yandexPayMerchantID = paymentDataInitialValues.yandexPayMerchantID ?: "";
 
-    val paymentData = PaymentData(
-      paymentDataInitialValues.publicId,
-      paymentDataInitialValues.totalAmount,
-      currency = paymentDataInitialValues.currency,
-      invoiceId = paymentDataInitialValues.invoiceId,
-      accountId = paymentDataInitialValues.accountId,
-      ipAddress = paymentDataInitialValues.ipAddress ?: "",
-      description = paymentDataInitialValues.description,
-      cardholderName = paymentDataInitialValues.cardHolderName ?: "",
-      jsonData = paymentDataInitialValues.jsonDataHash,
-      cultureName = paymentDataInitialValues.cultureName,
-      payer = paymentDataInitialValues.payer
-    )
+//    val paymentData = PaymentData(
+//      paymentDataInitialValues.publicId,
+//      paymentDataInitialValues.totalAmount,
+//      currency = paymentDataInitialValues.currency,
+//      invoiceId = paymentDataInitialValues.invoiceId,
+//      accountId = paymentDataInitialValues.accountId,
+//      ipAddress = paymentDataInitialValues.ipAddress ?: "",
+//      description = paymentDataInitialValues.description,
+//      cardholderName = paymentDataInitialValues.cardHolderName ?: "",
+//      jsonData = paymentDataInitialValues.jsonDataHash,
+//      cultureName = paymentDataInitialValues.cultureName,
+//      payer = paymentDataInitialValues.payer
+//    )
 
-    val configuration = PaymentConfiguration(
-      paymentData,
-      CardIOScanner(),
-      useDualMessagePayment,
-      disableGPay,
-      disableYandexPay,
-      yandexPayMerchantID
-    )
+//    val configuration = PaymentConfiguration(
+//      paymentData,
+//      CardIOScanner(),
+//      useDualMessagePayment,
+//      disableGPay,
+//      disableYandexPay,
+//      yandexPayMerchantID
+//    )
 
     val appCompatActivity = currentActivity as AppCompatActivity;
 
     // получаем экземпляр класса, запускае activity с оплатой из текущего activity
-    CloudpaymentsSDK.getInstance().start(configuration, appCompatActivity, REQUEST_CODE_PAYMENT)
+//    CloudpaymentsSDK.getInstance().start(configuration, appCompatActivity, REQUEST_CODE_PAYMENT)
   }
 }

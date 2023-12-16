@@ -27,7 +27,7 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
   override fun getName() = MODULE_NAME
 
   @ReactMethod
-  fun initApi(infoData: ReadableMap, jsonData: String?) {
+  fun initialization(infoData: ReadableMap, jsonData: String?) {
     paymentData = InitialPaymentData(infoData);
     api = CloudpaymentsSDK.createApi(paymentData.publicId)
 
@@ -35,7 +35,7 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
   }
 
   @ReactMethod
-  fun setDetailsOfPayment(details: ReadableMap) {
+  fun setInformationAboutPaymentOfProduct(details: ReadableMap) {
     val totalAmount = details.getString("totalAmount") as String;
     val currency = details.getString("currency") as String;
     val description = details.getString("description");

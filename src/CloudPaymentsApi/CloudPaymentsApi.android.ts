@@ -14,7 +14,7 @@ class CloudPaymentsApi {
   private constructor(paymentData: PaymentDataApi, jsonData?: PaymentJsonData) {
     const jsonDataString = jsonData && JSON.stringify(jsonData);
 
-    CloudPaymentsApiModule.initApi(paymentData, jsonDataString);
+    CloudPaymentsApiModule.initialization(paymentData, jsonDataString);
   }
 
   public static initialApi(
@@ -29,7 +29,7 @@ class CloudPaymentsApi {
   }
 
   public setDetailsOfPayment(details: DetailsOfPayment): void {
-    CloudPaymentsApiModule.setDetailsOfPayment(details);
+    CloudPaymentsApiModule.setInformationAboutPaymentOfProduct(details);
   }
 
   public auth = async (

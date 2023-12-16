@@ -6,14 +6,14 @@ import {
 } from '../types';
 import { NativeModules } from 'react-native';
 
-const { CreditCardForm: CreditCardFormManager } = NativeModules;
+const { PaymentForm: PaymentFormManager } = NativeModules;
 
 class CreditCardForm {
   private static instance: CreditCardForm;
 
   private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
     const jsonDataString = jsonData && JSON.stringify(jsonData);
-    CreditCardFormManager.initialPaymentData(paymentData, jsonDataString);
+    PaymentFormManager.initialization(paymentData, jsonDataString);
   }
 
   public static initialPaymentData(
@@ -28,7 +28,7 @@ class CreditCardForm {
   }
 
   public setDetailsOfPayment(details: DetailsOfPayment): void {
-    CreditCardFormManager.setDetailsOfPayment(details);
+    PaymentFormManager.setInformationAboutPaymentOfProduct(details);
   }
 
   public showCreditCardForm = async ({
@@ -36,12 +36,11 @@ class CreditCardForm {
     disableGPay = true,
     disableYandexPay = true,
   }: Configuration): Promise<number> => {
-    const transactionId: number =
-      await CreditCardFormManager.showCreditCardForm({
-        disableGPay,
-        useDualMessagePayment,
-        disableYandexPay,
-      });
+    const transactionId: number = await PaymentFormManager.open({
+      disableGPay,
+      useDualMessagePayment,
+      disableYandexPay,
+    });
     return transactionId;
   };
 }

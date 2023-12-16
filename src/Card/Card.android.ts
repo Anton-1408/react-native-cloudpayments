@@ -64,7 +64,7 @@ class Card {
   ): Promise<Result3DS> => {
     const transactionId = String(parametres3DS.transactionId);
 
-    const result: string = await ThreeDSecure.requestThreeDSecure({
+    const result: string = await ThreeDSecure.request({
       ...parametres3DS,
       transactionId,
     });

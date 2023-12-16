@@ -16,7 +16,7 @@ class ThreeDSecure(reactContext: ReactApplicationContext): ReactContextBaseJavaM
   override fun getName() = MODULE_NAME;
 
   @ReactMethod
-  fun requestThreeDSecure(parametres3DS: ReadableMap, promise: Promise) {
+  fun request(parametres3DS: ReadableMap, promise: Promise) {
     val acsUrl = parametres3DS.getString("acsUrl") as String;
     val paReq = parametres3DS.getString("paReq") as String;
     val md = parametres3DS.getString("transactionId") as String;

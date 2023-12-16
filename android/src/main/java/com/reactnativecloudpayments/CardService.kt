@@ -57,6 +57,7 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
   @ReactMethod
   fun getBinInfo(cardNumber: String, merchantId: String, promise: Promise?) {
     val api: CloudpaymentsApi = CloudpaymentsSDK.createApi(merchantId)
+
     api.getBinInfo(cardNumber)
       .subscribeOn(Schedulers.io()) // указываем в каком потоке будет выполнятся процесс observe
       .observeOn(AndroidSchedulers.mainThread()) // получаем результат в главном потоке
