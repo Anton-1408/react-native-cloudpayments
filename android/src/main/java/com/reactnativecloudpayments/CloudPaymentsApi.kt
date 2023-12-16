@@ -76,10 +76,8 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe({ results ->
-        val objectMapper = ObjectMapper();
-        val transaction = objectMapper.writeValueAsString(results)
-
-        promise?.resolve(transaction);
+          val data = parseTransactionFromApiToString(results)
+          promise?.resolve(data);
       }, {error -> promise?.reject("", error.message)})
   }
 
@@ -105,10 +103,8 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe({ results ->
-        val objectMapper = ObjectMapper();
-        val transaction = objectMapper.writeValueAsString(results)
-
-        promise?.resolve(transaction);
+        val data = parseTransactionFromApiToString(results)
+        promise?.resolve(data);
       }, {error -> promise?.reject("", error.message)})
   }
 }
