@@ -43,7 +43,27 @@ export interface PaymentData {
   accountId?: string;
   cardHolderName?: string;
   cultureName?: string;
-  payer?: string;
+  payer?: Payer;
+  jsonData?: string;
+  email?: string;
+  description?: string;
+  invoiceId?: string;
+  apiUrl?: string;
+  amount?: string;
+  currency?: Currency;
+}
+
+interface Payer {
+  firstName?: String;
+  lastName?: String;
+  middleName?: String;
+  birthDay?: String;
+  address?: String;
+  street?: String;
+  city?: String;
+  country?: String;
+  phone?: String;
+  postcode?: String;
 }
 
 export type PaymentDataApi = Omit<
@@ -88,7 +108,7 @@ export interface TransactionResponse {
 interface Transaction {
   transactionId?: number;
   amount?: number;
-  currency?: string;
+  currency?: Currency;
   currencyCode?: number;
   invoiceId?: string;
   accountId?: string;
