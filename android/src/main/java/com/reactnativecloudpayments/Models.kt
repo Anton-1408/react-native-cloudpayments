@@ -6,9 +6,9 @@ data class InitionalPaymentData(val paymentData: ReadableMap) {
   val publicId: String = paymentData.getString("publicId") as String
   val email: String? = paymentData.getString("email")
   val yandexPayMerchantID: String = paymentData.getString("yandexPayMerchantID") ?: ""
-  val cardholderName: String? = paymentData.getString("cardHolderName")
+  val cardholderName: String = paymentData.getString("cardHolderName") ?: ""
   val accountId: String? = paymentData.getString("accountId")
-  val ipAddress: String?  = paymentData.getString("ipAddress")
+  val ipAddress: String  = paymentData.getString("ipAddress") ?: ""
   var description: String? = paymentData.getString("description")
   val cultureName: String? = paymentData.getString("cultureName")
   val jsonData: String? = paymentData.getString("jsonData")

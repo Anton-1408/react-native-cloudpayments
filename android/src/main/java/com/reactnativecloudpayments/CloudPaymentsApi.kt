@@ -12,6 +12,7 @@ import ru.cloudpayments.sdk.api.models.PaymentRequestBody
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.cloudpayments.sdk.api.models.PaymentDataPayer
 
 
 @ReactModule(name = CloudPaymentsApi.MODULE_NAME)
@@ -20,46 +21,53 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
     const val MODULE_NAME = "CloudPaymentsApi"
   }
 
-  private lateinit var paymentData: InitialPaymentData;
+  private lateinit var paymentData: InitionalPaymentData;
   private lateinit var api: CloudpaymentsApi;
-  private var jsonData: String? = null;
+  private val payer = PaymentDataPayer();
 
   override fun getName() = MODULE_NAME
 
   @ReactMethod
-  fun initialization(infoData: ReadableMap, jsonData: String?) {
-    paymentData = InitialPaymentData(infoData);
+  fun initialization(infoData: ReadableMap) {
+    paymentData = InitionalPaymentData(infoData);
     api = CloudpaymentsSDK.createApi(paymentData.publicId)
 
-    this.jsonData = jsonData;
+    payer.city = paymentData.payer.city
+    payer.address = paymentData.payer.address
+    payer.country = paymentData.payer.country
+    payer.phone = paymentData.payer.phone
+    payer.birthDay = paymentData.payer.birthDay
+    payer.street = paymentData.payer.street
+    payer.firstName = paymentData.payer.firstName
+    payer.lastName = paymentData.payer.lastName
+    payer.middleName = paymentData.payer.middleName
+    payer.postcode = paymentData.payer.postcode
   }
 
   @ReactMethod
   fun setInformationAboutPaymentOfProduct(details: ReadableMap) {
-    val totalAmount = details.getString("totalAmount") as String;
-    val currency = details.getString("currency") as String;
-    val description = details.getString("description");
-    val invoiceId = details.getString("invoiceId");
+    val payment = Payment(details);
 
-    paymentData.totalAmount = totalAmount;
-    paymentData.currency = currency;
-    paymentData.description = description;
-    paymentData.invoiceId = invoiceId;
+    paymentData.amount = payment.amount;
+    paymentData.currency = payment.currency;
+    paymentData.description = payment.description;
+    paymentData.invoiceId = payment.invoiceId;
   }
 
   @ReactMethod
   fun charge(cardCryptogramPacket: String, email: String?, promise: Promise?) {
     val body = PaymentRequestBody(
-      amount = paymentData.totalAmount,
+      amount = paymentData.amount,
       currency = paymentData.currency,
-      ipAddress = paymentData.ipAddress ?: "",
-      name = paymentData.cardHolderName ?: "",
+      ipAddress = paymentData.ipAddress,
+      name = paymentData.cardholderName,
       cryptogram = cardCryptogramPacket,
-      jsonData = jsonData,
+      jsonData = paymentData.jsonData,
       invoiceId = paymentData.invoiceId,
       description = paymentData.description,
       accountId = paymentData.accountId,
       email = email,
+      payer = this.payer,
     )
 
     api.charge(body)
@@ -78,16 +86,17 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
   @ReactMethod
   fun auth(cardCryptogramPacket: String, email: String?, promise: Promise?) {
     val body = PaymentRequestBody(
-      amount = paymentData.totalAmount,
+      amount = paymentData.amount,
       currency = paymentData.currency,
-      ipAddress = paymentData.ipAddress ?: "",
-      name = paymentData.cardHolderName ?: "",
+      ipAddress = paymentData.ipAddress,
+      name = paymentData.cardholderName,
       cryptogram = cardCryptogramPacket,
-      jsonData = jsonData,
+      jsonData = paymentData.jsonData,
       invoiceId = paymentData.invoiceId,
       description = paymentData.description,
       accountId = paymentData.accountId,
       email = email,
+      payer = this.payer,
     )
 
     api.auth(body)
