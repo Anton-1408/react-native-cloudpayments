@@ -1,4 +1,4 @@
-import { API_URL } from 'src/constants';
+import { API_URL } from '../constants';
 import { TransactionResponse, DetailsOfPayment, PaymentData } from '../types';
 import { NativeModules } from 'react-native';
 

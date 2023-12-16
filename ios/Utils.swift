@@ -10,16 +10,16 @@ import Foundation
 import Cloudpayments;
 
 func parseDictionaryToStruct<T: Decodable>(dictionary: Dictionary<String, Any>, type: T.Type) -> T? {
-    do {
-        let dataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+  do {
+    let dataFromDictionaryToJSON = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
 
-        let data = try JSONDecoder().decode(type.self, from: dataFromDictionaryToJSON)
+    let data = try JSONDecoder().decode(type.self, from: dataFromDictionaryToJSON)
 
-        return data
-    } catch {
-        print("parseDictionaryToStruct", error)
-        return nil
-    }
+    return data
+  } catch {
+    print("parseDictionaryToStruct", error)
+    return nil
+  }
 }
 
 

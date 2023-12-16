@@ -23,7 +23,7 @@ final class PaymentFormManager: NSObject {
   @objc
   func initialization(_ paymentData: Dictionary<String, String>) -> Void {
     let dataParsed = parseDictionaryToStruct(dictionary: paymentData, type: InitionalPaymentData.self)
-      
+
     if let initialData = dataParsed {
       let applePayMerchantId = initialData.applePayMerchantId ?? "";
       let yandexPayMerchantId = initialData.yandexPayMerchantId ?? "";
@@ -40,7 +40,7 @@ final class PaymentFormManager: NSObject {
           .setEmail(initialData.email)
           .setCultureName(initialData.cultureName)
           .setDescription(initialData.description)
-      
+
       do {
         let payer = try PaymentDataPayer.init(from: initialData.payer as! Decoder);
         self.paymentData?.setPayer(payer)
@@ -65,7 +65,7 @@ final class PaymentFormManager: NSObject {
   @objc
   func setInformationAboutPaymentOfProduct(_ details: Dictionary<String, String>) -> Void {
     let dataParsed = parseDictionaryToStruct(dictionary: details, type: Payment.self)
-    
+
     if let initialData = dataParsed {
       self.paymentData?
         .setCurrency(initialData.currency)
@@ -84,10 +84,9 @@ final class PaymentFormManager: NSObject {
 
     PaymentFormManager.resolve = resolve;
     PaymentFormManager.reject = reject;
-    
+
     let dataParsed = parseDictionaryToStruct(dictionary: configuration, type: ConfigurationPaymentForm.self)
-    
-    
+
     if let configurationData = dataParsed {
       let paymentFormController = PaymentFormController(
         paymentData: paymentData,

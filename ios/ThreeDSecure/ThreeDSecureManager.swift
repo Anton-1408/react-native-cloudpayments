@@ -19,9 +19,9 @@ final class ThreeDSecureManager: NSObject {
   public func request(_ parametres3DS: Dictionary<String, String>, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) -> Void {
     ThreeDSecureManager.resolve = resolve;
     ThreeDSecureManager.reject = reject;
-    
+
     let dataParsed = parseDictionaryToStruct(dictionary: parametres3DS, type: Parametres3DS.self)
-    
+
     if let requestData = dataParsed {
       let threeDSecureController = ThreeDSecureController();
 

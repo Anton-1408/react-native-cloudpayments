@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 import { PaymentData, Configuration, DetailsOfPayment } from '../types';
-import { API_URL } from 'src/constants';
+import { API_URL } from '../constants';
 
 const { PaymentFormManager } = NativeModules;
 

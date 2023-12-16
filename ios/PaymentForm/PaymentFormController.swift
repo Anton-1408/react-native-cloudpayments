@@ -68,23 +68,23 @@ extension PaymentFormController: PaymentDelegate {
 };
 
 extension PaymentFormController: PaymentCardScanner {
-  func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
-    self.scannerCompletion = completion;
-    
-    let scanController = CardIOPaymentViewController.init(paymentDelegate: self)
-    
-    return scanController
-  }
+ func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
+   self.scannerCompletion = completion;
+
+   let scanController = CardIOPaymentViewController.init(paymentDelegate: self)
+
+   return scanController
+ }
 }
 
 extension PaymentFormController: CardIOPaymentViewControllerDelegate {
-  func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
-    paymentViewController.dismiss(animated: true, completion: nil)
-  }
+ func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
+   paymentViewController.dismiss(animated: true, completion: nil)
+ }
 
-  func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-    self.scannerCompletion?(cardInfo.cardNumber, cardInfo.expiryMonth, cardInfo.expiryYear, cardInfo.cvv)
-    
-    paymentViewController.dismiss(animated: true, completion: nil)
-  }
+ func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
+   self.scannerCompletion?(cardInfo.cardNumber, cardInfo.expiryMonth, cardInfo.expiryYear, cardInfo.cvv)
+
+   paymentViewController.dismiss(animated: true, completion: nil)
+ }
 }
