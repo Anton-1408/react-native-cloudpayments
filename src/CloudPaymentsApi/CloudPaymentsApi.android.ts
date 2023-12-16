@@ -11,18 +11,16 @@ const { CloudPaymentsApi: CloudPaymentsApiModule } = NativeModules;
 class CloudPaymentsApi {
   private static instance: CloudPaymentsApi;
 
-  private constructor(paymentData: PaymentDataApi, jsonData?: PaymentJsonData) {
-    const jsonDataString = jsonData && JSON.stringify(jsonData);
-
-    CloudPaymentsApiModule.initialization(paymentData, jsonDataString);
+  private constructor(paymentData: PaymentDataApi) {
+    CloudPaymentsApiModule.initialization(paymentData);
   }
 
   public static initialApi(
     paymentData: PaymentDataApi,
-    jsonData?: PaymentJsonData
+    _jsonData?: PaymentJsonData
   ): CloudPaymentsApi {
     if (!CloudPaymentsApi.instance) {
-      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData, jsonData);
+      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData);
     }
 
     return CloudPaymentsApi.instance;

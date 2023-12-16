@@ -11,17 +11,16 @@ const { PaymentForm: PaymentFormManager } = NativeModules;
 class CreditCardForm {
   private static instance: CreditCardForm;
 
-  private constructor(paymentData: PaymentData, jsonData?: PaymentJsonData) {
-    const jsonDataString = jsonData && JSON.stringify(jsonData);
-    PaymentFormManager.initialization(paymentData, jsonDataString);
+  private constructor(paymentData: PaymentData) {
+    PaymentFormManager.initialization(paymentData);
   }
 
   public static initialPaymentData(
     paymentData: PaymentData,
-    jsonData: PaymentJsonData = {}
+    _jsonData: PaymentJsonData = {}
   ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
+      CreditCardForm.instance = new CreditCardForm(paymentData);
     }
 
     return CreditCardForm.instance;

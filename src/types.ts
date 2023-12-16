@@ -5,18 +5,22 @@ export interface Parametres3DS {
   paReq: string;
   acsUrl: string;
 }
+
 export interface Result3DS {
   TransactionId: string;
   PaRes: string;
 }
+
 export interface BankInfo {
   logoUrl: string;
   bankName: string;
 }
+
 export interface Product {
   name: string;
   price: string;
 }
+
 export interface MethodDataPayment {
   merchantId: string;
   merchantName?: string;
