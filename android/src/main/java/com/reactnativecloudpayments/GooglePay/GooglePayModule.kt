@@ -32,7 +32,7 @@ class GooglePayModule(reactContext: ReactApplicationContext): ReactContextBaseJa
           val paymentMethodData: JSONObject = JSONObject(paymentData?.toJson() as String).getJSONObject("paymentMethodData")
           val tokenGP = paymentMethodData.getJSONObject("tokenizationData").getString("token") as String;
 
-          EventEmitter.sendEvent(reactApplicationContext, "listenerCryptogramCard",  tokenGP)
+          EventEmitter.sendEvent(reactApplicationContext, EventEmitter.listenerCryptogramCard,  tokenGP)
         }
       }
     }

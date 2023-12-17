@@ -5,7 +5,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.module.annotations.ReactModule;
-import com.fasterxml.jackson.databind.ObjectMapper
 
 import ru.cloudpayments.sdk.card.CardType;
 import ru.cloudpayments.sdk.card.Card;
@@ -31,6 +30,12 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
   }
 
   @ReactMethod
+  fun isHumoCard(cardNumber: String, promise: Promise?) {
+    val isHumoCard = Card.isHumoCard(cardNumber)
+    promise?.resolve(isHumoCard);
+  }
+
+  @ReactMethod
   fun isCardNumberValid(cardNumber: String, promise: Promise?) {
     val isCardNumberValid: Boolean = Card.isValidNumber(cardNumber);
     promise?.resolve(isCardNumberValid);
@@ -42,6 +47,59 @@ class CardService(reactContext: ReactApplicationContext): ReactContextBaseJavaMo
     promise?.resolve(isExpDateValid);
   }
 
+  @ReactMethod
+  fun isUzcardCard(cardNumber: String, promise: Promise?) {
+    val isUzcardCard: Boolean = Card.isUzcardCard(cardNumber);
+    promise?.resolve(isUzcardCard);
+  }
+
+  @ReactMethod
+  fun isValidCvv(cardNumber: String, cvv: String, promise: Promise?) {
+    val isValidCvv: Boolean = Card.isValidCvv(cardNumber, cvv);
+    promise?.resolve(isValidCvv);
+  }
+
+  @ReactMethod
+  fun createHexPacketFromData(
+    cardNumber: String,
+    cardExp: String,
+    cardCvv: String,
+    publicId: String,
+    publicKey: String,
+    keyVersion: Int,
+    promise: Promise?
+  ) {
+    val hexPacketFromData = Card.createHexPacketFromData(
+      cardNumber,
+      cardExp,
+      cardCvv,
+      publicId,
+      publicKey,
+      keyVersion
+    );
+    promise?.resolve(hexPacketFromData);
+  }
+
+  @ReactMethod
+  fun createCardCryptogram(
+    cardNumber: String,
+    cardExp: String,
+    cardCvv: String,
+    publicId: String,
+    publicKey: String,
+    promise: Promise?
+  ) {
+    val cardCryptogram = Card.createCardCryptogram(
+      cardNumber,
+      cardExp,
+      cardCvv,
+      publicId,
+      publicKey,
+    );
+    promise?.resolve(cardCryptogram);
+  }
+
+  @Deprecated("Use the new createCardCryptogram method")
   @ReactMethod
   fun makeCardCryptogramPacket(cardNumber: String, expDate: String, cvv: String, merchantId: String, promise: Promise?) {
     val cardCryptogram: String? = Card.cardCryptogram(cardNumber, expDate, cvv, merchantId);
