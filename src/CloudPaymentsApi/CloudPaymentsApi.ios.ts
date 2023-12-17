@@ -16,11 +16,21 @@ class CloudPaymentsApi {
   }
 
   public static initialApi(
-    paymentData: PaymentDataApi,
+    {
+      payer: _payer,
+      jsonData: _json,
+      email: _email,
+      description: _description,
+      invoiceId: _invoiceId,
+      apiUrl: _apiUrl,
+      amount: _amount,
+      currency: _currency,
+      ...rest
+    }: PaymentDataApi,
     jsonData?: PaymentJsonData
   ): CloudPaymentsApi {
     if (!CloudPaymentsApi.instance) {
-      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData, jsonData);
+      CloudPaymentsApi.instance = new CloudPaymentsApi(rest, jsonData);
     }
 
     return CloudPaymentsApi.instance;

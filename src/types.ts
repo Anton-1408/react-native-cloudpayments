@@ -71,7 +71,6 @@ export type PaymentDataApi = Omit<
   | 'applePayMerchantId'
   | 'googlePayMerchantId'
   | 'cultureName'
-  | 'payer'
   | 'yandexPayMerchantID'
 >;
 

@@ -16,11 +16,21 @@ class CreditCardForm {
   }
 
   public static initialPaymentData(
-    paymentData: PaymentData,
+    {
+      payer: _payer,
+      jsonData: _json,
+      email: _email,
+      description: _description,
+      invoiceId: _invoiceId,
+      apiUrl: _apiUrl,
+      amount: _amount,
+      currency: _currency,
+      ...rest
+    }: PaymentData,
     jsonData: PaymentJsonData = {}
   ): CreditCardForm {
     if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm(paymentData, jsonData);
+      CreditCardForm.instance = new CreditCardForm(rest, jsonData);
     }
 
     return CreditCardForm.instance;

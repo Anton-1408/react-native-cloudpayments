@@ -252,7 +252,7 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
-  - react-native-cloudpayments-sdk (2.2.5):
+  - react-native-cloudpayments-sdk (2.4.0):
     - CardIO
     - Cloudpayments
     - CloudpaymentsNetworking
@@ -493,7 +493,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
-  react-native-cloudpayments-sdk: a80c1c85a2038882fc9f402be388f10f77123362
+  react-native-cloudpayments-sdk: 00b0342442dcbf6cecb25092043949f9fc243741
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -509,4 +509,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7bc1662d956e1b575e10c5f0049306817f776f7c
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0
