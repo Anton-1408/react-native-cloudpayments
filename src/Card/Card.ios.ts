@@ -1,5 +1,11 @@
 import { NativeModules } from 'react-native';
-import { Parametres3DS, BankInfo, Result3DS, CardInfo } from '../types';
+import {
+  Parametres3DS,
+  BankInfo,
+  Result3DS,
+  CardInfo,
+  CardCryptogram,
+} from '../types';
 
 const { CardService, ThreeDSecure } = NativeModules;
 
@@ -45,6 +51,8 @@ class Card {
     }
     return await CardService.makeCardCryptogramPacketForCvv(cvv);
   };
+
+  public createCardCryptogram = async (_params: CardCryptogram) => {};
 
   public cardType = async (cardNumber: string): Promise<string> => {
     const cardType: string = await CardService.cardType(cardNumber);

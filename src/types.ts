@@ -146,3 +146,11 @@ export interface CardInfo {
   cvv: string;
   merchantId?: string;
 }
+
+export interface CardCryptogram {
+  cardNumber: string;
+  cardExp: string;
+  cardCvv: string;
+  publicId: string;
+  publicKey: string;
+}
