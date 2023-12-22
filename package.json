@@ -1,6 +1,6 @@
 {
   "name": "react-native-cloudpayments-sdk",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "CloudPayments SDK for React Native",
   "main": "src/index",
   "types": "src/index.d.ts",
