@@ -38,7 +38,7 @@ class CardFormController: UIViewController {
 };
 
 extension CardFormController: PaymentDelegate {
-  func onPaymentFinished(_ transactionId: Int?) {
+  func onPaymentFinished(_ transactionId: Int64?) {
     guard let resolve = CreditCardFormManager.resolve else {
       return
     };

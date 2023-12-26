@@ -4,7 +4,7 @@ CloudPayments SDK позволяет интегрировать прием пл�
 
 ## Требования:
 
-1. Для работы CloudPayments SDK необходим iOS версии 11.0 и выше.
+1. Для работы CloudPayments SDK необходим iOS версии 13.0 и выше.
 2. Для работы CloudPayments SDK необходим Android версии 7.0 или выше, и следующие зависимости (API level 24)
 
    минимальные версии окружения:
@@ -75,8 +75,8 @@ android {
 - Добавьте в `ios/Podfile`
 
 ```
-pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
-pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
+pod 'Cloudpayments', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :tag => '1.1.9.1'
+pod 'CloudpaymentsNetworking', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :tag => '1.1.9.1'
 ```
 
 - Выполните `pod install` в папке ios
