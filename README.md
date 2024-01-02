@@ -381,6 +381,10 @@ paymentService.openServicePay();
 
 По возникающим вопросам техничечкого характера и предложениями обращайтесь на antonvotinov@gmail.com
 
+## Дополнительная информация о библиотеки
+
+[Первая версия библиотеки](https://github.com/PurrwebTeam/react-native-cloudpayments-v1) писалась для проекта [EnerGO](https://energo.app/), разработанным компанией [Purrweb](https://www.purrweb.com/ru/)
+
 ## License
 
 MIT
