@@ -8,29 +8,33 @@ import { NativeModules } from 'react-native';
 
 const { PaymentForm: PaymentFormManager } = NativeModules;
 
-class CreditCardForm {
-  private static instance: CreditCardForm;
+class PaymentForm {
+  private static instance: PaymentForm;
 
   private constructor(paymentData: PaymentData) {
     PaymentFormManager.initialization(paymentData);
   }
 
-  public static initialPaymentData(
+  public static initialization(
     paymentData: PaymentData,
     _jsonData: PaymentJsonData = {}
-  ): CreditCardForm {
-    if (!CreditCardForm.instance) {
-      CreditCardForm.instance = new CreditCardForm(paymentData);
+  ): PaymentForm {
+    if (!PaymentForm.instance) {
+      PaymentForm.instance = new PaymentForm(paymentData);
     }
 
-    return CreditCardForm.instance;
+    return PaymentForm.instance;
   }
 
-  public setDetailsOfPayment(details: DetailsOfPayment): void {
+  public reInitialization(paymentData: PaymentData) {
+    PaymentFormManager.initialization(paymentData);
+  }
+
+  public setInformationAboutPaymentOfProduct(details: DetailsOfPayment): void {
     PaymentFormManager.setInformationAboutPaymentOfProduct(details);
   }
 
-  public showCreditCardForm = async ({
+  public open = async ({
     useDualMessagePayment,
     disableGPay = true,
     disableYandexPay = true,
@@ -44,4 +48,4 @@ class CreditCardForm {
   };
 }
 
-export default CreditCardForm;
+export default PaymentForm;

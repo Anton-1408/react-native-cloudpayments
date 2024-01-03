@@ -146,3 +146,11 @@ export interface CardCryptogram {
   publicId: string;
   publicKey: string;
 }
+
+export type PaymentDataApi = Omit<
+  PaymentData,
+  | 'applePayMerchantId'
+  | 'googlePayMerchantId'
+  | 'cultureName'
+  | 'yandexPayMerchantID'
+>;
