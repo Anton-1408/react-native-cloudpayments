@@ -1,6 +1,6 @@
 {
   "name": "react-native-cloudpayments-sdk",
-  "version": "2.3.2",
+  "version": "2.5.2",
   "description": "CloudPayments SDK for React Native",
   "main": "src/index",
   "types": "src/index.d.ts",
@@ -38,13 +38,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/PurrwebTeam/react-native-cloudpayments",
+  "repository": "https://github.com/Anton-1408/react-native-cloudpayments",
   "author": "Anton Votinov <antonvotinov@gmail.com> (https://github.com/Anton-1408)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PurrwebTeam/react-native-cloudpayments/issues"
+    "url": "https://github.com/Anton-1408/react-native-cloudpayments/issues"
   },
-  "homepage": "https://github.com/PurrwebTeam/react-native-cloudpayments#readme",
+  "homepage": "https://github.com/Anton-1408/react-native-cloudpayments#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

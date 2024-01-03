@@ -1,5 +1,11 @@
 import { NativeModules } from 'react-native';
-import { Parametres3DS, Result3DS, BankInfo, CardInfo } from '../types';
+import {
+  Parametres3DS,
+  Result3DS,
+  BankInfo,
+  CardInfo,
+  CardCryptogram,
+} from '../types';
 
 const { CardService, ThreeDSecure } = NativeModules;
 
@@ -56,7 +62,24 @@ class Card {
         merchantId
       );
     }
+
     return await CardService.makeCardCryptogramPacketForCvv(cvv);
+  };
+
+  public createCardCryptogram = async ({
+    cardNumber,
+    cardExp,
+    cardCvv,
+    publicId,
+    publicKey,
+  }: CardCryptogram) => {
+    return await CardService.createCardCryptogram(
+      cardNumber,
+      cardExp,
+      cardCvv,
+      publicId,
+      publicKey
+    );
   };
 
   public requestThreeDSecure = async (
@@ -64,7 +87,7 @@ class Card {
   ): Promise<Result3DS> => {
     const transactionId = String(parametres3DS.transactionId);
 
-    const result: string = await ThreeDSecure.requestThreeDSecure({
+    const result: string = await ThreeDSecure.request({
       ...parametres3DS,
       transactionId,
     });

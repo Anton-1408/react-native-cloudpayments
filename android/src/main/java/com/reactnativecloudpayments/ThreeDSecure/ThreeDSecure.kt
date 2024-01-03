@@ -16,10 +16,8 @@ class ThreeDSecure(reactContext: ReactApplicationContext): ReactContextBaseJavaM
   override fun getName() = MODULE_NAME;
 
   @ReactMethod
-  fun requestThreeDSecure(parametres3DS: ReadableMap, promise: Promise) {
-    val acsUrl = parametres3DS.getString("acsUrl") as String;
-    val paReq = parametres3DS.getString("paReq") as String;
-    val md = parametres3DS.getString("transactionId") as String;
+  fun request(params3DS: ReadableMap, promise: Promise) {
+    val params3DSParsed = Parametres3DS(params3DS)
 
     ThreeDSecure.promise = promise;
 
@@ -27,9 +25,9 @@ class ThreeDSecure(reactContext: ReactApplicationContext): ReactContextBaseJavaM
     val intent = Intent(currentActivity, ThreeDSecureActivity::class.java);
 
     //передаем параметры
-    intent.putExtra("acsUrl", acsUrl);
-    intent.putExtra("paReq", paReq);
-    intent.putExtra("md", md);
+    intent.putExtra("acsUrl", params3DSParsed.acsUrl);
+    intent.putExtra("paReq", params3DSParsed.paReq);
+    intent.putExtra("md", params3DSParsed.md);
 
     // переключаемся на новый экран
     currentActivity?.startActivity(intent);

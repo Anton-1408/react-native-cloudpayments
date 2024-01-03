@@ -1,5 +1,11 @@
 import { API_URL } from '../constants';
-import { TransactionResponse, DetailsOfPayment, PaymentData } from '../types';
+import {
+  TransactionResponse,
+  DetailsOfPayment,
+  PaymentData,
+  PaymentDataApi,
+  PaymentJsonData,
+} from '../types';
 import { NativeModules } from 'react-native';
 
 const { CloudPaymentsApi: CloudPaymentsApiManager } = NativeModules;
@@ -7,13 +13,26 @@ const { CloudPaymentsApi: CloudPaymentsApiManager } = NativeModules;
 class CloudPaymentsApi {
   private static instance: CloudPaymentsApi;
 
-  private constructor({ apiUrl = API_URL, ...rest }: PaymentData) {
-    CloudPaymentsApiManager.initialization({ apiUrl, ...rest });
+  private constructor(paymentData: PaymentDataApi, jsonData?: PaymentJsonData) {
+    CloudPaymentsApiManager.initApi(paymentData, jsonData);
   }
 
-  public static initialization(paymentData: PaymentData): CloudPaymentsApi {
+  public static initialApi(
+    {
+      payer: _payer,
+      jsonData: _json,
+      email: _email,
+      description: _description,
+      invoiceId: _invoiceId,
+      apiUrl: _apiUrl,
+      amount: _amount,
+      currency: _currency,
+      ...rest
+    }: PaymentDataApi,
+    jsonData?: PaymentJsonData
+  ): CloudPaymentsApi {
     if (!CloudPaymentsApi.instance) {
-      CloudPaymentsApi.instance = new CloudPaymentsApi(paymentData);
+      CloudPaymentsApi.instance = new CloudPaymentsApi(rest, jsonData);
     }
 
     return CloudPaymentsApi.instance;

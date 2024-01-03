@@ -6,24 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
+import ru.cloudpayments.sdk.api.models.PaymentDataPayer
 
 import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK
 import ru.cloudpayments.sdk.configuration.PaymentConfiguration
 import ru.cloudpayments.sdk.configuration.PaymentData
 
-@ReactModule(name = CreditCardForm.MODULE_NAME)
-class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener  {
+@ReactModule(name = PaymentForm.MODULE_NAME)
+class PaymentForm(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext), ActivityEventListener  {
   companion object {
-    const val MODULE_NAME: String = "CreditCardForm"
+    const val MODULE_NAME: String = "PaymentForm"
     private var REQUEST_CODE_PAYMENT = 69 // код выполнения оплаты для отслеживания выполнения операции
   }
 
-  private lateinit var paymentDataInitialValues: InitialPaymentData;
+  private lateinit var paymentData: InitionalPaymentData;
+  private val payer = PaymentDataPayer();
+
   private lateinit var promise: Promise;
 
   override fun getName() = MODULE_NAME;
 
-  // реализация метода onActivityResult для получение результата оплаты
   override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
       // получение ответа с сервера
@@ -46,7 +48,6 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
     }
   }
 
-  // Unit эквивалентен void
   override fun onNewIntent(intent: Intent?) = Unit
 
   init {
@@ -54,57 +55,56 @@ class CreditCardForm(reactContext: ReactApplicationContext): ReactContextBaseJav
   }
 
   @ReactMethod
-  fun initialPaymentData(initialData: ReadableMap, jsonData: String?) {
-    this.paymentDataInitialValues = InitialPaymentData(initialData);
+  fun initialization(initialData: ReadableMap) {
+    paymentData = InitionalPaymentData(initialData);
 
-    if (!jsonData.isNullOrEmpty()) {
-      this.paymentDataInitialValues.setJsonData(jsonData);
-    }
+    payer.city = paymentData.payer.city
+    payer.address = paymentData.payer.address
+    payer.country = paymentData.payer.country
+    payer.phone = paymentData.payer.phone
+    payer.birthDay = paymentData.payer.birthDay
+    payer.street = paymentData.payer.street
+    payer.firstName = paymentData.payer.firstName
+    payer.lastName = paymentData.payer.lastName
+    payer.middleName = paymentData.payer.middleName
+    payer.postcode = paymentData.payer.postcode
   }
 
   @ReactMethod
-  fun setDetailsOfPayment(details: ReadableMap) {
-    val totalAmount = details.getString("totalAmount") as String;
-    val currency = details.getString("currency") as String;
-    val description = details.getString("description");
-    val invoiceId = details.getString("invoiceId");
+  fun setInformationAboutPaymentOfProduct(details: ReadableMap) {
+    val payment = Payment(details);
 
-    paymentDataInitialValues.totalAmount = totalAmount;
-    paymentDataInitialValues.currency = currency;
-    paymentDataInitialValues.description = description;
-    paymentDataInitialValues.invoiceId = invoiceId;
+    paymentData.amount = payment.amount;
+    paymentData.currency = payment.currency;
+    paymentData.description = payment.description;
+    paymentData.invoiceId = payment.invoiceId;
   }
 
   @ReactMethod
-  fun showCreditCardForm(initialConfiguration: ReadableMap, promise: Promise) {
+  fun open(initialConfiguration: ReadableMap, promise: Promise) {
     this.promise = promise;
 
-    val disableGPay = initialConfiguration.getBoolean("disableGPay");
-    val useDualMessagePayment = initialConfiguration.getBoolean("useDualMessagePayment");
-    val disableYandexPay = initialConfiguration.getBoolean("disableYandexPay");
-    val yandexPayMerchantID = paymentDataInitialValues.yandexPayMerchantID ?: "";
+    val initialConfigurationParsed = ConfigurationPaymentForm(initialConfiguration)
 
     val paymentData = PaymentData(
-      paymentDataInitialValues.publicId,
-      paymentDataInitialValues.totalAmount,
-      currency = paymentDataInitialValues.currency,
-      invoiceId = paymentDataInitialValues.invoiceId,
-      accountId = paymentDataInitialValues.accountId,
-      ipAddress = paymentDataInitialValues.ipAddress ?: "",
-      description = paymentDataInitialValues.description,
-      cardholderName = paymentDataInitialValues.cardHolderName ?: "",
-      jsonData = paymentDataInitialValues.jsonDataHash,
-      cultureName = paymentDataInitialValues.cultureName,
-      payer = paymentDataInitialValues.payer
+      amount = this.paymentData.amount,
+      currency = this.paymentData.currency,
+      invoiceId = this.paymentData.invoiceId,
+      accountId = this.paymentData.accountId,
+      description = this.paymentData.description,
+      email = this.paymentData.email,
+      payer = this.payer,
+      jsonData = this.paymentData.jsonData
     )
 
     val configuration = PaymentConfiguration(
-      paymentData,
-      CardIOScanner(),
-      useDualMessagePayment,
-      disableGPay,
-      disableYandexPay,
-      yandexPayMerchantID
+      publicId = this.paymentData.publicId,
+      paymentData = paymentData,
+      scanner = CardIOScanner(),
+      useDualMessagePayment = initialConfigurationParsed.useDualMessagePayment,
+      disableGPay = initialConfigurationParsed.disableGPay,
+      disableYandexPay = initialConfigurationParsed.disableYandexPay,
+      yandexPayMerchantID = this.paymentData.yandexPayMerchantID
     )
 
     val appCompatActivity = currentActivity as AppCompatActivity;

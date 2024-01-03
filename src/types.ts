@@ -5,18 +5,22 @@ export interface Parametres3DS {
   paReq: string;
   acsUrl: string;
 }
+
 export interface Result3DS {
   TransactionId: string;
   PaRes: string;
 }
+
 export interface BankInfo {
   logoUrl: string;
   bankName: string;
 }
+
 export interface Product {
   name: string;
   price: string;
 }
+
 export interface MethodDataPayment {
   merchantId: string;
   merchantName?: string;
@@ -50,16 +54,16 @@ export interface PaymentData {
 }
 
 interface Payer {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  birth: string;
-  address: string;
-  street: string;
-  city: string;
-  country: string;
-  phone: string;
-  postcode: string;
+  firstName?: string;
+  lastName?: string;
+  middleName?: string;
+  birth?: string;
+  address?: string;
+  street?: string;
+  city?: string;
+  country?: string;
+  phone?: string;
+  postcode?: string;
 }
 
 export interface DetailsOfPayment {
@@ -95,7 +99,7 @@ export interface TransactionResponse {
 interface Transaction {
   transactionId?: number;
   amount?: number;
-  currency?: string;
+  currency?: Currency;
   currencyCode?: number;
   invoiceId?: string;
   accountId?: string;
@@ -133,4 +137,12 @@ export interface CardInfo {
   expDate?: string;
   cvv: string;
   merchantId?: string;
+}
+
+export interface CardCryptogram {
+  cardNumber: string;
+  cardExp: string;
+  cardCvv: string;
+  publicId: string;
+  publicKey: string;
 }
