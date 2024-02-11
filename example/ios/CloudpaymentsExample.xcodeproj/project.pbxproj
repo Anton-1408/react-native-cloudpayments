@@ -431,18 +431,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CloudpaymentsExample/Pods-CloudpaymentsExample-frameworks.sh",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/YandexMobileMetrica/Dynamic/Core/YandexMobileMetrica.framework/YandexMobileMetrica",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/YandexMobileMetrica/Dynamic/Crashes/YandexMobileMetricaCrashes.framework/YandexMobileMetricaCrashes",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/YandexPaySDK/Dynamic/YandexPaySDK.framework/YandexPaySDK",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/YandexPaySDK/Dynamic/XPlatPaySDK.framework/XPlatPaySDK",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetrica.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMobileMetricaCrashes.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexPaySDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XPlatPaySDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -456,12 +448,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CloudpaymentsExample/Pods-CloudpaymentsExample-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/Cloudpayments/CloudpaymentsSDK.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Cloudpayments/Cloudpayments.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CloudpaymentsSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Cloudpayments.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

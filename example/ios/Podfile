@@ -10,9 +10,8 @@ target 'CloudpaymentsExample' do
 
   pod 'react-native-cloudpayments-sdk', :path => '../..'
 
-  pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.3.3'
-  pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.3.3'
-  pod 'YandexLoginSDK', :modular_headers => true
+  pod 'Cloudpayments', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
+  pod 'CloudpaymentsNetworking', :git =>  "https://github.com/cloudpayments/CloudPayments-SDK-iOS", :tag => '1.1.9'
 
   # Enables Flipper.
   #
