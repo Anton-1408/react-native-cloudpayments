@@ -2,9 +2,10 @@ package com.reactnativecloudpayments
 
 import android.content.Context
 import android.content.Intent
+import android.os.Parcel
+import android.os.Parcelable
 import io.card.payment.CardIOActivity
 import io.card.payment.CreditCard
-import kotlinx.android.parcel.Parcelize
 import ru.cloudpayments.sdk.scanner.CardData
 import ru.cloudpayments.sdk.scanner.CardScanner
 
@@ -14,8 +15,7 @@ import ru.cloudpayments.sdk.scanner.CardScanner
   * Это нужно для того востановления состояния экрана
 */
 
-@Parcelize
-class CardIOScanner: CardScanner() {
+class CardIOScanner : CardScanner(), Parcelable {
   override fun getScannerIntent(context: Context) =
     Intent(context, CardIOActivity::class.java).apply {
       putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true)
@@ -36,4 +36,23 @@ class CardIOScanner: CardScanner() {
     } else {
       null
     }
+
+  // Parcelable implementation
+  override fun writeToParcel(parcel: Parcel, flags: Int) {
+    // No properties to write since the class currently has no fields
+  }
+
+  override fun describeContents(): Int {
+    return 0
+  }
+
+  companion object CREATOR : Parcelable.Creator<CardIOScanner> {
+    override fun createFromParcel(parcel: Parcel): CardIOScanner {
+      return CardIOScanner()
+    }
+
+    override fun newArray(size: Int): Array<CardIOScanner?> {
+      return arrayOfNulls(size)
+    }
+  }
 }
