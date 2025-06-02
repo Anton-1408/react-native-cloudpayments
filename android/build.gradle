@@ -6,6 +6,7 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    maven { url 'https://jitpack.io' }
   }
 
   dependencies {
@@ -70,10 +71,12 @@ repositories {
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
+def sdk_version = getExtOrDefault("sdkVersion")
 
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "ru.cloudpayments.gitpub.integrations.sdk:cloudpayments-android:$sdk_version"
 }
 
 react {

@@ -1,6 +1,11 @@
 PODS:
   - boost (1.84.0)
+  - Cloudpayments (1.6.0):
+    - CloudpaymentsNetworking
+  - CloudpaymentsNetworking (1.0.2)
   - CloudpaymentsSdk (0.1.0):
+    - Cloudpayments
+    - CloudpaymentsNetworking
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1683,6 +1688,8 @@ PODS:
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
+  - Cloudpayments (from `https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios`, branch `master`, tag `1.6.0`)
+  - CloudpaymentsNetworking (from `https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios`, branch `master`, tag `1.6.0`)
   - CloudpaymentsSdk (from `../..`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - fast_float (from `../node_modules/react-native/third-party-podspecs/fast_float.podspec`)
@@ -1763,6 +1770,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
+  Cloudpayments:
+    :branch: master
+    :git: https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios
+    :tag: 1.6.0
+  CloudpaymentsNetworking:
+    :branch: master
+    :git: https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios
+    :tag: 1.6.0
   CloudpaymentsSdk:
     :path: "../.."
   DoubleConversion:
@@ -1905,9 +1920,21 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
+CHECKOUT OPTIONS:
+  Cloudpayments:
+    :commit: 9badecd56c6a7643b651bf8b0539e04b20774b49
+    :git: https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios
+    :tag: 1.6.0
+  CloudpaymentsNetworking:
+    :commit: 9badecd56c6a7643b651bf8b0539e04b20774b49
+    :git: https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios
+    :tag: 1.6.0
+
 SPEC CHECKSUMS:
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
-  CloudpaymentsSdk: f0b6e3bf6538f4c035fdfae3afe73c3016accdda
+  Cloudpayments: 7e37f89de6293457d8ae7d25d2762da3394ac7b4
+  CloudpaymentsNetworking: 8d7f72b94360dcf3846ac10d9c479ec7a57f19b8
+  CloudpaymentsSdk: a988960c03bd7a8527ad12939de6521c23e69f16
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
   fast_float: 06eeec4fe712a76acc9376682e4808b05ce978b6
   FBLazyVector: 84b955f7b4da8b895faf5946f73748267347c975
@@ -1979,6 +2006,6 @@ SPEC CHECKSUMS:
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: 9f110fc4b7aa538663cba3c14cbb1c335f43c13f
 
-PODFILE CHECKSUM: a9835f46937282517b22c36b85bbe01213962d49
+PODFILE CHECKSUM: aa55cc6d9f93bce9dcfbe90abc3016e6a1680b93
 
 COCOAPODS: 1.16.2
