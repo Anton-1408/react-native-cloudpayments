@@ -24,16 +24,6 @@ export interface Spec extends TurboModule {
     keyVersion: number
   ) => Promise<string>;
   createMirPayHexPacketFromCryptogram: (cryptogram: string) => Promise<string>;
-  getBinInfo: (cardNumber: string, merchantId: string) => Promise<BinInfo>;
-}
-
-interface BinInfo {
-  cardType: string;
-  bankName: string;
-  logoUrl: string;
-  currency: string;
-  convertedAmount: string;
-  hideCvv: boolean;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('CardService');

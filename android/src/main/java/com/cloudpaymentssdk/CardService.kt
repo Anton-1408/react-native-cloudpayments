@@ -1,15 +1,10 @@
 package com.cloudpaymentssdk
 
-import android.annotation.SuppressLint
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.*
+
 import ru.cloudpayments.sdk.card.Card
 import ru.cloudpayments.sdk.card.CardType
-import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK
-
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(reactContext) {
   companion object {
@@ -31,29 +26,6 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
   override fun isValidExpDate(expDate: String, promise: Promise?) {
     val isValidExpDate = Card.isValidExpDate(expDate)
     promise?.resolve(isValidExpDate)
-  }
-
-  @SuppressLint("CheckResult")
-  override fun getBinInfo(cardNumber: String, merchantId: String, promise: Promise?) {
-    val api = CloudpaymentsSDK.createApi(merchantId)
-
-    api.getBinInfo(cardNumber)
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe({ info ->
-        val infoObject = Arguments.createMap()
-
-        infoObject.putString("cardType", info.cardType)
-        infoObject.putString("bankName", info.bankName)
-        infoObject.putString("logoUrl", info.logoUrl)
-        infoObject.putString("currency", info.currency)
-        infoObject.putString("convertedAmount", info.convertedAmount)
-        infoObject.putBoolean("hideCvv", info.hideCvv)
-
-        promise?.resolve(infoObject)
-      }, {error ->
-        promise?.reject("error", error.message)}
-      )
   }
 
   override fun createCardCryptogram(
