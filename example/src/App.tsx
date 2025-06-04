@@ -1,15 +1,14 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'react-native-cloudpayments-sdk';
+import { StyleSheet, View } from 'react-native';
 
-const result = multiply(3, 7);
+import { PaymentServiceButton } from './components';
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <PaymentServiceButton onPay={() => {}} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -17,4 +16,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    height: 50,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2962FF',
+    borderRadius: 4,
+    marginTop: 20,
+  },
+  title: {
+    color: '#ffffff',
+  },
 });
+
+export default App;

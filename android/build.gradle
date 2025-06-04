@@ -77,6 +77,13 @@ dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "ru.cloudpayments.gitpub.integrations.sdk:cloudpayments-android:$sdk_version"
+  implementation 'com.google.android.gms:play-services-wallet:19.1.0'
+
+  implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+  implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+  implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+    // implementation 'com.android.support:appcompat-v7:24.1.1'
 }
 
 react {

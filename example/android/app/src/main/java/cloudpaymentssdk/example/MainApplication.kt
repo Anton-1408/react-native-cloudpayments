@@ -1,6 +1,8 @@
 package cloudpaymentssdk.example
 
 import android.app.Application
+import android.util.Log
+import com.cloudpaymentssdk.CloudpaymentsSdkPackage
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -18,8 +20,8 @@ class MainApplication : Application(), ReactApplication {
       object : DefaultReactNativeHost(this) {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
-              // Packages that cannot be autolinked yet can be added manually here, for example:
-              // add(MyReactNativePackage())
+              // Packages that cannot be autolinked yet can be added manually here, for example:d
+               add(CloudpaymentsSdkPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"
