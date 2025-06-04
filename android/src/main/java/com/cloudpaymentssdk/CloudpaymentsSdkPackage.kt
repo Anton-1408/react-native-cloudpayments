@@ -11,6 +11,7 @@ class CloudpaymentsSdkPackage : BaseReactPackage() {
     return when (name) {
       GooglePayModule.MODULE_NAME -> GooglePayModule(reactContext)
       CardService.MODULE_NAME -> CardService(reactContext)
+      ThreeDSecure.MODULE_NAME -> ThreeDSecure(reactContext)
       else -> null
     }
   }
@@ -32,7 +33,15 @@ class CloudpaymentsSdkPackage : BaseReactPackage() {
         needsEagerInit = false,
         isCxxModule = false,
         isTurboModule = true
-      )
+      ),
+      ThreeDSecure.MODULE_NAME to ReactModuleInfo(
+        name = ThreeDSecure.MODULE_NAME,
+        className = ThreeDSecure::class.java.name,
+        canOverrideExistingModule = false,
+        needsEagerInit = false,
+        isCxxModule = false,
+        isTurboModule = true
+      ),
     )
   }
 }

@@ -46,10 +46,10 @@ data class ConfigurationPaymentForm(val configuration: ReadableMap) {
   val disableYandexPay: Boolean = configuration.getBoolean("disableYandexPay") as Boolean
 }
 
-data class Parammetres3DS(val params: ReadableMap) {
+data class Parameters3DS(val params: ReadableMap) {
   val acsUrl: String = params.getString("acsUrl") as String;
   val paReq: String = params.getString("paReq") as String
-  val md: String = params.getString("transactionId") as String
+  val md: String = params.getString("md") as String
 }
 
 data class GooglePayMethodData(val params: ReadableMap) {

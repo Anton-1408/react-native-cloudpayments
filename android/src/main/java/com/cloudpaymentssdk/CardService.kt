@@ -3,7 +3,6 @@ package com.cloudpaymentssdk
 import android.annotation.SuppressLint
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.*
 import ru.cloudpayments.sdk.card.Card
 import ru.cloudpayments.sdk.card.CardType
@@ -19,26 +18,22 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
 
   override fun getName() = MODULE_NAME;
 
-  @ReactMethod
   override fun cardType(cardNumber: String, promise: Promise?) {
     val cardType = CardType.getType(cardNumber);
     promise?.resolve(cardType.toString());
   }
 
-  @ReactMethod
   override fun isValidNumber(cardNumber: String, promise: Promise?) {
     val isValidNumber = Card.isValidNumber(cardNumber)
     promise?.resolve(isValidNumber)
   }
 
-  @ReactMethod
   override fun isValidExpDate(expDate: String, promise: Promise?) {
     val isValidExpDate = Card.isValidExpDate(expDate)
     promise?.resolve(isValidExpDate)
   }
 
   @SuppressLint("CheckResult")
-  @ReactMethod
   override fun getBinInfo(cardNumber: String, merchantId: String, promise: Promise?) {
     val api = CloudpaymentsSDK.createApi(merchantId)
 
@@ -61,7 +56,6 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
       )
   }
 
-  @ReactMethod
   override fun createCardCryptogram(
     cardNumber: String,
     cardDate: String,
@@ -78,7 +72,6 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
     }
   }
 
-  @ReactMethod
   override fun cardCryptogramForCVV(cvv: String, promise: Promise?) {
     val cvvCryptogramPacket = Card.cardCryptogramForCVV(cvv)
 
@@ -89,19 +82,16 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
     }
   }
 
-  @ReactMethod
   override fun isValidExpDateFull(expDate: String, promise: Promise?) {
     val isValidExpDate = Card.isValidExpDateFull(expDate)
     promise?.resolve(isValidExpDate)
   }
 
-  @ReactMethod
   override fun isValidCvv(cvv: String, promise: Promise?) {
     val isValidCvv = Card.isValidCvv(cvv)
     promise?.resolve(isValidCvv)
   }
 
-  @ReactMethod
   override fun createHexPacketFromData(
     cardNumber: String,
     cardExp: String,
@@ -127,7 +117,6 @@ class CardService(reactContext: ReactApplicationContext): NativeCardServiceSpec(
     }
   }
 
-  @ReactMethod
   override fun createMirPayHexPacketFromCryptogram(
     cryptogram: String,
     promise: Promise?

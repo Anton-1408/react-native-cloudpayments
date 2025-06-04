@@ -37,7 +37,6 @@ class GooglePayModule(reactContext: ReactApplicationContext): NativeGooglePaySpe
     }
   }
 
-  @ReactMethod
   override fun initialization(initialData: ReadableMap, paymentNetworks: ReadableArray) {
     val initialDataParsed = GooglePayMethodData(initialData);
     val paymentNetworksList = paymentNetworks.toArrayList() as ArrayList<Any>;
@@ -59,12 +58,10 @@ class GooglePayModule(reactContext: ReactApplicationContext): NativeGooglePaySpe
     reactApplicationContext.addActivityEventListener(this)
   }
 
-  @ReactMethod
   override fun setProducts(totalPrice: String) {
     googlePayRequest.setTransactionInfo(countryCode, currencyCode, totalPrice);
   }
 
-  @ReactMethod
   override fun canMakePayments(promise: Promise) {
     val isReadyToPayJson = googlePayRequest.isReadyToPayRequest() ?: return
     val request = IsReadyToPayRequest.fromJson(isReadyToPayJson.toString());
@@ -84,7 +81,6 @@ class GooglePayModule(reactContext: ReactApplicationContext): NativeGooglePaySpe
     }
   }
 
-  @ReactMethod
   override fun open() {
     val paymentDataRequest: String = googlePayRequest.getPaymentDataRequest().toString()
     val request = PaymentDataRequest.fromJson(paymentDataRequest)
