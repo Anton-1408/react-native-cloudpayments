@@ -9,7 +9,7 @@ import com.facebook.react.module.model.ReactModuleInfoProvider
 class CloudpaymentsSdkPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
     return when (name) {
-      GooglePayModule.MODULE_NAME -> GooglePayModule(reactContext)
+      ServicePay.MODULE_NAME -> ServicePay(reactContext)
       CardService.MODULE_NAME -> CardService(reactContext)
       ThreeDSecure.MODULE_NAME -> ThreeDSecure(reactContext)
       else -> null
@@ -18,9 +18,9 @@ class CloudpaymentsSdkPackage : BaseReactPackage() {
 
   override fun getReactModuleInfoProvider() = ReactModuleInfoProvider {
     mapOf(
-      GooglePayModule.MODULE_NAME to ReactModuleInfo(
-        name = GooglePayModule.MODULE_NAME,
-        className = GooglePayModule::class.java.name,
+      ServicePay.MODULE_NAME to ReactModuleInfo(
+        name = ServicePay.MODULE_NAME,
+        className = ServicePay::class.java.name,
         canOverrideExistingModule = false,
         needsEagerInit = false,
         isCxxModule = false,

@@ -7,9 +7,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
 import org.json.JSONObject
 
-class GooglePayModule(reactContext: ReactApplicationContext): NativeGooglePaySpec(reactContext), ActivityEventListener {
+class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(reactContext), ActivityEventListener {
   companion object {
-    const val MODULE_NAME: String = "GooglePayModule"
+    const val MODULE_NAME: String = "ServicePay"
     private var REQUEST_CODE_PAYMENT = 13
   }
 

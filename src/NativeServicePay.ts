@@ -36,4 +36,4 @@ enum PAYMENT_NETWORK {
   mir = 'MIR',
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('GooglePayModule');
+export default TurboModuleRegistry.getEnforcing<Spec>('ServicePay');
