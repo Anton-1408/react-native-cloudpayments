@@ -2,9 +2,12 @@ package com.cloudpaymentssdk
 
 import android.app.Activity
 import android.content.Intent
+
 import com.facebook.react.bridge.*
+
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
+
 import org.json.JSONObject
 
 class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(reactContext), ActivityEventListener {

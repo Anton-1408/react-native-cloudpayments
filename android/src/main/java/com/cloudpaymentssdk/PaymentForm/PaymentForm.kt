@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
+
 import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+
 import ru.cloudpayments.sdk.api.models.PaymentDataPayer
 import ru.cloudpayments.sdk.api.models.intent.CPReceipt
 import ru.cloudpayments.sdk.api.models.intent.CPReceiptAmounts
