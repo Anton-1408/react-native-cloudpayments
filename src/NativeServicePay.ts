@@ -1,6 +1,7 @@
 import type { TurboModule } from 'react-native';
 import { TurboModuleRegistry } from 'react-native';
 import type { EventEmitter } from 'react-native/Libraries/Types/CodegenTypes';
+import type { PAYMENT_NETWORK } from './constants';
 
 export interface Spec extends TurboModule {
   initialization: (
@@ -24,16 +25,6 @@ interface MethodDataPayment {
   countryCode: string;
   currencyCode: string;
   environmentRunning?: number;
-}
-
-enum PAYMENT_NETWORK {
-  visa = 'VISA',
-  masterCard = 'MASTERCARD',
-  amex = 'AMEX',
-  discover = 'DISCOVER',
-  interac = 'INTERAC',
-  jcb = 'JCB',
-  mir = 'MIR',
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('ServicePay');

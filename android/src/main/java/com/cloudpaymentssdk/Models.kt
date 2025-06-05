@@ -2,48 +2,67 @@ package com.cloudpaymentssdk
 
 import com.facebook.react.bridge.ReadableMap
 
-data class InitionalPaymentData(val paymentData: ReadableMap) {
-  val publicId: String = paymentData.getString("publicId") as String
-  val email: String? = paymentData.getString("email")
-  val yandexPayMerchantID: String = paymentData.getString("yandexPayMerchantID") ?: ""
-  val cardholderName: String = paymentData.getString("cardHolderName") ?: ""
-  val accountId: String? = paymentData.getString("accountId")
-  val ipAddress: String  = paymentData.getString("ipAddress") ?: ""
-  var description: String? = paymentData.getString("description")
-  val cultureName: String? = paymentData.getString("cultureName")
-  val jsonData: String? = paymentData.getString("jsonData")
-  var invoiceId: String? = paymentData.getString("invoiceId")
-  val apiUrl: String? = paymentData.getString("apiUrl")
-  var payer: Payer = Payer(paymentData.getMap("payer"))
-
-  lateinit var amount: String
-  lateinit var currency: String
+data class Payer(val payer: ReadableMap) {
+  val firstName: String? = payer.getString("firstName")
+  val lastName: String? = payer.getString("lastName")
+  val middleName: String? = payer.getString("middleName")
+  val birthDay: String? = payer.getString("birthDay")
+  val address: String? = payer.getString("address")
+  val street: String? = payer.getString("street")
+  val city: String? = payer.getString("city")
+  val country: String? = payer.getString("country")
+  val phone: String? = payer.getString("phone")
+  val postcode: String? = payer.getString("postcode")
 }
 
-data class Payer(val payer: ReadableMap?) {
-  val firstName: String? = payer?.getString("firstName")
-  val lastName: String? = payer?.getString("lastName")
-  val middleName: String? = payer?.getString("middleName")
-  val birthDay: String? = payer?.getString("birthDay")
-  val address: String? = payer?.getString("address")
-  val street: String? = payer?.getString("street")
-  val city: String? = payer?.getString("city")
-  val country: String? = payer?.getString("country")
-  val phone: String? = payer?.getString("phone")
-  val postcode: String? = payer?.getString("postcode")
+data class DataRecurrent(val dataRecurrent: ReadableMap?) {
+  val interval: String = dataRecurrent?.getString("interval") ?: ""
+  val period: Int = dataRecurrent?.getInt("period") ?: 0
+  val maxPeriods: Int = dataRecurrent?.getInt("maxPeriods") ?: 0
+  val startDate: String = dataRecurrent?.getString("startDate") ?: ""
+  val amount: Double = dataRecurrent?.getDouble("amount") ?: 0.0
+}
+
+data class ReceiptAmounts(val receiptAmounts: ReadableMap) {
+  val electronic: Double = receiptAmounts.getDouble("electronic")
+  val advancePayment: Double = receiptAmounts.getDouble("advancePayment")
+  val credit: Double = receiptAmounts.getDouble("credit")
+  val provision: Double = receiptAmounts.getDouble("provision")
+}
+
+data class DataReceiptItem(val receiptItem: ReadableMap?) {
+  val label: String = receiptItem?.getString("label") ?: ""
+  val price: Double = receiptItem?.getDouble("price") ?: 0.0
+  val quantity: Double = receiptItem?.getDouble("quantity") ?: 0.0
+  val amount: Double = receiptItem?.getDouble("amount") ?: 0.0
+  val vat: Int = receiptItem?.getInt("vat") ?: 0
+  val method: Int = receiptItem?.getInt("method") ?: 0
+  val objectt: Int = receiptItem?.getInt("objectt") ?: 0
+}
+
+data class DataPaymentReceipt(val dataPaymentReceipt: ReadableMap) {
+  val taxationSystem: Int = dataPaymentReceipt.getInt("taxationSystem")
+  val email: String = dataPaymentReceipt.getString("email") ?: ""
+  val phone: String = dataPaymentReceipt.getString("phone") ?: ""
+  val isBso: Boolean = dataPaymentReceipt.getBoolean("isBso")
 }
 
 data class Payment(val payment: ReadableMap) {
-  val amount: String = payment.getString("totalAmount") as String
-  val currency: String = payment.getString("currency") as String
-  val invoiceId: String? = payment.getString("invoiceId")
+  val amount: String = payment.getString("totalAmount") ?: ""
+  val currency: String = payment.getString("currency") ?: ""
+  val accountId: String? = payment.getString("accountId")
   val description: String? = payment.getString("description")
+  val email: String? = payment.getString("email")
 }
 
 data class ConfigurationPaymentForm(val configuration: ReadableMap) {
-  val disableGPay: Boolean = configuration.getBoolean("disableGPay") as Boolean
+  val publicId: String = configuration.getString("publicId") ?: ""
+  val requireEmail: Boolean = configuration.getBoolean("requireEmail") as Boolean
   val useDualMessagePayment: Boolean = configuration.getBoolean("useDualMessagePayment") as Boolean
-  val disableYandexPay: Boolean = configuration.getBoolean("disableYandexPay") as Boolean
+  val showResultScreenForSinglePaymentMode: Boolean = configuration.getBoolean("showResultScreenForSinglePaymentMode")
+  val saveCardForSinglePaymentMode: Boolean = configuration.getBoolean("saveCardForSinglePaymentMode")
+  val testMode: Boolean = configuration.getBoolean("testMode")
+  val mode: String = configuration.getString("mode") ?: ""
 }
 
 data class Parameters3DS(val params: ReadableMap) {

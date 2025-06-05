@@ -1,4 +1,4 @@
-package com.reactnativecloudpayments
+package com.cloudpaymentssdk
 
 import android.content.Context
 import android.content.Intent

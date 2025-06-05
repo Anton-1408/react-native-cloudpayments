@@ -5,7 +5,7 @@ import { PaymentServiceButton } from './components';
 const App = () => {
   return (
     <View style={styles.container}>
-      <PaymentServiceButton onPay={() => {}} />
+      <PaymentServiceButton onPay={async () => {}} />
     </View>
   );
 };

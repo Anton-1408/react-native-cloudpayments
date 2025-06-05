@@ -3,7 +3,7 @@ import { TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
   getPublicKey: () => Promise<PublicKey>;
-  getBinInfo: (cardNumber: string, merchantId: string) => Promise<BinInfo>;
+  getBinInfo: (cardNumber: string) => Promise<BinInfo>;
   initialization: (publicId: string) => void;
 }
 

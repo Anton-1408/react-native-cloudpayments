@@ -13,6 +13,7 @@ class CloudpaymentsSdkPackage : BaseReactPackage() {
       CardService.MODULE_NAME -> CardService(reactContext)
       ThreeDSecure.MODULE_NAME -> ThreeDSecure(reactContext)
       CloudPaymentsApi.MODULE_NAME -> CloudPaymentsApi(reactContext)
+      PaymentForm.MODULE_NAME -> PaymentForm(reactContext)
       else -> null
     }
   }
@@ -46,6 +47,14 @@ class CloudpaymentsSdkPackage : BaseReactPackage() {
       CloudPaymentsApi.MODULE_NAME to ReactModuleInfo(
         name = CloudPaymentsApi.MODULE_NAME,
         className = CloudPaymentsApi::class.java.name,
+        canOverrideExistingModule = false,
+        needsEagerInit = false,
+        isCxxModule = false,
+        isTurboModule = true
+      ),
+      PaymentForm.MODULE_NAME to ReactModuleInfo(
+        name = PaymentForm.MODULE_NAME,
+        className = PaymentForm::class.java.name,
         canOverrideExistingModule = false,
         needsEagerInit = false,
         isCxxModule = false,

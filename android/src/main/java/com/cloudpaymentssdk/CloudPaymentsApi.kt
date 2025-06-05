@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import ru.cloudpayments.sdk.api.CloudpaymentsApi
 import ru.cloudpayments.sdk.configuration.CloudpaymentsSDK;
 
-class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJavaModule(reactContext) {
+class CloudPaymentsApi(reactContext: ReactApplicationContext): NativeCloudPaymentsAPISpec(reactContext) {
   companion object {
     const val MODULE_NAME = "CloudPaymentsApi"
   }
@@ -18,12 +18,12 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
 
   override fun getName() = MODULE_NAME
 
-  fun initialization(publicId: String) {
+  override fun initialization(publicId: String) {
     api = CloudpaymentsSDK.createApi(publicId)
   }
 
   @SuppressLint("CheckResult")
-  fun getBinInfo(cardNumber: String, promise: Promise?) {
+  override fun getBinInfo(cardNumber: String, promise: Promise?) {
     api.getBinInfo(cardNumber)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
@@ -44,7 +44,7 @@ class CloudPaymentsApi(reactContext: ReactApplicationContext): ReactContextBaseJ
   }
 
   @SuppressLint("CheckResult")
-  fun getPublicKey(promise: Promise?) {
+  override fun getPublicKey(promise: Promise?) {
     api.getPublicKey()
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
