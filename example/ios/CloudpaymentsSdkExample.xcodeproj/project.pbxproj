@@ -15,8 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10669C822DEDC78400048A4F /* CloudpaymentsSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudpaymentsSdk.h; sourceTree = "<group>"; };
-		10669C832DEDC78400048A4F /* CloudpaymentsSdk.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CloudpaymentsSdk.mm; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CloudpaymentsSdkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudpaymentsSdkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CloudpaymentsSdkExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CloudpaymentsSdkExample/Info.plist; sourceTree = "<group>"; };
@@ -41,16 +39,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		10669C842DEDC78400048A4F /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				10669C822DEDC78400048A4F /* CloudpaymentsSdk.h */,
-				10669C832DEDC78400048A4F /* CloudpaymentsSdk.mm */,
-			);
-			name = ios;
-			path = "/Users/antonvotinov/projects/mobiles/react-native-cloudpayments-sdk/ios";
-			sourceTree = "<absolute>";
-		};
 		13B07FAE1A68108700A75B9A /* CloudpaymentsSdkExample */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,7 +63,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				10669C842DEDC78400048A4F /* ios */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
