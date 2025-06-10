@@ -22,7 +22,6 @@ target 'CloudpaymentsSdkExample' do
   pod 'Cloudpayments', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :branch => "master", :tag => '1.6.0'
   pod 'CloudpaymentsNetworking', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :branch => "master", :tag => '1.6.0'
 
-
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
