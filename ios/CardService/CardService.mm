@@ -71,7 +71,7 @@ RCT_EXPORT_MODULE()
   cardCvv: (NSString *)cardCvv
   publicId: (NSString *)publicId
   publicKey: (NSString *)publicKey
-  keyVersion: (NSInteger)keyVersion
+  keyVersion: (double)keyVersion
   resolve:(RCTPromiseResolveBlock)resolve
   reject:(RCTPromiseRejectBlock)reject {
   [[CardServiceSwift shared]
