@@ -19,8 +19,8 @@ end
 target 'CloudpaymentsSdkExample' do
   config = use_native_modules!
 
-  pod 'Cloudpayments', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :branch => "master", :tag => '1.6.0'
-  pod 'CloudpaymentsNetworking', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :branch => "master", :tag => '1.6.0'
+  pod 'Cloudpayments', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :tag => '1.5.18'
+  pod 'CloudpaymentsNetworking', :git =>  "https://gitpub.cloudpayments.ru/integrations/sdk/cloudpayments-ios", :tag => '1.5.18'
 
   use_react_native!(
     :path => config[:reactNativePath],

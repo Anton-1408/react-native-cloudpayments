@@ -40,3 +40,15 @@ public struct BankInfo: Codable {
     public let bankName: String?
     public let countryCode: Int?
 }
+
+public struct Parametres3DS {
+  var transactionId: String
+  var paReq: String
+  var acsUrl: String
+  
+  init(parametres3DS: Dictionary<String, String>) {
+    self.acsUrl = parametres3DS["acsUrl"] ?? "";
+    self.paReq = parametres3DS["paReq"] ?? "";
+    self.transactionId = parametres3DS["transactionId"] ?? "";
+  }
+}

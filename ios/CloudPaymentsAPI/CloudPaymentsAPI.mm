@@ -5,10 +5,8 @@
 RCT_EXPORT_MODULE()
 
 - (void)initialization:
-    (nonnull NSString *)publicId
-    resolve:(RCTPromiseResolveBlock)resolve
-    reject:(RCTPromiseRejectBlock)reject {
-    [[CloudPaymentsAPISwift shared] initialization:publicId resolve:resolve reject:reject];
+    (NSString *)publicId {
+    [[CloudPaymentsAPISwift shared] initialization:publicId];
 }
 
 - (void)getBinInfo:

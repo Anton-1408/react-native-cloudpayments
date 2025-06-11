@@ -15,28 +15,13 @@ public class CloudPaymentsAPISwift: NSObject {
   }
   
   @objc
-  public func initialization(_ publicId: String, resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) {
+  public func initialization(_ publicId: String) {
     self.api = CloudpaymentsApi.init(publicId: publicId)
   }
   
-  
   @objc
   public func getPublicKey(_ resolve: RCTPromiseResolveBlock?, reject: RCTPromiseRejectBlock?) {
-    CloudpaymentsApi.getPublicKey() {(info, error) in
-      if let error = error {
-        reject?("error", error.localizedDescription, nil);
-      } else {
-        var keyInfo: Dictionary<String, Any?> = [:];
-        
-        let infoConverted = info as! PublicKeyResponse?
-        
-        
-        keyInfo["pem"] = infoConverted?.Pem
-        keyInfo["version"] = infoConverted?.Version
-
-        resolve?(keyInfo);
-      }
-    }
+    reject?("error", "method not yet available", nil);
   }
   
   @objc
@@ -50,7 +35,7 @@ public class CloudPaymentsAPISwift: NSObject {
           let infoConverted = info as! BankInfo?
           
           bankInfo["cardType"] = infoConverted?.cardType
-          bankInfo["bankName"] = infoConverted?.bankName
+          bankInfo["bankName"] = nil
           bankInfo["logoUrl"] = infoConverted?.logoURL
           bankInfo["currency"] = infoConverted?.currency
           bankInfo["convertedAmount"] = infoConverted?.convertedAmount
