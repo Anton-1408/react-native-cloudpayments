@@ -11,7 +11,7 @@ class GooglePayRequest (
   merchantName: String,
   googlePayMerchantId: String,
   gateway: Gateway,
-  paymentNetworks: ArrayList<Any>,
+  paymentNetworks: ArrayList<String>,
 ) {
   private var baseCardPaymentMethod: JSONObject = JSONObject();
   private var baseRequest: JSONObject = JSONObject();

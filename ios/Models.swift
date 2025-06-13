@@ -37,7 +37,6 @@ public struct BankInfo: Codable {
     public let hideCvvInput: Bool?
     public let isCardAllowed: Bool?
     public let cardType: NameCardType.RawValue?
-    public let bankName: String?
     public let countryCode: Int?
 }
 
@@ -50,5 +49,19 @@ public struct Parametres3DS {
     self.acsUrl = parametres3DS["acsUrl"] ?? "";
     self.paReq = parametres3DS["paReq"] ?? "";
     self.transactionId = parametres3DS["transactionId"] ?? "";
+  }
+}
+
+struct MethodData {
+  var merchantId: String
+  var supportedNetworks: Array<String>
+  var countryCode: String
+  var currencyCode: String
+
+  init(methodData: Dictionary<String, Any>) {
+    self.countryCode = methodData["countryCode"] as! String;
+    self.currencyCode = methodData["currencyCode"] as! String;
+    self.merchantId = methodData["merchantId"] as! String;
+    self.supportedNetworks = methodData["supportedNetworks"] as! Array<String>;
   }
 }

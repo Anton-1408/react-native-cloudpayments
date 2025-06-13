@@ -40,9 +40,9 @@ class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(re
     }
   }
 
-  override fun initialization(initialData: ReadableMap, paymentNetworks: ReadableArray) {
+  override fun initialization(initialData: ReadableMap) {
     val initialDataParsed = GooglePayMethodData(initialData);
-    val paymentNetworksList = paymentNetworks.toArrayList() as ArrayList<Any>;
+    val paymentNetworksList = initialDataParsed.supportedNetworks.toArrayList() as ArrayList<String>;
 
     countryCode = initialDataParsed.countryCode;
     currencyCode = initialDataParsed.currencyCode;
@@ -61,8 +61,17 @@ class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(re
     reactApplicationContext.addActivityEventListener(this)
   }
 
-  override fun setProducts(totalPrice: String) {
-    googlePayRequest.setTransactionInfo(countryCode, currencyCode, totalPrice);
+  override fun setProducts(products: ReadableArray) {
+    var totalPrice: Double = 0.0
+
+    for (index in 0 until products.size()) {
+      val item = products.getMap(index)
+      val product = Product(item)
+
+      totalPrice += product.price.toDouble()
+    }
+
+    googlePayRequest.setTransactionInfo(countryCode, currencyCode, totalPrice.toString());
   }
 
   override fun canMakePayments(promise: Promise) {

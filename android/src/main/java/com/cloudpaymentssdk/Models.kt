@@ -1,5 +1,6 @@
 package com.cloudpaymentssdk
 
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 
 data class Payer(val payer: ReadableMap) {
@@ -78,9 +79,15 @@ data class GooglePayMethodData(val params: ReadableMap) {
   val gateway = Gateway(params.getMap("gateway") as ReadableMap)
   val countryCode: String = params.getString("countryCode") as String;
   val currencyCode = params.getString("currencyCode") as String;
+  val supportedNetworks = params.getArray("supportedNetworks") as ReadableArray
 }
 
 data class Gateway(val gateway: ReadableMap) {
   val gatewayName = gateway.getString("service") as String;
   val gatewayMerchantId = gateway.getString("merchantId") as String;
+}
+
+data class Product(val product: ReadableMap?) {
+  val name = product?.getString("name") ?: ""
+  val price = product?.getString("price") ?: "0.0"
 }
