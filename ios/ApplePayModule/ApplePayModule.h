@@ -1,7 +1,6 @@
 #import <CloudpaymentsSdkSpec/CloudpaymentsSdkSpec.h>
+#import <PassKit/PassKit.h>
 
-@interface ServicePay : NSObject <NativeServicePaySpec>
+@interface ServicePay : NativeServicePaySpecBase <NativeServicePaySpec>
 
 @end
-
-

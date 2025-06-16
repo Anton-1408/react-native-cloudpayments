@@ -6,6 +6,7 @@ import React
 public class ApplePayModuleSwift: NSObject {
   private var paymentNetworks: Array<PKPaymentNetwork> = [];
   private let requestPay = PKPaymentRequest();
+  private var onSendCryptogramCard: ((String) -> Void)?;
   
   @objc
   public static let shared = ApplePayModuleSwift()
@@ -16,11 +17,13 @@ public class ApplePayModuleSwift: NSObject {
   }
 
   @objc
-  public func initialization(_ methodData: Dictionary<String, Any>) -> Void {
+  public func initialization(_ methodData: Dictionary<String, Any>, eventEmitter: @escaping (String) -> Void) -> Void {
     let initialData = MethodData.init(methodData: methodData);
 
     self.setPaymentNetworks(paymentNetworks: initialData.supportedNetworks);
     self.setRequestPay(countryCode: initialData.countryCode, currencyCode: initialData.currencyCode, merchantId: initialData.merchantId)
+  
+    self.onSendCryptogramCard = eventEmitter
   }
 
   private func setPaymentNetworks(paymentNetworks: Array<String>) -> Void {
@@ -144,6 +147,8 @@ extension ApplePayModuleSwift: PKPaymentAuthorizationViewControllerDelegate {
       return
     }
 
+    self.onSendCryptogramCard?(cryptogram)
+    
     completion(PKPaymentAuthorizationStatus.success)
   }
 }

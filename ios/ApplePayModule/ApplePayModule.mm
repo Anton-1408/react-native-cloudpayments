@@ -16,7 +16,9 @@ RCT_EXPORT_MODULE()
 - (void)initialization:(JS::NativeServicePay::MethodDataPayment &)data { 
   NSDictionary *paramsToDictionary =  [self dictionaryFromRequestParams:data];
   
-  [[ApplePayModuleSwift shared] initialization: paramsToDictionary];
+  [[ApplePayModuleSwift shared] initialization: paramsToDictionary eventEmitter: ^(NSString *cryptogramCard){
+    [self emitOnServicePayToken: cryptogramCard];
+  }];
 }
 
 - (void)setProducts:(nonnull NSArray *)products { 
