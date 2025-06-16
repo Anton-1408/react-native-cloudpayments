@@ -64,6 +64,8 @@ interface PaymentData {
   accountId?: string;
   description?: string;
   email?: string;
+  applePayMerchantId?: string;
+  invoiceId?: string;
 }
 
 interface ConfigurationPaymentForm {
@@ -74,6 +76,7 @@ interface ConfigurationPaymentForm {
   saveCardForSinglePaymentMode: boolean;
   testMode: boolean;
   mode: 'SberPay' | 'SelectPaymentMethod' | 'SBP' | 'TPay';
+  disableApplePay: boolean;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('PaymentForm');
