@@ -75,6 +75,32 @@ const App = () => {
       street: 'Lenina',
     });
 
+    PaymentForm.createDataReceipt(
+      [
+        {
+          label: 'description',
+          price: 300.0,
+          quantity: 3.0,
+          amount: 900.0,
+          vat: 20,
+          method: 0,
+          objectt: 0,
+        },
+      ],
+      {
+        electronic: 900.0,
+        advancePayment: 0.0,
+        credit: 0.0,
+        provision: 0.0,
+      },
+      {
+        taxationSystem: 0,
+        email: 'email',
+        phone: 'payerPhone',
+        isBso: false,
+      }
+    );
+
     PaymentForm.createDataRecurrent({
       amount: 10,
       interval: '1',
@@ -117,7 +143,7 @@ const App = () => {
   const onPayWithCard = async () => {
     const result = await PaymentForm.open({
       useDualMessagePayment: true,
-      mode: 'SBP',
+      mode: 'SelectPaymentMethod',
       publicId: '',
       requireEmail: true,
       saveCardForSinglePaymentMode: true,
