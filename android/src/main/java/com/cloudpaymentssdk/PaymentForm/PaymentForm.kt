@@ -35,9 +35,13 @@ class PaymentForm(reactContext: ReactApplicationContext): NativePaymentFormSpec(
   }
 
   override fun getName() = MODULE_NAME
-  override fun onNewIntent(intent: Intent?) = Unit
+  override fun onNewIntent(intent: Intent) = Unit
 
-  override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+  init {
+    reactApplicationContext.addActivityEventListener(this)
+  }
+
+  override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
       val transactionId = data?.getIntExtra(CloudpaymentsSDK.IntentKeys.TransactionId.name, 0) ?: 0
       val transactionStatus: CloudpaymentsSDK.TransactionStatus? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

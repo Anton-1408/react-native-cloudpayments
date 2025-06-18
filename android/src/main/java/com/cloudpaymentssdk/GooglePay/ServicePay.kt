@@ -23,9 +23,13 @@ class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(re
   lateinit var countryCode: String;
   lateinit var currencyCode: String;
 
-  override fun onNewIntent(intent: Intent?) = Unit
+  override fun onNewIntent(intent: Intent) = Unit
 
-  override fun onActivityResult(activity: Activity?, requestCode: Int, resultCode: Int, data: Intent?) {
+  init {
+    reactApplicationContext.addActivityEventListener(this)
+  }
+
+  override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?) {
     if (requestCode == REQUEST_CODE_PAYMENT) {
       if (resultCode == Activity.RESULT_OK) {
         data?.let { intent ->
