@@ -7,7 +7,12 @@ import {
   Platform,
 } from 'react-native';
 import { PAYMENT_NETWORK, CURRENCY } from 'react-native-cloudpayments-sdk';
-import { PaymentForm, ServicePay } from 'react-native-cloudpayments-sdk';
+import {
+  PaymentForm,
+  ServicePay,
+  CardService,
+  ThreeDSecure,
+} from 'react-native-cloudpayments-sdk';
 import { PaymentServiceButton } from './components';
 
 const PAYMENT_DATA = Platform.select({
@@ -154,11 +159,42 @@ const App = () => {
     console.warn(result);
   };
 
+  const onCardService = async () => {
+    try {
+      const cardType = await CardService.cardType('4242424242424242');
+      // const result = await CardService.isValidNumber('4242424242424242');
+      // const result = await CardService.isValidCvv('424');
+      // const result = await CardService.isValidExpDate('02/12');
+      // const result = await CardService.cardCryptogramForCVV('333');
+      // const result = await CardService.createCardCryptogram(
+      //   '4242424242424242',
+      //   '12/25',
+      //   '333',
+      //   'test',
+      //   'test'
+      // );
+      const result = await ThreeDSecure.request({
+        acsUrl: 'https://demo.cloudpayments.ru/acs',
+        md: '891463508',
+        paReq:
+          '+/eyJNZXJjaGFudE5hbWUiOm51bGwsIkZpcnN0U2l4IjoiNDI0MjQyIiwiTGFzdEZvdXIiOiI0MjQyIiwiQW1vdW50IjoxMDAuMCwiQ3VycmVuY3lDb2RlIjoiUlVCIiwiRGF0ZSI6IjIwMjEtMTAtMjVUMDA6MDA6MDArMDM6MDAiLCJDdXN0b21lck5hbWUiOm51bGwsIkN1bHR1cmVOYW1lIjoicnUtUlUifQ==',
+      });
+
+      console.warn('here', result);
+      console.warn('here', cardType);
+    } catch (err) {
+      console.warn('error', err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {isSupportPayments && <PaymentServiceButton onPay={onPayWithService} />}
       <TouchableOpacity style={styles.button} onPress={onPayWithCard}>
         <Text style={styles.title}>Card Form</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={onCardService}>
+        <Text style={styles.title}>Card Service</Text>
       </TouchableOpacity>
     </View>
   );
