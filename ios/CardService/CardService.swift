@@ -47,7 +47,7 @@ public class CardServiceSwift: NSObject {
     if (cardCryptogramPacket != nil) {
       resolve?(cardCryptogramPacket)
     } else {
-      reject?("error", "cvvCryptogramPacket is undefined", nil);
+      reject?("error", "cardCryptogramPacket is undefined", nil);
     }
   }
   

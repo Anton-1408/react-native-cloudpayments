@@ -48,7 +48,7 @@ public struct Parametres3DS {
   init(parametres3DS: Dictionary<String, String>) {
     self.acsUrl = parametres3DS["acsUrl"] ?? "";
     self.paReq = parametres3DS["paReq"] ?? "";
-    self.transactionId = parametres3DS["transactionId"] ?? "";
+    self.transactionId = parametres3DS["md"] ?? "";
   }
 }
 

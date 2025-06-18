@@ -20,14 +20,16 @@ public class ThreeDSecureSwift: NSObject {
 
     ThreeDSecureSwift.resolve = resolve;
     ThreeDSecureSwift.reject = reject;
+    
+    RCTExecuteOnMainQueue {
+      let threeDSecure = ThreeDSecureController();
 
-    let threeDSecure = ThreeDSecureController();
-
-    threeDSecure.onShowController();
-    threeDSecure.onRequest(
-      transactionId: requestData.transactionId,
-      paReq: requestData.paReq,
-      acsUrl: requestData.acsUrl
-    );
+      threeDSecure.onShowController();
+      threeDSecure.onRequest(
+        transactionId: requestData.transactionId,
+        paReq: requestData.paReq,
+        acsUrl: requestData.acsUrl
+      );
+    }
   }
 }

@@ -1,7 +1,6 @@
 import Foundation
 import Cloudpayments
 import React
-import PayCardsRecognizer
 
 public class PaymentFormController: UIViewController {
   private var configuration: PaymentConfiguration?;
@@ -194,32 +193,6 @@ extension PaymentFormController: PaymentDelegate {
     resolve(transactionId);
   }
 };
-
-//extension PaymentFormController: PaymentCardScanner {
-//  public func startScanner(completion: @escaping (String?, UInt?, UInt?, String?) -> Void) -> UIViewController? {
-//    self.scannerCompletion = completion;
-//  
-//    let scanController = RecognizerViewController()
-//    
-//    scanController.delegate = self
-//
-//    return scanController
-//  }
-//}
-//
-//extension PaymentFormController: ScanResultDelegate {
-//  public func userDidCancel() {
-//    guard let rootViewController = RCTPresentedViewController() else {
-//      return
-//    };
-//    
-//    rootViewController.dismiss(animated: true)
-//  }
-//  
-//  public func userDidProvide(cardNumber: String, cardHolder: String, expireMonth: String, expireYear: String, cvv: String) {
-////    self.scannerCompletion?(cardNumber, expireMonth, expireYear, cvv)
-//  }
-//}
 
 extension PaymentFormController: PaymentTPayDelegate {
   public func resultPayment(_ tPay: Cloudpayments.PaymentTPayView, result: Cloudpayments.PaymentTPayView.PaymentAction, error: String?, transactionId: Int64?) {
