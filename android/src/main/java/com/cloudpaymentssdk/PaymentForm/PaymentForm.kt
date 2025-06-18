@@ -166,7 +166,7 @@ class PaymentForm(reactContext: ReactApplicationContext): NativePaymentFormSpec(
       PaymentConfiguration(
         publicId = configurationDataParsed.publicId,
         paymentData = it,
-        scanner = CardIOScanner(),
+        scanner = null,
         requireEmail = configurationDataParsed.requireEmail,
         useDualMessagePayment = configurationDataParsed.useDualMessagePayment,
         showResultScreenForSinglePaymentMode = configurationDataParsed.showResultScreenForSinglePaymentMode,

@@ -54,7 +54,7 @@ interface DataRecurrent {
   interval: string;
   period: number;
   maxPeriods: number;
-  startDate: number;
+  startDate: string;
   amount: number;
 }
 
@@ -64,7 +64,6 @@ interface PaymentData {
   accountId?: string;
   description?: string;
   email?: string;
-  applePayMerchantId?: string;
   invoiceId?: string;
 }
 
@@ -76,7 +75,6 @@ interface ConfigurationPaymentForm {
   saveCardForSinglePaymentMode: boolean;
   testMode: boolean;
   mode: 'SberPay' | 'SelectPaymentMethod' | 'SBP' | 'TPay';
-  disableApplePay: boolean;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('PaymentForm');

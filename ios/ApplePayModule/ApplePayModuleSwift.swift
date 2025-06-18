@@ -66,6 +66,7 @@ public class ApplePayModuleSwift: NSObject {
     }
 
     let isCanMakePayments = PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: self.paymentNetworks)
+    
     resolve(isCanMakePayments);
   }
 

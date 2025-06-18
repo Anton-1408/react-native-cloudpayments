@@ -73,7 +73,7 @@ data class Parameters3DS(val params: ReadableMap) {
 }
 
 data class GooglePayMethodData(val params: ReadableMap) {
-  val environmentRunning: Int = params.getInt("environmentRunning") as Int;
+  val environmentRunning: String = params.getString("environmentRunning") as String;
   val merchantName: String = params.getString("merchantName") as String
   val googlePayMerchantId: String = params.getString("merchantId") as String
   val gateway = Gateway(params.getMap("gateway") as ReadableMap)

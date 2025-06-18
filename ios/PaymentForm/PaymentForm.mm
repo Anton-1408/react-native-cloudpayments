@@ -66,7 +66,7 @@ RCT_EXPORT_MODULE()
 - (NSDictionary *)convertDataRecurrentToDictionary:(const JS::NativePaymentForm::DataRecurrent &)params {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
-    dict[@"startDate"] = @(params.startDate());
+    dict[@"startDate"] = params.startDate();
     dict[@"interval"] = params.interval();
     dict[@"period"] = @(params.period());
     dict[@"maxPeriods"] = @(params.maxPeriods());
@@ -94,7 +94,6 @@ RCT_EXPORT_MODULE()
     dict[@"accountId"] = params.accountId();
     dict[@"description"] = params.description();
     dict[@"email"] = params.email();
-    dict[@"applePayMerchantId"] = params.applePayMerchantId();
     dict[@"invoiceId"] = params.invoiceId();
     
     return [dict copy];
@@ -110,8 +109,7 @@ RCT_EXPORT_MODULE()
     dict[@"showResultScreenForSinglePaymentMode"] = @(params.showResultScreenForSinglePaymentMode());
     dict[@"saveCardForSinglePaymentMode"] = @(params.saveCardForSinglePaymentMode());
     dict[@"testMode"] = @(params.testMode());
-    dict[@"disableApplePay"] = @(params.disableApplePay());
-  
+
     return [dict copy];
 }
 

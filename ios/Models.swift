@@ -164,7 +164,6 @@ struct DageOfPayment {
   var accountId: String?
   var description: String?
   var email: String?
-  var applePayMerchantId: String?
   var invoiceId: String?
   
   init(data: Dictionary<String, Any>) {
@@ -173,7 +172,6 @@ struct DageOfPayment {
     self.accountId = data["accountId"] as? String
     self.description = data["description"] as? String
     self.email = data["email"] as? String
-    self.applePayMerchantId = data["applePayMerchantId"] as? String
     self.invoiceId = data["invoiceId"] as? String
   }
 }
@@ -186,7 +184,6 @@ struct ConfigurationPaymentForm {
   var saveCardForSinglePaymentMode: Bool
   var testMode: Bool
   var mode: String
-  var disableApplePay: Bool
   
   init(data: Dictionary<String, Any>) {
     self.publicId = data["publicId"] as! String
@@ -196,6 +193,5 @@ struct ConfigurationPaymentForm {
     self.saveCardForSinglePaymentMode = data["saveCardForSinglePaymentMode"] as! Bool
     self.testMode = data["testMode"] as! Bool
     self.mode = data["mode"] as! String
-    self.disableApplePay = data["disableApplePay"] as! Bool
   }
 }

@@ -1,32 +1,32 @@
 export enum CURRENCY {
-  ruble = 'RUB', //    Российский рубль
-  euro = 'EUR', //    Евро
-  usd = 'USD', //    Доллар США
-  gbp = 'GBP', //    Фунт стерлингов
-  uah = 'UAH', //    Украинская гривна
-  byn = 'BYN', //    Белорусский рубль
-  kzt = 'KZT', //    Казахский тенге
-  azn = 'AZN', //    Азербайджанский манат
-  chf = 'CHF', //    Швейцарский франк
-  czk = 'CZK', //    Чешская крона
-  cad = 'CAD', //    Канадский доллар
-  pln = 'PLN', //    Польский злотый
-  sek = 'SEK', //    Шведская крона
-  tur = 'TRY', //    Турецкая лира
-  cny = 'CNY', //    Китайский юань
-  inr = 'INR', //    Индийская рупия
-  brl = 'BRL', //    Бразильский реал
-  zar = 'ZAR', //    Южноафриканский рэнд
-  uzs = 'UZS', //    Узбекский сум
-  bgl = 'BGL', //    Болгарский лев
+  RUBLE = 'RUB', //    Российский рубль
+  EURO = 'EUR', //    Евро
+  USD = 'USD', //    Доллар США
+  GBP = 'GBP', //    Фунт стерлингов
+  UAH = 'UAH', //    Украинская гривна
+  BYN = 'BYN', //    Белорусский рубль
+  KZT = 'KZT', //    Казахский тенге
+  AZN = 'AZN', //    Азербайджанский манат
+  CHF = 'CHF', //    Швейцарский франк
+  CZK = 'CZK', //    Чешская крона
+  CAD = 'CAD', //    Канадский доллар
+  PLN = 'PLN', //    Польский злотый
+  SEK = 'SEK', //    Шведская крона
+  TUR = 'TRY', //    Турецкая лира
+  CNY = 'CNY', //    Китайский юань
+  INR = 'INR', //    Индийская рупия
+  BRL = 'BRL', //    Бразильский реал
+  ZAR = 'ZAR', //    Южноафриканский рэнд
+  UZS = 'UZS', //    Узбекский сум
+  BGL = 'BGL', //    Болгарский лев
 }
 
 export enum PAYMENT_NETWORK {
-  visa = 'VISA',
-  masterCard = 'MASTERCARD',
-  amex = 'AMEX',
-  discover = 'DISCOVER',
-  interac = 'INTERAC',
-  jcb = 'JCB',
-  mir = 'MIR',
+  VISA = 'VISA',
+  MASTERCARD = 'MASTERCARD',
+  AMEX = 'AMEX',
+  DISCOVER = 'DISCOVER',
+  INTERAC = 'INTERAC',
+  JCB = 'JCB',
+  MIR = 'MIR',
 }

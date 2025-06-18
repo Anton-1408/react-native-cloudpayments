@@ -90,7 +90,6 @@ public class PaymentFormSwift: NSObject {
     paymentData = PaymentData()
       .setAmount(paymentDataConverted.amount)
       .setCurrency(paymentDataConverted.currency)
-      .setApplePayMerchantId(paymentDataConverted.applePayMerchantId ?? "")
       .setDescription(paymentDataConverted.description)
       .setAccountId(paymentDataConverted.accountId)
       .setInvoiceId(paymentDataConverted.invoiceId)
@@ -109,12 +108,14 @@ public class PaymentFormSwift: NSObject {
       return
     }
     
-    let paymentFormcontroller = PaymentFormController(
-      paymentData: paymentData,
-      configurationData: configuration
-    );
+    RCTExecuteOnMainQueue {
+      let paymentFormcontroller = PaymentFormController(
+        paymentData: paymentData,
+        configurationData: configuration
+      );
 
-    paymentFormcontroller.onOpen();
+      paymentFormcontroller.onOpen();
+    }
   }
   
   @objc

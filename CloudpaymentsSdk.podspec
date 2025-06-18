@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
 
   s.dependency "Cloudpayments"
   s.dependency "CloudpaymentsNetworking"
-  s.dependency "CardIO"
 
   install_modules_dependencies(s)
 end

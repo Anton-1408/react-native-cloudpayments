@@ -55,8 +55,9 @@ class ServicePay(reactContext: ReactApplicationContext): NativeServicePaySpec(re
     );
 
     val activity = currentActivity as Activity;
+    val environmentRunning = if (initialDataParsed.environmentRunning === "Test") 3 else 1
 
-    paymentsClient = googlePayRequest.createPaymentsClient(activity, initialDataParsed.environmentRunning);
+    paymentsClient = googlePayRequest.createPaymentsClient(activity, environmentRunning);
 
     reactApplicationContext.addActivityEventListener(this)
   }

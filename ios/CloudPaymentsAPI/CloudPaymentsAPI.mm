@@ -1,7 +1,7 @@
 #import "CloudPaymentsAPI.h"
 #import "CloudpaymentsSdk-Swift.h"
 
-@implementation CloudPaymentsAPI
+@implementation CloudPaymentsApi
 RCT_EXPORT_MODULE()
 
 - (void)initialization:
